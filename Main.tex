@@ -1,6 +1,7 @@
-% Created by Bartosz Sobkowiak -----------------
+% Created by Kamil Burdziński, Filip Bończyk, Bartosz Sobkowiak, Joanna Świda -----------------
+% Template from https://www.overleaf.com/latex/templates/template-master-thesis-nhh-english/pvnktffqyspm  -----------------
 
-\documentclass[english, a4paper, 12pt, twoside]{article} 
+\documentclass[english, a4paper, 11pt, twoside]{article} 
 
 % -------------- Setup, do not change these ---------------
 \usepackage{textcomp}
@@ -39,6 +40,10 @@
 \linespread{1.5} % line spread for the document
 \usepackage{microtype}
 
+% ----- Todo List -----
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\usepackage{xargs} % Use more than one optional parameter in a new commands
+% \usepackage[pdftex,dvipsnames]{xcolor}  % Coloured text etc.
 
 % ----- Sections -----
 \titleformat*{\section}{\LARGE\bfseries} % \section heading
@@ -61,7 +66,7 @@
 \usepackage[labelfont=bf]{caption} % bold text for captions
 \usepackage[para]{threeparttable} % fancy tables, check these before you use them
 \usepackage{url}
-\usepackage[table,xcdraw]{xcolor}
+% \usepackage[table]{xcolor}
 \usepackage{makecell}
 \usepackage{hhline}
 
@@ -95,6 +100,14 @@
 % ----- Document starts here ----- 
 \begin{document}
 
+% ----- Todo new commands -----
+\newcommandx{\TODO}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+\newcommandx{\kamil}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\filip}[2][1=]{\todo[linecolor=gray,backgroundcolor=gray!25,bordercolor=gray,#1]{#2}}
+\newcommandx{\bartek}[2][1=]{\todo[linecolor=green,backgroundcolor=green!25,bordercolor=green,#1]{#2}}
+\newcommandx{\asia}[2][1=]{\todo[linecolor=orange,backgroundcolor=orange!25,bordercolor=orange,#1]{#2}}
+
+
 \def\biblio{} % resets the biblio command, if not here a new reference list will be produced after every chapter
 
 \include{Frontpage}
@@ -103,13 +116,26 @@
 
 \pagenumbering{gobble} % suppress page numbering
 \thispagestyle{plain} % suppress header
+
+% ----- Todo section -----
+% REMOVE LATER
+\newpage
+\textbf{todo package} \\
+\url{https://github.com/henrikmidtiby/todonotes} \\
+\textbf{todo commands} \\
+\url{https://tex.stackexchange.com/a/178806} \\
+\textbf{usage}
+\TODO{\textbackslash TODO}
+\kamil[inline] {\textbackslash kamil[inline]}
+\filip[inline] {\textbackslash filip[inline]}
+\bartek[inline] {\textbackslash bartek[inline]}
+\asia[inline] {\textbackslash asia[inline]}
+\listoftodos
+% ----- end of todo new commands -----
+
 \clearpage\mbox{}\clearpage % add blank page
 
 \pagenumbering{roman} % starting roman page numbering
-% \newpage
-% \section*{Acknowledgements}
-%     \subfile{Chapters/Acknowledgements}
-
 \newpage
 \section*{Abstract}
     \subfile{Chapters/Abstract}
@@ -140,20 +166,20 @@
     \subfile{Chapters/02Background}
 \clearpage
 
-\section{Data}
-    \subfile{Chapters/03Data}
+\section{Related Work}
+    \subfile{Chapters/03RelatedWork}
 \clearpage
 
-\section{Methodology}
-    \subfile{Chapters/04Methodology}
+\section{Technologies}
+    \subfile{Chapters/04Technologies}
 \clearpage
   
-\section{Analysis}
-    \subfile{Chapters/05Analysis}
+\section{Experiments}
+    \subfile{Chapters/05Experiments}
 \clearpage
 
-\section{Discussion}
-    \subfile{Chapters/06Discussion}
+\section{Results}
+    \subfile{Chapters/06Results}
 \clearpage
 
 \section{Conclusion}
