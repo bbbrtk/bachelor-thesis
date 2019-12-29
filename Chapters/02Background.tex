@@ -1,6 +1,8 @@
 \documentclass[../Main.tex]{subfiles}
 \begin{document}
 
+\subsection{What is style transfer}
+
 \subsection{Machine Learning} 
 % or DEEP LEARNING
 \bartek[inline]{write intros based on artciles listed below}
@@ -12,44 +14,56 @@
     check \\
     \url{https://www.ics.ei.tum.de/fileadmin/w00bcw/www/ics/pics/research/data_sets/MasterarbeitICS-FINALVERSION-Niklas.pdf}\\
 
-\subsubsection{Unsupervised Learning}
-
 
 \subsection{Neural Networks}
     \subsubsection{Overview}
     \subsubsection{Layers}
-    \subsubsection{Loss}
+        \textbf{Fully Connected Layers}
+        \textbf{Convolutional Layers}
+    \subsubsection{Loss} %for style tranfer
     \subsubsection{Activation}
+        \textbf{ReLU}
     \subsubsection{Backpropagation}
-    
 
-\subsection{Convolutional Neural Networks}
-\kamil[inline]{check and correct subsubsections}
-    \subsubsection{Major Concepts}
-    \subsubsection{Architecture}
-        \textbf{Convolutional Layers} \\
-        \textbf{Fully Connected Layers} \\
-        \textbf{Pooling Layers} \\
-    \subsubsection{Unsupervised CNN}
-        \textbf{Differences} \\
-        \textbf{Training} \\
-    \subsubsection{Examples}
+\subsection{Neural network compression}
+    Latest neural networks usually have between 2 million and 50 million parameters.
+    Older architectures are even heavier - full VGG16 model has as much as
+    138 million parameters. In consequence models 
+    are often too big for deployment on memory bounded mobile and embedded devices.
+    Number of parameters strongly correlates with inference time, which in turn
+    prevents real-time inference not only on embedded and mobile
+    devices but even on middle-class GPUs. Overcoming these limitations 
+    is very active area of research.\\
+    \textbf{Specialized architectures} such as MobileNet [\cite{mobilenetv1},
+    \cite{mobilenetv2}, \cite{mobilenetv3}] and ShuffleNet [\cite{shufflenetv1},
+    \cite{shufflenetv2}], replace full convolutions with bottlenecks of lighweight
+    pointwise, depthwise and group convolutions in order to reduce number of 
+    arithmetic operations and parameters. MobileNetV3 \cite{mobilenetv3} uses
+    Neural Architecture Search to optimize the network for mobile phone CPU
+    inference, while discussion in \cite{shufflenetv2} shows what aspects should
+    be considered, when designing mobile architecture manually. 
+    \textbf{Network pruning} aims to reduce already trained model's size by pruning away
+    weights with the least impact on network's quality. [\cite{zhu2017prune}] show
+    that for some models even up to \[87.5\%\] weights can be removed with only 
+    marginally reduced quality. 
+    Beacuse networks are initialized randomly, the least
+    important parameters are usually spread across whole network. Naive pruning 
+    then results in sparse networks. Their storage is significantlly reduced, however
+    beacuse available linear algebra libraries are optimized for dense structures,
+    their inference time doesn't scale as well. To overcome this, more structured
+    methods of pruning were developed, among them filter pruning [\cite{li2016pruning}]
+    and channel pruning [\cite{he2017channel}]. Weight's or weights set's importance
+    can be measured by various heuristics. 
+    [\cite{li2016pruning}] prune away th filters with the smallest \[L1\] norm.
+    [\cite{polyak2015}] on the other hand choose to prune away the filters with
+    the smallest activation statistics.
 
 
 \subsection{Image and Video Processing}
     \subsubsection{Basics}
-    \subsubsection{
     \TODO {add subsections of Image and Video Processing}
-    }
     \subsubsection{Examples}
 
-
-\lipsum[10] % dummy text
-
-\lipsum[15] % dummy text
-
-
-I am here citing one of my sources \citep{ISLR}.
 
 \biblio % Needed for referencing to working when compiling individual subfiles - Do not remove
 \end{document}

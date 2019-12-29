@@ -133,7 +133,8 @@ style=vs
 \subsubsection{Appendix}
 In the appendix the numbering is changed. Every subsection is number A1, A2, A3 etc. Figures, tables and equations are numbered according to their subsection, Figure A1.3, Table A3.5 etc.
 
-\subsection{References}
+\subsection{References}\bibitem{lamport94}
+
 Referencing in \LaTeX{} can be done many different ways, with many different packages. In this template the package \textit{natbib} and the the \textit{apa} style is used for referencing. Most referencing packages have a similar setup. In the Refererence.bib file you can find several examples of how to add a source to the document. After a sources has been added to the .bib file one can cite it in the text using several commands. I recommend reading the following link for more information regarding citation using natbib: \url{https://no.overleaf.com/learn/latex/Natbib_citation_styles}. Another common package for referencing and citation is \textit{biblatex}. Only sources that are cited within the text will appear in the reference list. One can use a command called nocite to list all references in the .bib file, even the ones not cited in text. If you find your source on Google scholar you can get the code chunk needed to add the source to your \LaTeX{} .bib file directly. This is done by clicking the citation button and choosing \textit{BibTex} in Google scholar.
 
 If you are using this template in Norwegian do not touch the apanor.bst file. This contains the sourcecode for the Norwegian style citation and referencing with natbib. Automatically generated words like ''and'', ''page'' and ''in'' is changed to ''og'', ''side'' and ''i''.
