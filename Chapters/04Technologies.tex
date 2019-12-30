@@ -10,10 +10,33 @@
     
 \subsection{Server}
 \bartek[inline]{describe server}
+    Client-server communication is divided into two parts: video streaming and transferring filter specification data. The first part is maintained by server in WebRTC standard, whereas the second one is micro-server based on Flask. Both segments are written in Python and developed by open-source communities.
     \subsubsection{Python}
-    \subsubsubsection{Description} 
-    \subsubsubsection{Motivation}
-    \subsubsubsection{Difficulties}
+
+    \subsubsection{WebRTC}
+
+    \subsubsection{aiortc}
+    https://aiortc.readthedocs.io/en/stable/
+    
+    \subsubsection{Flask}
+    Flask is so-called micro-framework with little dependencies to external libraries, which provides tools and technologies useful with building a small web application. It could be helpful for ones who want to create web pages, blogs or simple REST server. 
+    Technically, Flask is based on:
+    \begin{itemize}
+    \item Werkzeug WSGI (Web Server Gateway Interface is a popular specification for a universal interface between the  server and the web app) - toolkit which implements requests-response objects, and some service functions
+    \item Jinja2 template engine - template system helpful with rendering dynamic web pages
+    \end{itemize}
+    Flask itself does not support database handling, validation or extensive visual templates. Being lightweight is the factor we found crucial, since our server does not perform any complicated tasks. Running constantly in the background, it only has to:
+    \begin{itemize}
+    \item Receive POST request from mobile application containing filter specification 
+    \item Encode filter image and parameters
+    \item Assign it to the IP of sender and store in particular folder
+    \item Send confirmation response to the mobile app
+    \end{itemize}
+    We also decided to write simple Flask client in order to test connection to the server
+    
+    biblio to add: http://flask.palletsprojects.com/en/1.1.x/
+    
+    \subsubsection{Testing}
 
 \subsection{Mobile Application}
     This part describes the style tranfer clinet, which is mobile application 
