@@ -2,21 +2,41 @@
 \begin{document}
 
 \subsection{Neural Network}
-\asia[inline]{describe NN technologies}
     \subsubsection{PyTorch}
+        \bartek[inline]{biere ten punkt /b}
     \subsubsection{TensorRT}
     \subsubsection{OpenCV}
+        \bartek[inline]{ten tez /b}
     \subsubsection{CUDA}
     
 \subsection{Server}
-\bartek[inline]{describe server}
     Client-server communication is divided into two parts: video streaming and transferring filter specification data. The first part is maintained by server in WebRTC standard, whereas the second one is micro-server based on Flask. Both segments are written in Python and developed by open-source communities.
-    \subsubsection{Python}
 
     \subsubsection{WebRTC}
+    WebRTC is an open framework that enables Real Time Communication (RTC) in web browsesr and mobile apps via simple API. It provides tools to create peer-to-peer communication without any external plugins or programs. Standarized on API level by W3C \bartek{add hyperlink} and protocol level by IETF \bartek{add hyperlink} is widely used and supported by Google, Apple, Microsoft and main browser vendors. Given that our project and mobile application is cross-platfrom, we consider it as a key factor when chosing server technology. \\
+    WebRTC architecture distinguishes two main layers: 
+    \begin{itemize}
+    \item C++ API - for browser makesrs implementing the Web API proposal
+    \item Javascript Web API - for web developers building audio-video applications
+    \end{itemize}
 
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{webrtc-public-diagram-for-website}
+    \caption{Overview of WebRTC architecture}
+    \end{figure}
+
+    Comprehensive documentation and community creating many template projects and libraries makes using this framework rather convenient. One of the most popular open-source libraries is \textit{aiortc}.
+    
+    \bartek{
+    photo: https://webrtc.org/architecture/
+    biblio: https://webrtc.org
+    }
+    
     \subsubsection{aiortc}
-    https://aiortc.readthedocs.io/en/stable/
+    \textit{aiortc} was developed as a 'WebRTC for Python'. Complexity (especially for beginners) and lack of Python bindings motivated authors of aiortc to design library and API which follow its Javascript counterpart. They pointed out that \bartek{add cite} 'WebRTC (...) is tightly coupled to a media stack, making it hard to plug in audio or video processing algorithms'. Our goal is to literally use the video processing algorithm, so we found this library and its examples extremely useful.
+    We based our server on the aiortc example which performs video, audio and data channel establishing with a browser. It also allows to process streaming frames using OpenCV. 
+        \bartek{biblio: https://aiortc.readthedocs.io/en/stable/}
     
     \subsubsection{Flask}
     Flask is so-called micro-framework with little dependencies to external libraries, which provides tools and technologies useful with building a small web application. It could be helpful for ones who want to create web pages, blogs or simple REST server. 
@@ -32,11 +52,37 @@
     \item Assign it to the IP of sender and store in particular folder
     \item Send confirmation response to the mobile app
     \end{itemize}
-    We also decided to write simple Flask client in order to test connection to the server
+    We also decided to write simple Flask client in order to test connection to the server.
     
-    biblio to add: http://flask.palletsprojects.com/en/1.1.x/
+    \bartek{biblio to add: http://flask.palletsprojects.com/en/1.1.x/}
     
-    \subsubsection{Testing}
+    \subsubsection{Server flow}
+    Aforementioned servers work separately and do not directly interfere with each other and could perform tasks asynchronously. In that way, many clients can upload filter image and parameters as well as stream video without delays. Every client is able to change filter params and start new stream in various order, but usual client-server flow is depicted on Figure 5.2. 
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{server-flow}
+    \caption{Client-server flow}
+    \end{figure}
+    
+    In a nutshell, when user selects filter style the following actions happen:
+    \begin{enumerate}
+    \item Mobile app send POST request to the Flask server running on port 5000 including JSON with three fields: filter image encoded in base64 format, filter benchmark value in float, boolean information about color preservation during process 
+    \item Flask server performs tasks described in the section 5.2.3
+    \item Mobile app ping server running on port 8080
+    \item Server establishes RTC-peer connection with browser running inside app
+    \item The stream is started - aiortc-based server catch frame and transform it using filter style image uploaded in advance from storage
+    \item Transformed frame is added to RTC Media Stream Track and streamed back to the mobile browser
+    \item Browser displays video using WebView component 
+    \end{enumerate}
+    
+    When stream finishes or breaks (due to network error, application shutdown or any other error), server close connection gracefully but still stores last filter style parameters. If they are not specified during next stream or the POST request to the Flask server failes, the server uses saved ones. 
+    
+    \subsubsection{Alternative technologies}
+    We had been trying several options before we chose to use aiortc. Our prime attempt was to adopt \texit{WebRTC Plugin for Flutter}. It is small project developed by Flutter community containing Javascript server and Flutter client. That seemed to be a perfect solution which could accelerate our work.
+    However we encounter some obstacles in this undertaking. First of all, mentioned plugin is poorly documented and error-prone what is rather annoying combination. Secondly it works efficiently only over LAN network when we wish to connect to the server from any place. And the third thing is the communication crashes if the video is not streaming to/from Chrome browser. Nevertheless, the project is gathering greater community what makes it promising in the time of growing popularity of Flutter.
+    
+    \bartek{biblio to add:  https://github.com/cloudwebrtc/flutter-webrtc}
+   
 
 \subsection{Mobile Application}
     This part describes the style tranfer clinet, which is mobile application 
