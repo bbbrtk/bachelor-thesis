@@ -5,7 +5,7 @@
 
 \subsection{Machine Learning} 
 % or DEEP LEARNING
-\bartek[inline]{write intros based on artciles listed below}
+%\bartek[inline]{write intros based on artciles listed below}
     \subsubsection{What is Machine Learning?}
     see chapter 1.1 in \\
     \url{https://www.bc.edu/content/dam/bc1/schools/mcas/cs/pdf/honors-thesis/Aleshin-Guendel_Serge_Thesis.pdf} \\
@@ -44,24 +44,52 @@
     be considered, when designing mobile architecture manually. 
     \textbf{Network pruning} aims to reduce already trained model's size by pruning away
     weights with the least impact on network's quality. [\cite{zhu2017prune}] show
-    that for some models even up to \[87.5\%\] weights can be removed with only 
-    marginally reduced quality. 
-    Beacuse networks are initialized randomly, the least
+    that for some models even up to $87.5$ weights can be removed with only 
+    marginally reduced performance. 
+    Because networks are initialized randomly, the least
     important parameters are usually spread across whole network. Naive pruning 
-    then results in sparse networks. Their storage is significantlly reduced, however
-    beacuse available linear algebra libraries are optimized for dense structures,
+    then results in sparse networks. Their storage is significantly reduced, however
+    because available linear algebra libraries are optimized for dense structures,
     their inference time doesn't scale as well. To overcome this, more structured
-    methods of pruning were developed, among them filter pruning [\cite{li2016pruning}]
-    and channel pruning [\cite{he2017channel}]. Weight's or weights set's importance
-    can be measured by various heuristics. 
-    [\cite{li2016pruning}] prune away th filters with the smallest \[L1\] norm.
-    [\cite{polyak2015}] on the other hand choose to prune away the filters with
-    the smallest activation statistics.
-
+    methods of pruning were developed, among them filter pruning [\cite{li2016pruning},
+    \cite{molchanov2016pruning}]
+    and channel pruning [\cite{he2017channel}]. 
+    Weight's or weights set's importance can be measured by various heuristics. 
+    [\cite{li2016pruning}] prune away the filters with the smallest $\ell_1$ norm.
+    This approach easily generalizes to $\ell_p$ norm.
+    [\cite{polyak2015}] choose to prune away the filters with
+    the smallest activation statistics. More direct methods formulate pruning 
+    try to preserve performance metrics (e.g. low loss, high accuracy) on training set. 
+    [\cite{molchanov2016pruning}] formulate pruning as optimization problem where
+    the goal is preserving original training set loss value, that is minimizing
+    $|L_{new} - L_{orig}|$. Curiously changing the goal to $L_{new} - L_{orig}$,
+    that is letting the loss drop, degrades the resulting network's performance.\\
+    Smaller networks can also be trained with aid of larger ones through process called
+    \textbf{knowledge distillation} [\cite{hinton2015distilling}]. 
+    The key idea is that activations of certain layers
+    contain knowledge which is not present in dataset's labels. For example in network 
+    trained for classification, the final softmax layer's outputs are usually 
+    interpreted as probabilities of respective classes. These probabilities might indicate,
+    that for given input x, $C_1$ is the proper class and class $C_2$ is twice as probable 
+    as class $C_3$. If the network is well trained, this means x is more similar to
+    objects of class $C_2$, rather than $C_3$. By training new small network to match both
+    it's softmax outputs with larger trained network's softmax outputs and proper labels,
+    we effectively gain additional training data and ease the training.
+    Almost every network's inference time can also be increased by \textbf{quantization}.
+    In many deep learning frameworks, computation is by default performed on
+    32-bit floating point numbers. Such precision is often required during training to 
+    ensure gradient's numerical stability. However given that network's weights have
+    relatively small magnitude, in many applications it's unnecessary during inference.
+    Modern GPUs enable inference in FP16 and INT8 modes. There has also been work 
+    on even lower precision inference, performed on CPUs. 
+    %TODO: opisać z tej strony: https://software.intel.com/en-us/articles/lower-numerical-precision-deep-learning-inference-and-training; napisać o obecnym stanie bibliotek co
+    % do wsparcia dla kwantyzacji
+    
+    
 
 \subsection{Image and Video Processing}
     \subsubsection{Basics}
-    \TODO {add subsections of Image and Video Processing}
+%    \TODO {add subsections of Image and Video Processing}
     \subsubsection{Examples}
 
 

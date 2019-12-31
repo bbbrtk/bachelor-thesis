@@ -45,6 +45,18 @@
 \usepackage{xargs} % Use more than one optional parameter in a new commands
 % \usepackage[pdftex,dvipsnames]{xcolor}  % Coloured text etc.
 
+
+% ----- Hyperlinks -----
+\usepackage{xcolor}
+\usepackage{hyperref} 
+\hypersetup{     
+    colorlinks=true,                
+    linkcolor=black, %red                
+    filecolor=red,
+    citecolor=blue
+}
+
+
 % ----- Sections -----
 \titleformat*{\section}{\LARGE\bfseries} % \section heading
 \titleformat*{\subsection}{\Large\bfseries} % \subsection heading
@@ -182,12 +194,8 @@
     \subfile{Chapters/05Experiments}
 \clearpage
 
-\section{Results}
-    \subfile{Chapters/06Results}
-\clearpage
-
 \section{Conclusion}
-    \subfile{Chapters/07Conclusion}
+    \subfile{Chapters/06Conclusion}
 \clearpage
 
 \newpage
@@ -197,19 +205,16 @@
 \bibliography{References.bib} % adds the references to the document
 }
 
-\newpage
-\renewcommand{\appendixpagename}{Appendix} % Heading of appendix
-\renewcommand{\appendixtocname}{Appendix} % name of appendix in TOC
-\appendixpage 
-\addappheadtotoc
+% -------- APPENDIX --------
+% \newpage
+% \renewcommand{\appendixpagename}{Appendix} % Heading of appendix
+% \renewcommand{\appendixtocname}{Appendix} % name of appendix in TOC
+% \appendixpage 
+% \addappheadtotoc
 
-\begin{appendices}
-    \subfile{Chapters/Appendix}
-\end{appendices}
+% \begin{appendices}
+%     \subfile{Chapters/Appendix}
+% \end{appendices}
 
-% TIPS AND TRICKS - REMOVE WHEN YOU DON'T NEED IT ANYMORE
-\newpage
-\section{Tips and tricks to get you started}
-    \subfile{Chapters/Tips}
 
 \end{document}
