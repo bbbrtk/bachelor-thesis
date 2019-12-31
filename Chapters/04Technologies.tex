@@ -2,15 +2,35 @@
 \begin{document}
 
 \subsection{Neural Network}
+    todo
+    
     \subsubsection{PyTorch}
-        \bartek[inline]{biere ten punkt /b}
+        PyTorch is an open-source machine learning library created by Facebook and broadly used in the field of computer vision. Released in 2016 rapidly gained popularity among researchers and developers. PyTorch is not an another Python binding into a C++ framework. It uses core Python concepts like structures, classes or conditions, so integrates easily with the rest of Python ecosystem. Library provides all necessary tools for developing and training neural network based on deep learning models. \\ 
+        Two main features of this package are:
+        \begin{itemize}
+            \item Strong GPU acceleration during computation of tensors
+            \item Neural networks built on a tape-based autograd system
+        \end{itemize}
         
+        We decided to pick out PyTorch instead of TensorFlow (the main and actually the only alternative) due to several reasons. Firstly, TF was becoming more and more complex for machine learning beginners, where the PyTorch is based on basic and familiar programming paradigms. New version of TF (2.0) solves this problem, but was released after we had started working on the project. Moreover, the documentation is also pretty straightforward and helpful for newcomers. And finally, plenty of style transfer approaches are built on PyTorch. Including the network we adopt. 
+        \bartek{add biblio: https://pytorch.org/docs/stable/index.html}
         
     \subsubsection{TensorRT}
+    todo
+    
     \subsubsection{OpenCV}
-        \bartek[inline]{ten tez /b}
+    Open Source Computer Vision Library is an open-source library for the machine learning, image processing and so on. It includes dozens of computer vision algorithms adjusted for easy use. Althought written in C++, OpenCV has Python bindings and provides support for ML libraries like PyTorch.
+
+    
+    use for:  These algorithms can be used to detect and recognize faces, identify objects, classify human actions in videos, track 
+    
+    By using it, one can process images and videos to identify objects, faces, or even handwriting of a human. When it integrated with various libraries, such as Numpuy, python is capable of processing the OpenCV array structure for analysis.
+    
+    WE USE FOR: makinf video 
+        \bartek{add: https://docs.opencv.org/master/}
         
     \subsubsection{CUDA}
+    todo
     
 \newpage
 \subsection{Server}
