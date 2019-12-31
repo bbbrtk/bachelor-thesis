@@ -1,23 +1,41 @@
 \documentclass[../Main.tex]{subfiles}
 \begin{document}
 
-\subsection{What is style transfer}
+
 
 \subsection{Machine Learning} 
-% or DEEP LEARNING
-%\bartek[inline]{write intros based on artciles listed below}
-    \subsubsection{What is Machine Learning?}
-    see chapter 1.1 in \\
-    \url{https://www.bc.edu/content/dam/bc1/schools/mcas/cs/pdf/honors-thesis/Aleshin-Guendel_Serge_Thesis.pdf} \\
-    see chapter 2.1.1 in \\
-    \url{https://www.ke.tu-darmstadt.de/lehre/arbeiten/master/2016/Muenker_Christoph.pdf} \\
-    check \\
-    \url{https://www.ics.ei.tum.de/fileadmin/w00bcw/www/ics/pics/research/data_sets/MasterarbeitICS-FINALVERSION-Niklas.pdf}\\
-
-    \subsubsection{Computer Vision}
-    todo:
-    Computer vision is a process by which we can understand the images and videos how they are stored and how we can manipulate and retrieve data from them. Computer Vision is the base or mostly used for Artificial Intelligence. Computer-Vision is playing a major role in self-driving cars, robotics as well as in photo correction apps.
+    Machine Learning is the field of study that gives computers the capability to learn without being explicitly programmed. \bartek{add quote: Arthur Samuel}. Technically, machine learning is an approach to data science and analysis that involves adapting and building special models, which allow computer programs to learn through experience. It is based on many others fields such as: linear algebra, calculus, statistics and probability or graph theory. ML models are constructed and improved by algorithms which goal is to make the most accurate possible prediction. \\
+    There are various ML concepts and architectures, but one can highlight three most common parts:
+    \begin{itemize}
+        \item Model - the part which makes predictions
+        \item Parameters - the factors used by the model to make decisions
+        \item Learner - the part that adjusts the parameters
+    \end{itemize}
+    Machine Learning works by gathering the data (where quality of data determines the future quality of model), processing to make them consistent and relevant and split them to different sets (usually training and test sets). Next, the chosen algorithm and techniques build the model which is evaluated and upgraded several times to reach the appropriate level of prediction.
     
+     One way that we can classify the tasks that machine learning algorithms solve is by how much labled data they got and how much feedback they present. In some scenarios, the significant amount of labeled data is provided and the model generates some output. This paradigm is called supervised learning. In other cases, no labeled data is provided, no feedback generated - it is an unsupervised learning. Lastly, the reinforcement learning, rather different from the previous ones taking suitable action to maximize reward in a particular situation. The three main paradigms of ML are depicted on Figure \ref{fig:ML-paradigms}.
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.7\textwidth]{ML-paradigms}
+        \caption{Machine Learning paradigms}
+        \label{fig:ML-paradigms}
+    \end{figure}
+    
+    There are whole bunch of different applications to which machine learning methods can be applied. The most popular ones incl.: Natural Language Processing, Classification Problems, Learning Associations, Pattern Recognition and Image Processing which is the one we focus on in this paper.
+    \bartek{sources:
+    https://deepai.org/machine-learning-glossary-and-terms/machine-learning
+    https://martechtoday.com/how-machine-learning-works-150366
+    https://developers.google.com/machine-learning/glossary
+    }
+
+\subsection{sth about computer Vision and deep learning}
+    \bartek[inline]{REWRITE:}
+    Computer vision is a process by which we can understand the images and videos how they are stored and how we can manipulate and retrieve data from them. Computer Vision is the base or mostly used for Artificial Intelligence. Computer-Vision is playing a major role in self-driving cars, robotics as well as in photo correction apps.
+    What is Deep Learning technology so special about, that it is a technique for computers (AI) to learn just like humans do – by trial and error.
+    https://www.bitdegree.org/tutorials/what-is-deep-learning/
+    
+\subsection{Style transfer}
 
 \subsection{Neural Networks}
     \subsubsection{Overview}

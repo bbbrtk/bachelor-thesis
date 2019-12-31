@@ -1,9 +1,10 @@
 \documentclass[../Main.tex]{subfiles}
 \begin{document}
 
+Today we have a great variety of free open-source tools for NN purposes and its number is increasing with the growth of AI and ML. Development of neural networks, mobile application or server is full of nuances, unexperienced programmer may encounter many troubles since not everything can be easily tracked. However most problems can be solved by good Internet research. Therefore, it is highly significant to choose the up-to-date tools with well-prepared documentation and active communities. Technologies we have chosen allowed us to focus on core concepts instead of struggling with implementation or configuration.
+
 \subsection{Neural Network}
-    todo
-    
+
     \subsubsection{PyTorch}
         PyTorch is an open-source machine learning library created by Facebook and broadly used in the field of computer vision. Released in 2016 rapidly gained popularity among researchers and developers. PyTorch is not an another Python binding into a C++ framework. It uses core Python concepts like structures, classes or conditions, so integrates easily with the rest of Python ecosystem. Library provides all necessary tools for developing and training neural network based on deep learning models. \\ 
         Two main features of this package are:
@@ -19,15 +20,9 @@
     todo
     
     \subsubsection{OpenCV}
-    Open Source Computer Vision Library is an open-source library for the machine learning, image processing and so on. It includes dozens of computer vision algorithms adjusted for easy use. Althought written in C++, OpenCV has Python bindings and provides support for ML libraries like PyTorch.
-
-    
-    use for:  These algorithms can be used to detect and recognize faces, identify objects, classify human actions in videos, track 
-    
-    By using it, one can process images and videos to identify objects, faces, or even handwriting of a human. When it integrated with various libraries, such as Numpuy, python is capable of processing the OpenCV array structure for analysis.
-    
-    WE USE FOR: makinf video 
-        \bartek{add: https://docs.opencv.org/master/}
+    Open Source Computer Vision Library is an open-source library for the machine learning, image processing and so on. It includes dozens of computer vision algorithms adjusted for easy use. Althought written in C++, OpenCV has Python bindings and provides support for ML libraries like PyTorch.  By using it, one can process images and videos to detect objects, apply filters, analyze structure or perform reconstruction. OpenCV is designed to handle real-time vision applications and is curently developing full-featured CUDA interfaces.
+    \bartek{describe what do we use it for}
+    \bartek{add: https://docs.opencv.org/master/}
         
     \subsubsection{CUDA}
     todo
@@ -48,6 +43,7 @@
     \centering
     \includegraphics[width=0.7\textwidth]{webrtc-public-diagram-for-website}
     \caption{Overview of WebRTC architecture}
+    \label{fig:webrtc-public-diagram-for-website}
     \end{figure}
 
     Comprehensive documentation and community creating many template projects and libraries makes using this framework rather convenient. One of the most popular open-source libraries is \textit{aiortc}.
@@ -84,6 +80,7 @@
     \centering
     \includegraphics[width=0.7\textwidth]{server-flow}
     \caption{Client-server flow}
+        \label{fig:server-flow}
     \end{figure}
     
     In a nutshell, when user selects filter style the following actions happen:
