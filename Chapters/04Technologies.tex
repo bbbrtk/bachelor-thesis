@@ -6,21 +6,22 @@ Today we have a great variety of free open-source tools for NN purposes and its 
 \subsection{Neural Network}
 
     \subsubsection{PyTorch}
-        PyTorch is an open-source machine learning library created by Facebook and broadly used in the field of computer vision. Released in 2016 rapidly gained popularity among researchers and developers. PyTorch is not an another Python binding into a C++ framework. It uses core Python concepts like structures, classes or conditions, so integrates easily with the rest of Python ecosystem. Library provides all necessary tools for developing and training neural network based on deep learning models. \\ 
+        PyTorch is an open-source machine learning library created by Facebook and broadly used in the field of computer vision. Released in 2016 rapidly gained popularity among researchers and developers. PyTorch is not an another Python binding into a C++ framework. It uses core Python concepts like structures, classes or conditions, so integrates easily with the rest of Python ecosystem. Library provides all necessary tools for developing and training neural network based on deep learning models.
+        
         Two main features of this package are:
         \begin{itemize}
             \item Strong GPU acceleration during computation of tensors
             \item Neural networks built on a tape-based autograd system
         \end{itemize}
         
-        We decided to pick out PyTorch instead of TensorFlow (the main and actually the only alternative) due to several reasons. Firstly, TF was becoming more and more complex for machine learning beginners, where the PyTorch is based on basic and familiar programming paradigms. New version of TF (2.0) solves this problem, but was released after we had started working on the project. Moreover, the documentation is also pretty straightforward and helpful for newcomers. And finally, plenty of style transfer approaches are built on PyTorch. Including the network we adopt. 
+        We decided to pick out PyTorch instead of TensorFlow (the main and actually the only alternative) due to several reasons. Firstly, TensorFlow was becoming more and more complex for machine learning beginners, where the PyTorch is based on basic and familiar programming paradigms. New version of TF (2.0) solves this problem, but was released after we had started working on the project. Moreover, the documentation is also pretty straightforward and helpful for newcomers. And finally, plenty of style transfer approaches are built on PyTorch. Including the network we adopt. 
         \bartek{add biblio: https://pytorch.org/docs/stable/index.html}
         
     \subsubsection{TensorRT}
-    todo
+    TensorRT is a SDK for deep learing interface created by NVIDIA and design for graphic cards from this company. It allowed optimalize neutral network 
     
     \subsubsection{OpenCV}
-    Open Source Computer Vision Library is an open-source library for the machine learning, image processing and so on. It includes dozens of computer vision algorithms adjusted for easy use. Althought written in C++, OpenCV has Python bindings and provides support for ML libraries like PyTorch.  By using it, one can process images and videos to detect objects, apply filters, analyze structure or perform reconstruction. OpenCV is designed to handle real-time vision applications and is curently developing full-featured CUDA interfaces.
+    Open Source Computer Vision Library is an open-source library for the machine learning, image processing and so on. It includes dozens of computer vision algorithms adjusted for easy use. Althought written in C++, OpenCV has Python bindings and provides support for Machine Learning libraries like PyTorch.  By using it, one can process images and videos to detect objects, apply filters, analyze structure or perform reconstruction. OpenCV is designed to handle real-time vision applications and is curently developing full-featured CUDA interfaces.
     \bartek{describe what do we use it for}
     \bartek{add: https://docs.opencv.org/master/}
         
@@ -32,7 +33,8 @@ Today we have a great variety of free open-source tools for NN purposes and its 
     Client-server communication is divided into two parts: video streaming and transferring filter specification data. The first part is maintained by server in WebRTC standard, whereas the second one is micro-server based on Flask. Both segments are written in Python and developed by open-source communities.
 
     \subsubsection{WebRTC}
-    WebRTC is an open framework that enables Real Time Communication (RTC) in web browsesr and mobile apps via simple API. It provides tools to create peer-to-peer communication without any external plugins or programs. Standarized on API level by W3C \bartek{add hyperlink} and protocol level by IETF \bartek{add hyperlink} is widely used and supported by Google, Apple, Microsoft and main browser vendors. Given that our project and mobile application is cross-platfrom, we consider it as a key factor when chosing server technology. \\
+    WebRTC is an open framework that enables Real Time Communication (RTC) in web browsesr and mobile apps via simple API. It provides tools to create peer-to-peer communication without any external plugins or programs. Standarized on API level by W3C \bartek{add hyperlink} and protocol level by IETF \bartek{add hyperlink} is widely used and supported by Google, Apple, Microsoft and main browser vendors. Given that our project and mobile application is cross-platfrom, we consider it as a key factor when chosing server technology.
+    
     WebRTC architecture presented on Figure Figure \ref{fig:webrtc-public-diagram-for-website} contains two main layers: 
     \begin{itemize}
     \item C++ API - for browser makesrs implementing the Web API proposal
@@ -46,7 +48,7 @@ Today we have a great variety of free open-source tools for NN purposes and its 
     \label{fig:webrtc-public-diagram-for-website}
     \end{figure}
 
-    Comprehensive documentation and community creating many template projects and libraries makes using this framework rather convenient. One of the most popular open-source libraries is \textit{aiortc}.
+    Comprehensive documentation and community creating many additional libraries make using this framework rather convenient. One of the most popular open-source libraries is \textbf{aiortc}.
     \bartek{
     photo: https://webrtc.org/architecture/
     biblio: https://webrtc.org

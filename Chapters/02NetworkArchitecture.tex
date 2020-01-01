@@ -12,14 +12,14 @@
     pruning procedure used to obtain the final model.
     \subsubsection{Overall network architecture} 
     We follow architecture described in \cite{Li2018}, changing it's components' details 
-    in order enable real time inference. The network consists of two 
+    in order to enable real time inference. The network consists of two 
     main components - encoder-decoder module and
     transformation module pictured in Figure \ref{fig:overall_network}.
     To perform style transfer encoder is fed with content image
     and style image, producing feature maps cF and sF respectively.
-    Next tranformation module transfers sF's statistics onto cF. Resulting 
+    Next, transformation module transfers sF's statistics onto cF. Resulting 
     feature map is passed through decoder, which creates final image. 
-    Thanks to this modular architecture each style image needs to be encoded
+    Thanks to this modular architecture, each style image needs to be encoded
     only once. For both encoder-decoder and
     transformation module we use pretrained models publicly available at 
     \url{https://github.com/sunshineatnoon/LinearStyleTransfer}
