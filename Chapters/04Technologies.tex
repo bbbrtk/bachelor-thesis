@@ -17,14 +17,13 @@ Today we have a great variety of free open-source tools for NN purposes and its 
         We decided to pick out PyTorch instead of TensorFlow (the main and actually the only alternative) due to several reasons. Firstly, TensorFlow was becoming more and more complex for machine learning beginners, where the PyTorch is based on basic and familiar programming paradigms. New version of TF (2.0) solves this problem, but was released after we had started working on the project. Moreover, the documentation is also pretty straightforward and helpful for newcomers. And finally, plenty of style transfer approaches are built on PyTorch. Including the network we adopt. 
         \bartek{add biblio: https://pytorch.org/docs/stable/index.html}
         
-    \subsubsection{TensorRT}
+    \subsubsection{TensorRT} \label{trt_chapter}
     TensorRT is a SDK for deep learing interface created by NVIDIA and design for graphic cards from this company. It allowed optimalize neutral network 
     
     \subsubsection{OpenCV}
     Open Source Computer Vision Library is an open-source library for the machine learning, image processing and so on. It includes dozens of computer vision algorithms adjusted for easy use. Althought written in C++, OpenCV has Python bindings and provides support for Machine Learning libraries like PyTorch.  By using it, one can process images and videos to detect objects, apply filters, analyze structure or perform reconstruction. OpenCV is designed to handle real-time vision applications and is curently developing full-featured CUDA interfaces.
     \bartek{describe what do we use it for}
     \bartek{add: https://docs.opencv.org/master/}
-        
     \subsubsection{CUDA}
     todo
     
@@ -120,11 +119,30 @@ Today we have a great variety of free open-source tools for NN purposes and its 
     \subsubsection{Description}
         Flutter is framework created by Google but it's also an open source project 
         so everone can propose new fetures and improvments. 
-        When we write Flutter application we use Dart language.
-        Dart is also developed by Google and has C-style syntax.
+        When we write Flutter application we use Dart - language developed by 
+        Google with C-style syntax.
         It runs's on Dart VM included in the SDK. 
-        Very interesting feautre of Dart is that it can transcompile to JavaScript.
-        This feature is 
+        Very interesting feautre of Dart is that it optionally transcompiles to 
+        JavaScript so you can also create web applications.
+        
+        Basic idea of Flutter sounds "Everything’s a widget" and widgets are 
+        quite similar to React "components". You use widgets to build whole UI 
+        and some of them are:
+        \begin{itemize}
+            \item Layout widgets - e.g. rows, columns, lists, grids, tables
+            \item Style widgets - e.g. colors
+            \item Structure widgets - e.g. buttons
+            \item Animation widgets - e.g. transition
+        \end{itemize}
+        Flutter comes with loads of prebuild Material Design widgets which makes 
+        easy and fast to create applications in this particular great convention. 
+        
+        
+        
+        
+        
+        
+        
     
     There are Material Design 
         icons, colors, typical UI interface elements like top and bottom bars,
