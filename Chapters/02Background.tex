@@ -45,6 +45,11 @@
 % do 2018, funkcję straty dla transferu stylu, jej interpretację, na czym polega
 % AdaIn (https://arxiv.org/abs/1703.06868), czemu była całkeim okej ale nie do końca.
 % Takie jej ograniczenia, które ta praca, na której bazujemy rozwiązuje
+
+% AdaIn - definicja z pracy, schemat dzialania z pracy
+% Loss function - schemat z https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-neural-style-transfer-ef88e46697ee + byc moze rownanie z: https://towardsdatascience.com/neural-style-transfer-tutorial-part-1-f5cd3315fa7f
+% cite - https://arxiv.org/pdf/1603.08155.pdf
+% different losses - http://openaccess.thecvf.com/content_CVPR_2019/papers/Li_Learning_Linear_Transformations_for_Fast_Image_and_Video_Style_Transfer_CVPR_2019_paper.pdf
     \subsubsection{Overview}
     Style transfer is a technique of extraction visual aspects from an image and blending it together with an another image content. It aims to manipulate digital pictures (or videos) and adopt the appearance or visual style. This is usually implemented by optimizing the output image to match the content statistics of the content image and the style statistics of the style reference image. These statistics are extracted from the images using a convolutional network. 
     
@@ -72,6 +77,8 @@ to change the style of an image while preserving its content.
     
     \subsubsection{Loss function}
     
+    dividing the loss function into two parts, one is the Content loss and the other is the Style loss
+    
     \subsubsection{AdaIn}
     
     
@@ -88,6 +95,7 @@ to change the style of an image while preserving its content.
     image
     
     \subsubsection{Commercial use}
+    % check https://github.com/ycjing/Neural-Style-Transfer-Papers - applicatoin papers
     Some research projects became a base of mobile applications or programs which can be used by everyone for any purpose:
     \begin{itemize}
         \item \href{https://deepart.io}{DeepArt} - free website where one can turn photo into artistic image

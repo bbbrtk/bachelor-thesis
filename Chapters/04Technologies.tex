@@ -1,7 +1,14 @@
 \documentclass[../Main.tex]{subfiles}
 \begin{document}
 
-Today we have a great variety of free open-source tools for NN purposes and its number is increasing with the growth of AI and ML. Development of neural networks, mobile application or server is full of nuances, unexperienced programmer may encounter many troubles since not everything can be easily tracked. However most problems can be solved by good Internet research. Therefore, it is highly significant to choose the up-to-date tools with well-prepared documentation and active communities. Technologies we have chosen allowed us to focus on core concepts instead of struggling with implementation or configuration.
+Today we have a great variety of free open-source tools for NN purposes and it's
+number is increasing with the growth of AI and ML. Development of neural networks,
+mobile application or server is full of nuances, unexperienced programmer may 
+encounter many troubles since not everything can be easily tracked. However most
+problems can be resolved by good Internet research. Therefore, it is highly significant
+to choose the up-to-date tools with well-prepared documentation and active communities. 
+Technologies we have chosen allowed us to focus on core concepts instead of 
+struggling with implementation or configuration.
 
 \subsection{Neural Network}
 
@@ -18,31 +25,49 @@ Today we have a great variety of free open-source tools for NN purposes and its 
 %        \bartek{add biblio: https://pytorch.org/docs/stable/index.html}
         
     \subsubsection{TensorRT} \label{trt_chapter}
-    TensorRT is a SDK for deep learing interface created by NVIDIA and design for graphic cards from this company. It is build on CUDA and ensure C++ and Python API's, which allowes to load a pre-defined or deep learning models, trained on packages like PyTorch to run them on NVIDIA GPU. The main adventages of using TensorRT are high-performance deep learning interface optimalizer and light-weight runtime engine, that provide low latency, which minimalize straming videos delays. The engine is generated only once for GPU and serialized as plan file for next uses. You can run application with lower precizion to reduce memory request and rise performance. 
+    TensorRT is an SDK for deep learing interface created by NVIDIA and design for 
+    their GPUs. It is build on CUDA and provides C++ and Python APIs, which allow
+    to load a pretrained deep learning models, trained with libraries like PyTorch
+    and run them on NVIDIA GPU. The main advantages of TensorRT are
+    high-performance deep learning interface optimizer and light-weight runtime
+    engine, that provide low latency and minimize streaming videos delays.
+    The engine is generated only once for each GPU and serialized as plan file for next uses.
+    It's also possible to run application with lower precision (if hardware allows to do so)
+    to reduce memory requirements and reduce inference time. 
     
     The workflow of build phase network on TensorRT is following those steps:
     \begin{itemize}
-        \item Eliminate layers with non using outputs
-        \item Eliminate operation equalent to no-operation
+        \item Eliminate layers with unused outputs
+        \item Eliminate operation equivalent to no-operation
         \item Fusion of convolution
-        \item Aggregation of operation with similar parameter on the same source tensor 
+        \item Aggregation of operations with similar parameters on the same source tensor 
         \item Merge of concatenation layers
-        \item Modifies the precizions of weight 
-        \item Calibrate and appropriate scaling factors
-        \item Runs layers on dummy data, to chose the fastest kernel catalog
+        \item Modifies the precisions of weights 
+        \item Calibration and appropriate scaling factors
+        \item Run layers on dummy data, to chose the fastest kernel catalog
     \end{itemize}
     
-    TensorRT allowes to focus on creating new applications with AI, authonomous machines and high-performance computing instead of calibrate for inference development. After optimalization TensorRT chooses specific kernels for using platform to maximalize performance on GPUs. It uses Docker to integration with DevOps architectures.
+    TensorRT allows to focus on creating new applications with AI, autonomous machines
+    and high-performance computing instead of calibration for inference development.
+    After optimization TensorRT chooses specific CUDA kernels for the platform to maximize
+    performance on GPUs. It uses Docker for integration with DevOps architectures.
     
 %        \asia{add biblio: https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide, https://developer.nvidia.com/tensorrt }
-    
-    
+
     \subsubsection{OpenCV}
-    Open Source Computer Vision Library is an open-source library for the machine learning, image processing and so on. It includes dozens of computer vision algorithms adjusted for easy use. Althought written in C++, OpenCV has Python bindings and provides support for Machine Learning libraries like PyTorch.  By using it, one can process images and videos to detect objects, apply filters, analyze structure or perform reconstruction. OpenCV is designed to handle real-time vision applications and is curently developing full-featured CUDA interfaces.
+    Open Source Computer Vision Library is an open-source library for machine learning,
+    image processing and so on. It includes dozens of computer vision algorithms adjusted
+    for easy use. Although written in C++, OpenCV has Python bindings and provides support
+    for Machine Learning libraries like PyTorch.  By using it, one can process
+    images and videos to detect objects, apply filters, analyze structure or
+    perform reconstruction. OpenCV is designed to handle real-time vision
+    applications and is currently developing full-featured CUDA interfaces.
 %    \bartek{describe what do we use it for}
 %    \bartek{add: https://docs.opencv.org/master/}
+
     \subsubsection{CUDA}
-    todo
+    
+    
     
 \newpage
 \subsection{Server}
