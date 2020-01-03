@@ -49,6 +49,12 @@
     Style transfer is a technique of extraction visual aspects from an image and blending it together with an another image content. It aims to manipulate digital pictures (or videos) and adopt the appearance or visual style. This is usually implemented by optimizing the output image to match the content statistics of the content image and the style statistics of the style reference image. These statistics are extracted from the images using a convolutional network. 
     
     The crucial part of style transfer is process of isolating the style and the content from an image. Researchers developed many approaches which enable computers to do it with high precision. We will go through these techniques in next sections. 
+    
+    deep
+neural networks (DNNs) encode not only the content but
+also the style information of an image. Moreover, the image style and content are somewhat separable: it is possible
+to change the style of an image while preserving its content.
+    
         \bartek{image: https://mspries.github.io/OpticalIllusionReportPage.html
     based on paper: https://arxiv.org/abs/1607.08022
     }
@@ -68,6 +74,9 @@
     
     \subsubsection{AdaIn}
     
+    
+    is \cite{huang2017adain} a novel adaptive instance normalization (AdaIN) layer that aligns the mean and variance of the content features with those of the style features
+    
     \subsubsection{Examples}
     The most common use of style transfer is obviously the artificial artwork created from photo. Especially the ones produced from some famous paintings. Attached examples give an idea of this approach capabilities. 
     \bartek{attach examples}
@@ -86,7 +95,7 @@
         \item \href{https://prisma-ai.com}{Prisma} - photo-editing application able to create artwork from image
     \end{itemize}
     
-    \subsubsection{Alternative approach}
+    \subsubsection{Previous approach}
     The alternative CNN approach which used to be popular beforehand is called \textbf{image analogy}. In brief, the algorithm wants to find an analogous image B' that relates to B in the same way as A' relates to A. \bartek{cite: https://mrl.nyu.edu/publications/image-analogies/analogies-72dpi.pdf} To transfer the style of image we need a dataset of training pairs of photo and an artwork from processed photo. The main weakness of this method is that mentioned pair barely exist in practice. An artwork is seldom based on a particular photo.
     
 \subsection{Neural Networks}
