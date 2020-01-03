@@ -31,6 +31,28 @@
     https://developers.google.com/machine-learning/glossary
     }
 
+\subsection{Convolutional Neural Networks}
+
+\bartek[inline]{rewrite this mess:}
+
+    \subsubsection{Neural Networks - Overview}
+    The neural network is a concept and technique for building a computer program that learns from data. It is based very loosely on how we think the human brain works. First, a collection of software “neurons” are created and connected together, allowing them to send messages to each other. Next, the network is asked to solve a problem, which it attempts to do over and over, each time strengthening the connections that lead to success and diminishing those that lead to failure.
+    \bartek{book: https://playground.tensorflow.org/}
+    \bartek{base on: http://neuralnetworksanddeeplearning.com/chap1.html}
+    \bartek{base on: \cite{Goodfellow-et-al-2016}}
+    
+     Technically, neural networks are weighted graphs. They consist of an ordered set of layers, where every layer is a set of nodes. The first layer of the neural network is called the input layer, and the last one is called the output layer. The layers in between are called hidden layers. Layers are groups of nodes. Nodes belonging to one layer are connected to the nodes in the following and/or the previous layers. These connections are weighted edges. 
+    Given an input each node gives and output (a number) which is calculated by some function. Output of node is then passed to the subsequent connected nodes, which calculates next outputs. By calculating the layer outputs consecutively we calculate the output of the last layer, which is the one we need.
+    
+    \subsection{Convolution Neural Networks}
+        Convolution Neural Networks (CNN) are specialized kind of networks. CNN are well suited for the processing of images, but the same concepts are adaptable for other fields, like audio or video. A convolutional network consists of multiple convolution and pooling layers. At the end follows normally a fully connected layer. A pooling layer is applied after one or multiple convolution layers. The convolution layers have the task to extract useful features from the input, which results in multiple feature maps. The pooling layer reduces the spatial size of these feature maps
+            
+    \subsubsection{Loss}
+    \subsubsection{Activation}
+        \textbf{ReLU}
+    \subsubsection{Backpropagation}
+
+
 \subsection{Computer Vision}
     Computer vision is a field of computer science which tries to understand the images and videos - how they are stored, how can we manipulate and effectively retrieve data from them. It seeks to replicate human vision system and enable computers to 'think and see' the same way we do.  Computer Vision plays a major role in photo correction apps and art generation but also in self-driving vehicles or robotics.
     
@@ -39,7 +61,7 @@
         https://www.bitdegree.org/tutorials/what-is-deep-learning/
         }
 
-\newpage
+
 \subsection{Style transfer}
 %  przydałoby się opisać transfer stylu, rozwój prac od 2015
 % do 2018, funkcję straty dla transferu stylu, jej interpretację, na czym polega
@@ -53,14 +75,8 @@
     \subsubsection{Overview}
     Style transfer is a technique of extraction visual aspects from an image and blending it together with an another image content. It aims to manipulate digital pictures (or videos) and adopt the appearance or visual style. This is usually implemented by optimizing the output image to match the content statistics of the content image and the style statistics of the style reference image. These statistics are extracted from the images using a convolutional network. 
     
-    The crucial part of style transfer is process of isolating the style and the content from an image. Researchers developed many approaches which enable computers to do it with high precision. We will go through these techniques in next sections. 
-    
-    deep
-neural networks (DNNs) encode not only the content but
-also the style information of an image. Moreover, the image style and content are somewhat separable: it is possible
-to change the style of an image while preserving its content.
-    
-        \bartek{image: https://mspries.github.io/OpticalIllusionReportPage.html
+    The crucial part of style transfer is process of isolating the style and the content from an image. Researchers developed many approaches which enable computers to do it with high precision. We will go through these techniques in next subsections. 
+    \bartek{image: https://mspries.github.io/OpticalIllusionReportPage.html
     based on paper: https://arxiv.org/abs/1607.08022
     }
     \\
@@ -70,6 +86,17 @@ to change the style of an image while preserving its content.
         \caption{Style and content diagram from \href{https://mspries.github.io/OpticalIllusionReportPage.html}{mspires.github.io}}
         \label{fig:style-and-content}
     \end{figure}
+    
+        
+    \subsubsection{Examples}
+    The most common use of style transfer is obviously the artificial artwork created from photo. Especially the ones produced from some famous paintings. Attached examples give an idea of this approach capabilities. 
+    \bartek{attach examples}
+    
+    image
+    
+    image
+    
+    image
 
     \subsubsection{State of art}
     \bartek[inline]{REWRITE:}
@@ -83,16 +110,7 @@ to change the style of an image while preserving its content.
     
     
     is \cite{huang2017adain} a novel adaptive instance normalization (AdaIN) layer that aligns the mean and variance of the content features with those of the style features
-    
-    \subsubsection{Examples}
-    The most common use of style transfer is obviously the artificial artwork created from photo. Especially the ones produced from some famous paintings. Attached examples give an idea of this approach capabilities. 
-    \bartek{attach examples}
-    
-    image
-    
-    image
-    
-    image
+
     
     \subsubsection{Commercial use}
     % check https://github.com/ycjing/Neural-Style-Transfer-Papers - applicatoin papers
@@ -105,19 +123,7 @@ to change the style of an image while preserving its content.
     
     \subsubsection{Previous approach}
     The alternative CNN approach which used to be popular beforehand is called \textbf{image analogy}. In brief, the algorithm wants to find an analogous image B' that relates to B in the same way as A' relates to A. \bartek{cite: https://mrl.nyu.edu/publications/image-analogies/analogies-72dpi.pdf} To transfer the style of image we need a dataset of training pairs of photo and an artwork from processed photo. The main weakness of this method is that mentioned pair barely exist in practice. An artwork is seldom based on a particular photo.
-    
-\subsection{Neural Networks}
 
-\bartek[inline]{moge opisac reszte}
-
-    \subsubsection{Overview}
-    \subsubsection{Layers}
-        \textbf{Fully Connected Layers}
-        \textbf{Convolutional Layers}
-    \subsubsection{Loss} %for style tranfer
-    \subsubsection{Activation}
-        \textbf{ReLU}
-    \subsubsection{Backpropagation}
 
 \subsection{Neural network compression}
     Latest neural networks usually have between 2 million and 50 million parameters.
