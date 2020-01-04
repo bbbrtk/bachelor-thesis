@@ -1,10 +1,10 @@
-\documentclass[../Main.tex]{subfiles}
+ \documentclass[../Main.tex]{subfiles}
 \begin{document}
 
-Today we have a great variety of free open-source tools for NN purposes and it's
+Today we have a great variety of free open-source tools for NN purposes and its
 number is increasing with the growth of AI and ML. Development of neural networks,
-mobile application or server is full of nuances, unexperienced programmer may 
-encounter many troubles since not everything can be easily tracked. However most
+mobile application or server is full of nuances, an unexperienced programmer may 
+encounter many troubles since not everything can be easily tracked. However, most
 problems can be resolved by good Internet research. Therefore, it is highly significant
 to choose the up-to-date tools with well-prepared documentation and active communities. 
 Technologies we have chosen allowed us to focus on core concepts instead of 
@@ -13,29 +13,25 @@ struggling with implementation or configuration.
 \subsection{Neural Network}
 
     \subsubsection{PyTorch}
-        PyTorch is an open-source machine learning library created by Facebook and broadly used in the field of computer vision. Released in 2016 rapidly gained popularity among researchers and developers. PyTorch is not an another Python binding into a C++ framework. It uses core Python concepts like structures, classes or conditions, so integrates easily with the rest of Python ecosystem. Library provides all necessary tools for developing and training neural network based on deep learning models.
+        \textbf{PyTorch} is an open-source machine learning library created by Facebook and broadly used in the field of computer vision. Released in 2016 rapidly gained popularity among researchers and developers. PyTorch is not another Python binding into a C++ framework. It uses core Python concepts like structures, classes or conditions, so integrates easily with the rest of Python ecosystem. Library provides all necessary tools for developing and training the neural networks based on deep learning models.
         
         Two main features of this package are:
         \begin{itemize}
-            \item Strong GPU acceleration during computation of tensors
-            \item Neural networks built on a tape-based autograd system
+            \item \textbf{Strong GPU acceleration} during computation of tensors
+            \item Neural networks built on a tape-based \textbf{autograd system}
         \end{itemize}
         
-        We decided to pick out PyTorch instead of TensorFlow (the main and actually the only alternative) due to several reasons. Firstly, TensorFlow was becoming more and more complex for machine learning beginners, where the PyTorch is based on basic and familiar programming paradigms. New version of TF (2.0) solves this problem, but was released after we had started working on the project. Moreover, the documentation is also pretty straightforward and helpful for newcomers. And finally, plenty of style transfer approaches are built on PyTorch. Including the network we adopt. 
+        We decided to pick out PyTorch instead of TensorFlow (the main and actually the only alternative) due to several reasons. Firstly, TensorFlow was becoming more and more complex for machine learning beginners, where the PyTorch is based on basic and familiar programming paradigms. The new version of TF (2.0) solves this problem but was released after we had started working on the project. Moreover, the documentation is also pretty straightforward and helpful for newcomers. And finally, plenty of style transfer approaches are built on PyTorch. Including the network we adopt. 
 %        \bartek{add biblio: https://pytorch.org/docs/stable/index.html}
-        
-    \subsubsection{TensorRT} \label{trt_chapter}
-    TensorRT is an SDK for deep learing interface created by NVIDIA and design for 
-    their GPUs. It is build on CUDA and provides C++ and Python APIs, which allow
-    to load a pretrained deep learning models, trained with libraries like PyTorch
-    and run them on NVIDIA GPU. The main advantages of TensorRT are
-    high-performance deep learning interface optimizer and light-weight runtime
-    engine, that provide low latency and minimize streaming videos delays.
-    The engine is generated only once for each GPU and serialized as plan file for next uses.
-    It's also possible to run application with lower precision (if hardware allows to do so)
-    to reduce memory requirements and reduce inference time. 
+
+    \subsubsection{CUDA}
     
-    The workflow of build phase network on TensorRT is following those steps:
+    todo
+    
+    \subsubsection{TensorRT} \label{trt_chapter}
+    TensorRT is an SDK for deep learning interface \textbf{created by NVIDIA and designed for their GPUs}. It is built on CUDA and provides C++ and Python APIs, which allows loading pre-trained deep learning models, (trained with libraries like PyTorch) and run them on NVIDIA GPU. The main advantages of TensorRT are high-performance deep learning interface optimizer and light-weight runtime engine, that provide low latency and minimize streaming video delays. The engine is generated only once for each GPU and serialized as a plan file for the next uses. It is also possible to run an application with lower precision (if hardware allows doing so) to reduce memory requirements and reduce inference time. 
+    
+    The workflow of the build phase network on TensorRT follows those steps:
     \begin{itemize}
         \item Eliminate layers with unused outputs
         \item Eliminate operation equivalent to no-operation
@@ -47,7 +43,7 @@ struggling with implementation or configuration.
         \item Run layers on dummy data, to chose the fastest kernel catalog
     \end{itemize}
     
-    TensorRT allows to focus on creating new applications with AI, autonomous machines
+    TensorRT allows focusing on creating new applications with AI, autonomous machines
     and high-performance computing instead of calibration for inference development.
     After optimization TensorRT chooses specific CUDA kernels for the platform to maximize
     performance on GPUs. It uses Docker for integration with DevOps architectures.
@@ -65,24 +61,21 @@ struggling with implementation or configuration.
 %    \bartek{describe what do we use it for}
 %    \bartek{add: https://docs.opencv.org/master/}
 
-    \subsubsection{CUDA}
-    
-    
-    
+
 \newpage
 \subsection{Server}
-    Client-server communication is divided into two parts: video streaming and transferring filter specification data. The first part is maintained by server in WebRTC standard, whereas the second one is micro-server based on Flask. Both segments are written in Python and developed by open-source communities.
+    Client-server communication is divided into two parts: video streaming and transferring filter specification data. The first part is maintained by a server in WebRTC standard, whereas the second one is micro-server based on Flask. Both segments are written in Python and developed by open-source communities.
 
     \subsubsection{WebRTC}
-    WebRTC is an open framework that enables Real Time Communication (RTC) in web browsers and mobile apps via simple API. It provides tools to create peer-to-peer communication without any external plugins or programs. Standarized on API level by W3C 
+    WebRTC is an open framework that enables \textbf{Real Time Communication (RTC)} in web browsers and mobile apps via simple API. It provides tools to create peer-to-peer communication without any external plugins or programs. Standardized on API level by W3C 
     %\bartek{add hyperlink} 
     and protocol level by IETF 
     %\bartek{add hyperlink}
-    is widely used and supported by Google, Apple, Microsoft and main browser vendors. Given that our project and mobile application is cross-platfrom, we consider it as a key factor when chosing server technology.
+    is widely used and supported by Google, Apple, Microsoft, and main browser vendors. Given that our project and mobile application is cross-platfoom, we consider it as a key factor when choosing server technology.
     
     WebRTC architecture presented on  Figure \ref{fig:webrtc-public-diagram-for-website} contains two main layers: 
     \begin{itemize}
-    \item C++ API - for browser makesrs implementing the Web API proposal
+    \item C++ API - for browser makers implementing the Web API proposal
     \item Javascript Web API - for web developers building audio-video applications \\
     \end{itemize}
     
@@ -100,14 +93,14 @@ struggling with implementation or configuration.
     % }
     
     \subsubsection{Aiortc}
-    \textit{Aiortc} was developed as a 'WebRTC for Python'. Complexity (especially for beginners) and lack of Python bindings motivated authors of aiortc to design library and API which follow its Javascript counterpart. They pointed out that 
+    \textbf{Aiortc} was developed as a 'WebRTC for Python'. Complexity (especially for beginners) and lack of Python bindings motivated authors of aiortc to design library and API which follow its Javascript counterpart. They pointed out that 
     %\bartek{add cite} 
     'WebRTC (...) is tightly coupled to a media stack, making it hard to plug in audio or video processing algorithms'. Our goal is to literally use the video processing algorithm, so we found this library and its examples extremely useful.
-    We based our server on the aiortc example which performs video, audio and data channel establishing with a browser. It also allows to process streaming frames using OpenCV. 
+    We based our server on the aiortc example which performs video, audio and data channel establishing with a browser. It also allows pocessing streaming frames using OpenCV. 
         % \bartek{biblio: https://aiortc.readthedocs.io/en/stable/}
     
     \subsubsection{Flask}
-    Flask is so-called micro-framework with little dependencies to external libraries, which provides tools and technologies useful with building a small web application. It could be helpful for ones who want to create web pages, blogs or simple REST server. 
+    Flask is a so-called \textbf{micro-framework} with little dependencies to external libraries, which provides tools and technologies useful with building a small web application. It could be helpful for ones who want to create web pages, blogs or a simple REST server. 
     Technically, Flask is based on:
     \begin{itemize}
     \item Werkzeug WSGI (Web Server Gateway Interface is a popular specification for a universal interface between the  server and the web app) - toolkit which implements requests-response objects, and some service functions
@@ -124,7 +117,7 @@ struggling with implementation or configuration.
    % \bartek{biblio to add: http://flask.palletsprojects.com/en/1.1.x/}
     
     \subsubsection{Server flow}
-    Aforementioned servers work separately and do not directly interfere with each other and could perform tasks asynchronously. In that way, many clients can upload filter image and parameters as well as stream video without delays. Every client is able to change filter params and start new stream in various order, but usual client-server flow is depicted on Figure \ref{fig:server-flow} \\
+    The aforementioned servers work separately and do not directly interfere with each other and could perform tasks asynchronously. In that way, many clients can upload filter images and parameters as well as stream video without delays. Every client can change filter params and start a new stream in various order, but the usual client-server flow is depicted in Figure \ref{fig:server-flow} \\
     \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{server-flow}
@@ -143,11 +136,11 @@ struggling with implementation or configuration.
     \item Browser displays video using WebView component 
     \end{enumerate}
     
-    When stream finishes or breaks (due to network error, application shutdown or any other error), server close connection gracefully but still stores last filter style parameters. If they are not specified during next stream or the POST request to the Flask server failes, the server uses saved ones. 
+    When streaming finishes or breaks (due to network error, application shutdown or any other error), server close connection gracefully but still stores last filter style parameters. If they are not specified during the next stream or the POST request to the Flask server fails, the server uses saved ones. 
     
     \subsubsection{Alternative technologies}
-    We had been trying several options before we chose to use aiortc. Our prime attempt was to adopt \textit{WebRTC Plugin for Flutter}. It is small project developed by Flutter community containing Javascript server and Flutter client. That seemed to be a perfect solution which could accelerate our work.
-    However we encounter some obstacles in this undertaking. First of all, mentioned plugin is poorly documented and error-prone what is rather annoying combination. Secondly it works efficiently only over LAN network when we wish to connect to the server from any place. And the third thing is the communication crashes if the video is not streaming to/from Chrome browser. Nevertheless, the project is gathering greater community what makes it promising in the time of growing popularity of Flutter.
+    We had been trying several options before we chose to use aiortc. Our prime attempt was to adopt \textit{WebRTC Plugin for Flutter}. It is a small project developed by the Flutter community containing Javascript server and Flutter client. That seemed to be a perfect solution that could accelerate our work.
+    However, we encounter some obstacles in this undertaking. First of all, the mentioned plugin is poorly documented and error-prone what is a rather annoying combination. Secondly, it works efficiently only over the LAN network when we wish to connect to the server from any place. And the third thing is the communication crashes if the video is not streaming to/from the Chrome browser. Nevertheless, the project is gathering greater community what makes it promising in the time of growing popularity of Flutter.
     %\bartek{biblio to add:  https://github.com/cloudwebrtc/flutter-webrtc}
    
 \newpage
@@ -251,7 +244,8 @@ struggling with implementation or configuration.
         so Flutter seemed easy to learn. 
         
     \subsubsection{Implementation}
-        
+    
+    todo
         
     
 

@@ -1,10 +1,10 @@
 \documentclass[../Main.tex]{subfiles}
 \begin{document}
 
-    This chapter describes the background necessary for our work. At the beginning we describe the core concepts of machine learning and image style transfer. Subsequently, the key elements of neural network are briefly outlined.
+    This chapter describes the background necessary for our work. At the beginning, we outline the core concepts of machine learning and neural networks. The key elements of image style transfer are briefly explained afterwards.
 
 \subsection{Machine Learning} 
-    Machine Learning is the field of study that gives computers the capability to learn without being explicitly programmed. \bartek{add quote: Arthur Samuel}. Technically, machine learning is an approach to data science and analysis that involves adapting and building special models, which allow computer programs to learn through experience. It is based on many others fields such as: linear algebra, calculus, statistics and probability or graph theory. ML models are constructed and improved by algorithms which goal is to make the most accurate possible prediction.
+    Machine Learning (ML) is the field of study that gives computers the capability to learn without being explicitly programmed. \bartek{add quote: Arthur Samuel}. Technically, machine learning is an approach to data science and data analysis that involves adapting and building special models, which allow computer programs to learn through experience. It is based on many other fields such as: linear algebra, calculus, statistics, probability or graph theory. ML models are constructed and improved by algorithms which goal is to make the most accurate possible prediction.
     
     There are various ML concepts and architectures, but one can highlight three most common parts:
     \begin{itemize}
@@ -12,10 +12,9 @@
         \item Parameters - the factors used by the model to make decisions
         \item Learner - the part that adjusts the parameters
     \end{itemize}
-    Machine Learning works by gathering the data (where quality of data determines the future quality of model), processing to make them consistent and relevant and split them to different sets (usually training and test sets). Next, the chosen algorithm and techniques build the model which is evaluated and upgraded several times to reach the appropriate level of prediction.
+    Machine Learning works by gathering the data (where the quality of data determines the future quality of model), processing to make them consistent and relevant followed by splitting them to different sets (usually training and test sets). Next, the chosen algorithm and techniques build the model which is evaluated and upgraded several times to reach the appropriate level of prediction.
     
-     One way that we can classify the tasks that machine learning algorithms solve is by how much labeled data they got and how much feedback they present. In some scenarios, the significant amount of labeled data is provided and the model generates some output. This paradigm is called supervised learning. In other cases, no labeled data is provided, no feedback generated - it is an unsupervised learning. Lastly, the reinforcement learning, rather different from the previous ones taking suitable action to maximize reward in a particular situation. The three main paradigms of ML are depicted on Figure \ref{fig:ML-paradigms}.
-    
+    ML model needs well-prepared data to work properly. A prepared batch of data usually includes  label describing its type - it enables the algorithm to distinguish the batches and learn about their specific properties. One way that we can classify the tasks that machine learning algorithms solve is by how much labeled data they got and how much feedback they present. In the first type, the significant amount of labeled data is provided and the model generates some output. This paradigm is called \textbf{supervised learning}. In another paradigm, no labeled data is provided, no feedback generated - it is  \textbf{unsupervised learning}. Lastly, the \textbf{reinforcement learning}, rather different from the previous ones taking suitable action to maximize reward in a particular situation. The three main paradigms of ML are depicted on Figure \ref{fig:ML-paradigms}. \\
     \begin{figure}[h]
         \centering
         \includegraphics[width=0.7\textwidth]{ML-paradigms}
@@ -23,93 +22,126 @@
         \label{fig:ML-paradigms}
     \end{figure}
 
-\newpage
-    There are whole bunch of different applications to which machine learning methods can be applied. The most popular ones incl.: Natural Language Processing, Classification Problems, Learning Associations, Pattern Recognition and Image Processing which is the one we focus on in this paper.
+    There are a whole bunch of different applications to which machine learning methods can be implemented. The most popular ones incl.: Natural Language Processing, Classification Problems, Learning Associations, Pattern Recognition and Image Processing which is the one we focus on in this paper.
     \bartek{sources:
     https://deepai.org/machine-learning-glossary-and-terms/machine-learning
     https://martechtoday.com/how-machine-learning-works-150366
     https://developers.google.com/machine-learning/glossary
     }
 
+
+\bartek[inline]{section about deep learning?}
+
+
 \subsection{Convolutional Neural Networks}
 
-\bartek[inline]{rewrite this mess:}
-
-    \subsubsection{Neural Networks - Overview}
-    The neural network is a concept and technique for building a computer program that learns from data. It is based very loosely on how we think the human brain works. First, a collection of software “neurons” are created and connected together, allowing them to send messages to each other. Next, the network is asked to solve a problem, which it attempts to do over and over, each time strengthening the connections that lead to success and diminishing those that lead to failure.
+    \subsubsection{Neural networks - an overview}
+    The neural network is a concept and technique for building a computer program that learns from data and which is based very loosely on how the human brain works. More precisely, it is a collection of software \textbf{neurons} which are created, connected and allowed to send messages to each other. When this collection is asked to solve a problem, it attempts to do so over and over, each time strengthening the connections that lead to successful solution and reduce those leading to wrong one.
     \bartek{book: https://playground.tensorflow.org/}
     \bartek{base on: http://neuralnetworksanddeeplearning.com/chap1.html}
-    \bartek{base on: \cite{Goodfellow-et-al-2016}}
     
-     Technically, neural networks are weighted graphs. They consist of an ordered set of layers, where every layer is a set of nodes. The first layer of the neural network is called the input layer, and the last one is called the output layer. The layers in between are called hidden layers. Layers are groups of nodes. Nodes belonging to one layer are connected to the nodes in the following and/or the previous layers. These connections are weighted edges. 
-    Given an input each node gives and output (a number) which is calculated by some function. Output of node is then passed to the subsequent connected nodes, which calculates next outputs. By calculating the layer outputs consecutively we calculate the output of the last layer, which is the one we need.
+\newpage
     
-    \subsection{Convolution Neural Networks}
-        Convolution Neural Networks (CNN) are specialized kind of networks. CNN are well suited for the processing of images, but the same concepts are adaptable for other fields, like audio or video. A convolutional network consists of multiple convolution and pooling layers. At the end follows normally a fully connected layer. A pooling layer is applied after one or multiple convolution layers. The convolution layers have the task to extract useful features from the input, which results in multiple feature maps. The pooling layer reduces the spatial size of these feature maps
-            
-    \subsubsection{Loss}
-    \subsubsection{Activation}
-        \textbf{ReLU}
-    \subsubsection{Backpropagation}
+     Technically, neural networks are \textbf{weighted graphs}. They consist of an ordered set of layers, where every layer is a set of neurons (nodes). The first layer of the neural network is called the \textbf{input layer}, and the last one is called the \textbf{output layer}. The layers in between are named \textbf{hidden layers}. Layers are groups of nodes. Nodes belonging to one layer are connected to the nodes in the following and/or the previous layers. These connections are weighted edges. \\ 
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.7\textwidth]{cnn-network.jpeg}
+        \caption{Neural network layers}
+        \label{fig:nn-scheme}
+    \end{figure}
 
+    Given an input, each node produces an output (a number) which is calculated by the \textbf{activation function}. This output is then passed to the subsequently connected nodes, which calculate the next outputs. By calculating layer outputs consecutively we calculate the output of the last layer, which is the one we need.
+    
+    \subsection{Definition}
+    \textbf{Convolution Neural Networks (CNN)} are specialized kinds of networks. The \textbf{convolution} itself is a specialized kind of linear operation. Convolutional networks are simply neural networks that use convolution in place of general matrix multiplication in at least one of their layers \cite{Goodfellow-et-al-2016}.  CNN is well adapted for the processing of images, but the same concept fits other fields, like audio or video. 
+    Compared to the standard feedforward neural network with a similarly-sized layer, CNN has much fewer connections and parameters. Therefore it is easier to train, while its theoretically-best performance is going to be only slightly worse \bartek{biblio: http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf}
+        
+    \subsection{CNN Layers}
+    As mentioned, the convolutional network is comprised of one or more convolutional layers (which often have a subsampling step) and then followed by one or more fully connected layers as in a standard multilayer neural network. The architecture of a CNN is designed to take advantage of the two-dimensional structure of an input image. Good results are achieved with local connections between neurons and tied weights followed by some form of pooling. \bartek{source: http://deeplearning.stanford.edu/tutorial/supervised/ConvolutionalNeuralNetwork/} The most common CNN layers listed below are normally placed where the hidden layers are depicted on Figure \ref{fig:nn-scheme}. 
+    \begin{itemize}
+        \item The \textbf{convolution layer} has a task to extract useful features from the input. This layer computes the output of neurons that are connected to local regions in the input, each computing a dot product between their weights and a small region they are connected to in the input volume. \bartek{pretty messy, rewrite} \\
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.5\textwidth]{cnn-convolution.png}
+        \caption{Convolution with 3x3 filter}
+        \label{fig:cnn-convolution}
+    \end{figure}
+    
+        \item The \textbf{pooling layer} reduces the spatial size of these feature maps. Sometimes, the input image is big (and therefore time consuming especially if you have a big input set) or there is sparse data. In these cases, the objective of the Pooling Layers is to reduce the spatial dimension of the input matrix. A pooling layer is applied after one or multiple convolution layers.\\
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.5\textwidth]{cnn-pooling.jpeg}
+        \caption{Process of max-pooling}
+        \label{fig:cnn-pooling}
+    \end{figure}
+    
+        \item The last one, the \textbf{fully connected layer} performs the high-level reasoning and produces the final output. Neurons in a fully connected layer have connections to all activations in the previous layer.
+    \end{itemize}
+    
+    \bartek[inline]{network and pooling img: http://cs231n.github.io/convolutional-networks/
+    conv: https://mlnotebook.github.io/post/CNN1/}
+    
+    \subsubsection{Loss}
+    To know if the result/solution of operations performed in a neural network is correct (or not) we need a function that allows solutions to be ranked and compared. This is known as the \textbf{loss function}. It reduces all the various good and bad aspects of a possibly complex system down to a single number, a scalar value, which evaluates the candidate solution. \bartek{source: https://www.amazon.com/Neural-Smithing-Supervised-Feedforward-Artificial/dp/0262527014/}
+    The details of the loss function used in our project are described in the next section.
+    
+    \subsubsection{Activation}
+    The activation function is attached to each neuron in the network, and determines whether it should be activated or not, based on whether each neuron input is relevant for the model prediction. Activation functions also help normalize the output of each neuron to some range (generally between 1 and 0 or 1 and -1). \bartek{source: https://missinglink.ai/guides/neural-network-concepts/7-types-neural-network-activation-functions-right/}
+
+    Since activation function is calculated across thousands or even millions of neurons for each data sample, it  must be computationally efficient. Probably the most used one is \textbf{Rectified Linear Unit (ReLU)}. It applies an element-wise  function, such as the max(0,x) - thresholding at zero - to activate or deactivate each single neuron.
+    
+    \subsubsection{Backpropagation}
+    
+    Backpropagation is an algorithm commonly used to train neural networks. When the neural network is initialized, weights are set randomly. Input is loaded and then passed through the network of neurons, and the network provides an output for each one, given the initial weights. Backpropagation helps to adjust the weights of the neurons so that the result comes closer and closer to the known true result. It is worth to mention that backprop for a convolution operation (for both the data and the weights) is also a convolution. Description of this mechanism in our network can be found in chapter 3.
 
 \subsection{Computer Vision}
-    Computer vision is a field of computer science which tries to understand the images and videos - how they are stored, how can we manipulate and effectively retrieve data from them. It seeks to replicate human vision system and enable computers to 'think and see' the same way we do.  Computer Vision plays a major role in photo correction apps and art generation but also in self-driving vehicles or robotics.
+    Computer vision is a field of computer science that tries to understand the images and videos - how they are stored, how can we manipulate and effectively retrieve data from them. It seeks to replicate the human vision system and enable computers to \textit{think and see} the same way we do. Computer Vision plays a major role in photo correction apps and art generation but also in self-driving vehicles or robotics.
     
-    Thanks to growing popularity of AI and recent innovations in the field of Deep Learning (and Neural Network as well), Computer Vision develops rapidly and is able to achieve better rates in almost all areas. In many tasks it even can surpass humans (e.g. in object detection and labeling). Since we generate and collect more data used to train and make Computer Vision better, the growth of this field will be ensured.
-        \bartek{add source: https://towardsdatascience.com/everything-you-ever-wanted-to-know-about-computer-vision-heres-a-look-why-it-s-so-awesome-e8a58dfb641e
-        https://www.bitdegree.org/tutorials/what-is-deep-learning/
-        }
-
+    Thanks to the growing popularity of AI and recent innovations in the field of Deep Learning (and Neural Network as well), Computer Vision develops rapidly and is able to achieve better rates in almost all areas. In many tasks, it even can surpass humans (e.g. in object detection and labeling). Since we generate and collect more data used to train and make Computer Vision better, the growth of this field will be ensured. \bartek{add source: https://towardsdatascience.com/everything-you-ever-wanted-to-know-about-computer-vision-heres-a-look-why-it-s-so-awesome-e8a58dfb641e and https://www.bitdegree.org/tutorials/what-is-deep-learning/ }
 
 \subsection{Style transfer}
-%  przydałoby się opisać transfer stylu, rozwój prac od 2015
-% do 2018, funkcję straty dla transferu stylu, jej interpretację, na czym polega
-% AdaIn (https://arxiv.org/abs/1703.06868), czemu była całkeim okej ale nie do końca.
-% Takie jej ograniczenia, które ta praca, na której bazujemy rozwiązuje
-
-% AdaIn - definicja z pracy, schemat dzialania z pracy
-% Loss function - schemat z https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-neural-style-transfer-ef88e46697ee + byc moze rownanie z: https://towardsdatascience.com/neural-style-transfer-tutorial-part-1-f5cd3315fa7f
-% cite - https://arxiv.org/pdf/1603.08155.pdf
-% different losses - http://openaccess.thecvf.com/content_CVPR_2019/papers/Li_Learning_Linear_Transformations_for_Fast_Image_and_Video_Style_Transfer_CVPR_2019_paper.pdf
     \subsubsection{Overview}
     Style transfer is a technique of extraction visual aspects from an image and blending it together with an another image content. It aims to manipulate digital pictures (or videos) and adopt the appearance or visual style. This is usually implemented by optimizing the output image to match the content statistics of the content image and the style statistics of the style reference image. These statistics are extracted from the images using a convolutional network. 
     
-    The crucial part of style transfer is process of isolating the style and the content from an image. Researchers developed many approaches which enable computers to do it with high precision. We will go through these techniques in next subsections. 
-    \bartek{image: https://mspries.github.io/OpticalIllusionReportPage.html
-    based on paper: https://arxiv.org/abs/1607.08022
-    }
-    \\
+    The crucial part of style transfer is process of isolating the style and the content from an image. Researchers developed many approaches which enable computers to do it with high precision. We will go through these techniques in next subsections. \bartek{image: https://mspries.github.io/OpticalIllusionReportPage.html
+    based on paper: https://arxiv.org/abs/1607.08022} \\
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.7\textwidth]{style-and-content}
+        \includegraphics[width=0.6\textwidth]{style-and-content}
         \caption{Style and content diagram from \href{https://mspries.github.io/OpticalIllusionReportPage.html}{mspires.github.io}}
         \label{fig:style-and-content}
     \end{figure}
     
         
-    \subsubsection{Examples}
-    The most common use of style transfer is obviously the artificial artwork created from photo. Especially the ones produced from some famous paintings. Attached examples give an idea of this approach capabilities. 
-    \bartek{attach examples}
+\newpage
     
-    image
-    
-    image
-    
-    image
+    \subsubsection{Example}
+    The most common use of style transfer is obviously the artificial artwork created from photo. Especially the ones produced from some famous paintings. Attached examples give an idea of this approach capabilities. \\
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.7\textwidth]{ST-example-gatys.jpg}
+        \caption{Picture transformed to painting-like image by \cite{gatys2015neural}}
+        \label{fig:ST-example-gatys}
+    \end{figure}
 
+
+\todo[inline]{TODO - FROM THIS PART:}
+    
+    
     \subsubsection{State of art}
-    \bartek[inline]{REWRITE:}
-    NST was first published in the paper "A Neural Algorithm of Artistic Style" by Gatys et al., originally released to ArXiv 2015,[2] and subsequently accepted by the peer-reviewed Computer Vision and Pattern Recognition (CVPR) in 2016.[3]
+    % NST was first published in the paper "A Neural Algorithm of Artistic Style" by Gatys et al., originally released to ArXiv 2015,[2] and subsequently accepted by the peer-reviewed Computer Vision and Pattern Recognition (CVPR) in 2016
+    Describe state of based on: \url{https://github.com/ycjing/Neural-Style-Transfer-Papers}
     
     \subsubsection{Loss function}
-    
-    dividing the loss function into two parts, one is the Content loss and the other is the Style loss
+    % Loss function - schemat z https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-neural-style-transfer-ef88e46697ee + byc moze rownanie z: https://towardsdatascience.com/neural-style-transfer-tutorial-part-1-f5cd3315fa7f
+    % cite - https://arxiv.org/pdf/1603.08155.pdf
+    % different losses - http://openaccess.thecvf.com/content_CVPR_2019/papers/Li_Learning_Linear_Transformations_for_Fast_Image_and_Video_Style_Transfer_CVPR_2019_paper.pdf
+    Describe loss based on: \url{https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-neural-style-transfer-ef88e46697ee}
     
     \subsubsection{AdaIn}
-    
-    
-    is \cite{huang2017adain} a novel adaptive instance normalization (AdaIN) layer that aligns the mean and variance of the content features with those of the style features
+    % AdaIn (https://arxiv.org/abs/1703.06868), czemu była całkeim okej ale nie do końca.
+    % opisać takie jej ograniczenia, które ta praca, na której bazujemy rozwiązuje
+    Describe pros and cons of the method: \cite{huang2017adain} 
 
     
     \subsubsection{Commercial use}
@@ -120,8 +152,12 @@
         \item \href{https://www.fritz.ai}{Fritz} - machine learning platform for iOS and Android 
         \item \href{https://prisma-ai.com}{Prisma} - photo-editing application able to create artwork from image
     \end{itemize}
+
     
-    \subsubsection{Previous approach}
+\todo[inline]{TODO - TO THIS PART}
+
+    
+    \subsubsection{Obsolete approach}
     The alternative CNN approach which used to be popular beforehand is called \textbf{image analogy}. In brief, the algorithm wants to find an analogous image B' that relates to B in the same way as A' relates to A. \bartek{cite: https://mrl.nyu.edu/publications/image-analogies/analogies-72dpi.pdf} To transfer the style of image we need a dataset of training pairs of photo and an artwork from processed photo. The main weakness of this method is that mentioned pair barely exist in practice. An artwork is seldom based on a particular photo.
 
 
@@ -186,11 +222,5 @@
     % do wsparcia dla kwantyzacji
     
         
-% ?        
-% \subsection{Image and Video Processing}
-%     \subsubsection{Basics}
-%     \subsubsection{Examples}
-
-
 \biblio % Needed for referencing to working when compiling individual subfiles - Do not remove
 \end{document}
