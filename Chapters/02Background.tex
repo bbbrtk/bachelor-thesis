@@ -30,17 +30,11 @@
     }
 
 
-\bartek[inline]{section about deep learning?}
-
-
-\subsection{Convolutional Neural Networks}
-
-    \subsubsection{Neural networks - an overview}
+\subsection{Neural Networks}
+    \subsubsection{Overview}
     The neural network is a concept and technique for building a computer program that learns from data and which is based very loosely on how the human brain works. More precisely, it is a collection of software \textbf{neurons} which are created, connected and allowed to send messages to each other. When this collection is asked to solve a problem, it attempts to do so over and over, each time strengthening the connections that lead to successful solution and reduce those leading to wrong one.
     \bartek{book: https://playground.tensorflow.org/}
     \bartek{base on: http://neuralnetworksanddeeplearning.com/chap1.html}
-    
-\newpage
     
      Technically, neural networks are \textbf{weighted graphs}. They consist of an ordered set of layers, where every layer is a set of neurons (nodes). The first layer of the neural network is called the \textbf{input layer}, and the last one is called the \textbf{output layer}. The layers in between are named \textbf{hidden layers}. Layers are groups of nodes. Nodes belonging to one layer are connected to the nodes in the following and/or the previous layers. These connections are weighted edges. \\ 
     \begin{figure}[h!]
@@ -52,11 +46,29 @@
 
     Given an input, each node produces an output (a number) which is calculated by the \textbf{activation function}. This output is then passed to the subsequently connected nodes, which calculate the next outputs. By calculating layer outputs consecutively we calculate the output of the last layer, which is the one we need.
     
-    \subsection{Definition}
-    \textbf{Convolution Neural Networks (CNN)} are specialized kinds of networks. The \textbf{convolution} itself is a specialized kind of linear operation. Convolutional networks are simply neural networks that use convolution in place of general matrix multiplication in at least one of their layers \cite{Goodfellow-et-al-2016}.  CNN is well adapted for the processing of images, but the same concept fits other fields, like audio or video. 
+    \subsubsection{Deep Neural Networks}
+    Deep neural network is simply a feedforward network with many hidden layers. 
+    How many layers does a network have to have in order to qualify as deep? There is no definite answer to this (it's a bit like asking how many grains make a heap), but usually having two or more hidden layers counts as deep. In contrast, a network with only a single hidden layer is conventionally called "shallow". \bartek{base on: https://stats.stackexchange.com/questions/182734/what-is-the-difference-between-a-neural-network-and-a-deep-neural-network-and-w}
+    
+\newpage
+
+    \subsubsection{Relationships}
+    The variety of terms in the field of AI may be confusing. Especially, the relations between major concepts described in this paper. Diagram presented on Figure \ref{AI-ML-Scheme} tries to clarify it.
+    \\
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.7\textwidth]{AI-ML-Scheme.png}
+        \caption{The relationship between main fields}
+        \label{fig:AI-ML-Scheme}
+    \end{figure}
+
+\subsection{Convolutional Neural Networks}
+
+    \subsubsection{Definition}
+    \textbf{Convolution Neural Networks (CNN)} are specialized types of networks. The \textbf{convolution} itself is a specialized kind of linear operation. Convolutional networks are simply neural networks that use convolution in place of general matrix multiplication in at least one of their layers \cite{Goodfellow-et-al-2016}.  CNN is well adapted for the processing of images, but the same concept fits other fields, like audio or video. 
     Compared to the standard feedforward neural network with a similarly-sized layer, CNN has much fewer connections and parameters. Therefore it is easier to train, while its theoretically-best performance is going to be only slightly worse \bartek{biblio: http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf}
         
-    \subsection{CNN Layers}
+    \subsubsection{CNN Layers}
     As mentioned, the convolutional network is comprised of one or more convolutional layers (which often have a subsampling step) and then followed by one or more fully connected layers as in a standard multilayer neural network. The architecture of a CNN is designed to take advantage of the two-dimensional structure of an input image. Good results are achieved with local connections between neurons and tied weights followed by some form of pooling. \bartek{source: http://deeplearning.stanford.edu/tutorial/supervised/ConvolutionalNeuralNetwork/} The most common CNN layers listed below are normally placed where the hidden layers are depicted on Figure \ref{fig:nn-scheme}. 
     \begin{itemize}
         \item The \textbf{convolution layer} has a task to extract useful features from the input. This layer computes the output of neurons that are connected to local regions in the input, each computing a dot product between their weights and a small region they are connected to in the input volume. \bartek{pretty messy, rewrite} \\

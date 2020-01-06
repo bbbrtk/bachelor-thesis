@@ -25,8 +25,8 @@ struggling with implementation or configuration.
 %        \bartek{add biblio: https://pytorch.org/docs/stable/index.html}
 
     \subsubsection{CUDA}
-    
-    todo
+    CUDA is parallel computing platform on GPUs and programming model created by NVIDIA. Using GPUs models can be train with shorter period of time and allow high floating-point computing performance.CUDA allows to use equivalent CPU functions for maximum use of GPUs and accelerate programms. Many frameworks like TensorFlow or PyTorch relay on CUDA for their GPU support. The NVIDIA company also created CUDA Toolkit, which includes libraries, debugging and optimalization tool, which support all NVIDIA GPUs. There are three main libraries intended for deep learning CuDNN, which is the most popular for deep neutral network computations and mostly using in open sorce frameworks, TensorRT - the high-performance inference optimalizer and runtime, and DeepStream, a liblary to video inference. You can use also use signal processing and math libraries. In case, when there are no needed library, you can write your low-level CUDA program in C or C++.  
+%       \asia{add biblio: https://www.infoworld.com/article/3299703/what-is-cuda-parallel-programming-for-gpus.html, https://developer.nvidia.com/cuda-toolkit}
     
     \subsubsection{TensorRT} \label{trt_chapter}
     TensorRT is an SDK for deep learning interface \textbf{created by NVIDIA and designed for their GPUs}. It is built on CUDA and provides C++ and Python APIs, which allows loading pre-trained deep learning models, (trained with libraries like PyTorch) and run them on NVIDIA GPU. The main advantages of TensorRT are high-performance deep learning interface optimizer and light-weight runtime engine, that provide low latency and minimize streaming video delays. The engine is generated only once for each GPU and serialized as a plan file for the next uses. It is also possible to run an application with lower precision (if hardware allows doing so) to reduce memory requirements and reduce inference time. 
