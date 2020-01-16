@@ -129,7 +129,10 @@
     \end{itemize}
 
 
-    \subsection{Transformation module}
+    \subssubection{Transformation module}
+    Transformation module is the component where style is actually transfered.
+    
+    
 
 \subsection{Pruning}
     In this chapter we describe the pruning algorithm and the pruning procedure 
@@ -180,7 +183,7 @@
     
     \subsubsection{Loss function}
     As can be seen in Figure \ref{fig:overall_network}, losses are computed by
-    special VGG19 loss module. The network was pretrained on large dataset for classifiaction
+    special VGG19 loss module. The network was pretrained on large dataset for classification
     task and is able to extract useful features for any image. 
     VGG19 is a deep network and it's consecutive
     layers encode different characteristics of image, for example first layers might
@@ -203,7 +206,7 @@
     fine-tuning we SGD optimizer to apply gradients. We set learning rate to $10^{-4}$
     and momentum to $0.9$. We use SGD mainly because other optimizers aren't implemented 
     in pruning framework we use. However we also find adaptive optimizers result 
-    in instable training of transformation module and gradient explosion (see \ref{what_didnt_work}).
+    in instable training of transformation module and gradient explosion.
     
     \subsubsection{Pruning schedule, datasets} 
     Following \cite{Li2018} we MS-COCO \cite{mscoco} as content dataset and Wikiart \cite{wikiart}
@@ -264,6 +267,8 @@
         \label{fig:wykresy}
     \end{figure}
     \end{center}
+    
+
 
 
 
