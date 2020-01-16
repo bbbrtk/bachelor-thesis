@@ -130,7 +130,39 @@
 
 
     \subssubection{Transformation module}
-    Transformation module is the component where style is actually transfered.
+    Transformation module is the component where style is actually transfered
+    by matching feature maps' statistics. \cite{huang2017adain} introduced
+    statistics matching as style transfer method in form of Adaptive Instance
+    Normalization (AdaIN). Their model also consists of encoder, transformation
+    module and decoder. Transformation module performs AdaIn on feature maps
+    produced by encoder by explicitly matching their means and standard deviations:
+    \[ AdaIN(F_C, F_S) = \sigma(F_S)\left( \frac{F_C - \mu(F_C)}{\sigma(F_C)}\right)+\mu(F_S) \]
+    where $F_C$ is $n$th content feature map and $F_S$ is $n$th style feature map.
+    Transformed feature maps are then decoded to final image. This simple transformation 
+    module performs reasonably well for smooth styles (e.g. impressionist paintings),
+    but often fails if content or style image contains some sharp edges 
+    (e.g. cubist paintings). \cite{Li2018} observe
+    AdaIN is in fact an affine transformation of feature map vector $F_C$. 
+    This suggests it can be generalized to higher dimensional transformation 
+    using matrix multiplication and bias vector. This way for example covariance
+    between individual feature maps could be captured, modeling complex 
+    interactions in style image's components. Exact architecture of
+    transformation module proposed by \cite{Li2018} is depicted in Figure
+    \ref{fig:tranform_module}. 
+    
+        \begin{figure}[h!]
+            \includegraphics[scale=0.35]{transform_module.png}
+            \caption{Architecture of transformation module. $F_C$, $F_S$ and $F_D$
+            are content, style and transformed image feature maps respectively.
+            $f_c$ is fully connected layer and $T$ is transformation matrix.
+            }
+            \label{fig:AGP}
+        \end{figure}
+    
+    
+    
+    
+    
     
     
 

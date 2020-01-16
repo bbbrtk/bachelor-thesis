@@ -139,25 +139,27 @@ struggling with implementation or configuration.
    
 \newpage
 \subsection{Mobile Application}
-    This part describes the style tranfer clinet, which is mobile application 
-    for Android systems. We will go through all features of the application and
-    explain why we've choosen Flutter framework. 
+    This part describes the main technology used in clinet application which is Flutter. 
+    We will also explain why we've chosen this specific technology.. 
     \subsubsection{Flutter}
         Today there are several frameworks which allow us to create mobile 
         applications for both Android and iOS simultaneously, 
         eg. React Native, Ionic, Xamarin.
-        In 2015 Flutter joined this family and changed drasticly situation
+        In 2015 Flutter joined this family and changed drastically situation
         on mobile application scene. At the moment when we write this paper,
         Flutter is the most popular multiplatform framework, which allow us to 
         create not only mobile applications but also web from single codebase.
     
+    
         Flutter is framework created by Google but it's also an open source project 
-        so everone can propose new fetures and improvments. 
+        so everyone can propose new features and improvments. 
         When we write Flutter application we use Dart - language developed by 
         Google with C-style syntax.
-        It runs's on Dart VM included in the SDK. 
-        Very interesting feautre of Dart is that it optionally transcompiles to 
+        It runs on Dart VM included in the SDK. 
+        Very interesting feature of Dart is that it optionally transcompiles to 
         JavaScript so you can also create web applications.
+        
+        
         Basic idea of Flutter sounds "Everything’s a widget" and widgets are 
         quite similar to React "components". 
         Widgets can be combined in order to create more complex ones. 
@@ -168,7 +170,7 @@ struggling with implementation or configuration.
             \item Structure widgets - e.g. buttons, sliders, switches
             \item Animation widgets - e.g. transition, fade in
         \end{itemize}
-        Flutter comes with loads of prebuild Material Design and Cupertino(iOS style)
+        Flutter comes with loads of prebuilt Material Design and Cupertino(iOS style)
         widgets which makes easy and fast to create great looking applications. 
         There are Material Design icons, colors, typical UI interface 
         elements like top and bottom bars, buttons, list, animations and much more.
@@ -179,12 +181,11 @@ struggling with implementation or configuration.
              \item Stateless - build only when the input data changes. 
              \item Statefull - build when input data or state property changes 
         \end{itemize}
-        
-        Difference between this two kinds of widgets is that Statless widgets 
+        Difference between this two kinds of widgets is that Stateless widgets 
         never changes while Statefull can be modified during their lifetime.
         One example of statefull widget is simple checkbox. When we press checkbox
         it changes it's state to checked or unchecked and triggers rebuild on itself.
-        When we want change state of widget we must use specjal 
+        When we want change state of widget we must use special 
         \textit{setState} to made flutter to re render this particular widget.
     
         
@@ -192,7 +193,7 @@ struggling with implementation or configuration.
         three main layers presented at Figure \ref{fig:flutter-layers}.
         \begin{figure}[h]
             \centering
-            \includegraphics[width=0.7\textwidth]{flutter-system.jpeg}
+            \includegraphics[width=0.80\textwidth]{flutter-system.jpeg}
             \caption{Flutter layers}
             \label{fig:flutter-layers}
         \end{figure}
@@ -202,13 +203,13 @@ struggling with implementation or configuration.
         The lowest one is foundation which contains core classes, functions and constants.
     
     
-        From the begining of our project we wanted to be able to develop new ideas
+        From the beginning of our project we wanted to be able to develop new ideas
         very quickly.
         Python and PyTorch are technologies which definitely helped us keep high
-        productivity during this time. First choise was Kotlin - new mordern programing 
-        language for Android apps. Main advantages of Kotlin are:
+        productivity during this time. First choose was Kotlin - new modern programing 
+        language for Android applications. Main advantages of Kotlin are:
             \begin{itemize}
-                \item officialy supported by Google
+                \item official supported by Google
                 \item high performance - native application
                 \item some great language features like null safety, readability or async functions
                 \item we had some experience with this language
@@ -221,26 +222,21 @@ struggling with implementation or configuration.
         we've found Flutter - relatively new tool framework from Google which 
         is still developing very quickly.
         The main advantage of Flutter is that you can develop your apps very 
-        quckly beceause there are tons of ready, efficient and highly customizable 
+        quickly because there are tons of ready, efficient and highly customizable 
         widgets. There is also large community which creates new great widgets 
         add publishes them on official website so everyone can download them and use in project.
         You can also modify or build new widgets on top of it and then publish.
         If some widget would become very popular and useful it will may be 
         include to official Flutter SDK. 
-        Flutter also makes easy to create apps in beatiful Mateterial Design 
+        Flutter also makes easy to create apps in beautiful Mateterial Design 
         style or it's iOS equivalent - Cupertino. 
         The main feature of Flutter, and always mentioned by Google is of course 
-        creating apss for Android and iOS at the same time. 
-        Our main goal was to create app for Android so we treated this feature like 
+        creating applications for Android and iOS at the same time. 
+        Our main goal was to create application for Android so we treated this feature like 
         an opened door. 
-        Flutter is also declarative, react style framework which we prefere while
+        Flutter is also declarative, react style framework which we prefer while
         creating user interface's. We've had previous experience with React on web
         so Flutter seemed easy to learn. 
-        
-    \subsubsection{Implementation}
-    
-    todo
-        
     
 
 \biblio % Needed for referencing to working when compiling individual subfiles - Do not remove
