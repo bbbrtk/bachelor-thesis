@@ -2,18 +2,59 @@
 \begin{document}
 
 
-This section describes functionality of implemented mobile application for 
+This section describes functionality and design principles of implemented mobile application for 
 style transfer. We will present whole application screen by screen and some
 of the difficulties we were facing during development.
 
-\section{Requirements}
+\subsection{Requirements}
 During planning process we decided that our application should meet all of the 
 below requirements.
 User should be able to:
-\begin{enumerate}
-    \item \textbf{manage filters} in some kind of gallery, where it's easy to pick filter image
-    \item \textbf{}
-\end{enumerate}
+\begin{itemize}
+    \item manage filters in some kind of gallery, where it's easy to pick filter image
+    \item take photo directly in application and then use it as filter
+    \item set style transfer settings like color preservation or scale
+    \item transfer style from filter to real-time video
+\end{itemize}
+
+\subsection{Design}
+Our assumption was to fill our application with beautiful image content,
+painters greatest pieces of work so every user should feel like he's communing with art.
+To achieve this goal we let images take whole screen and put them on first plane.
+Most of the UI elements are transparent in some level so they don't cover the images.
+Buttons and icons are very subtle, kept in Google's Material Design style.
+Animations are also gentle and they are introduced to improve user experience rather
+than make mind blowing visual effects.
+
+\subsection{Difficulties}
+To create style transfer client application and meet all of the requirements
+we had to face two main difficulties:
+\begin{itemize}
+    \item sending video to server and than receiving it back with applied style transfer (real-time streaming)
+    \item implementing efficient image gallery which can load photos from smartphone's storage. 
+\end{itemize}
+
+Our main concept of this project was real-time streaming so solving first problem was crucial.
+A great, relatively new tool for streaming video is WebRTC.
+It's HTML5 standard and it allows real-time communication in browser. 
+Someone may wonder how this can allow us to stream video in mobile application.
+We used Flutter InAppWebView plugin which can display websites inside application.
+With this plugin we were able to move almost all logic associated with communication into server.
+The application is just opening website under specific address.
+
+
+
+
+\subsection{Application walk-through}
+
+
+
+
+
+
+
+
+
 
 
 

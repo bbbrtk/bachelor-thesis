@@ -129,7 +129,7 @@
     \end{itemize}
 
 
-    \subssubection{Transformation module}
+    \subsubsection{Transformation module}
     Transformation module is the component where style is actually transfered
     by matching feature maps' statistics. \cite{huang2017adain} introduced
     statistics matching as style transfer method in form of Adaptive Instance
@@ -144,20 +144,41 @@
     (e.g. cubist paintings). \cite{Li2018} observe
     AdaIN is in fact an affine transformation of feature map vector $F_C$. 
     This suggests it can be generalized to higher dimensional transformation 
-    using matrix multiplication and bias vector. This way for example covariance
-    between individual feature maps could be captured, modeling complex 
-    interactions in style image's components. Exact architecture of
+    using matrix multiplication and bias vector. It's then assumed style transfer
+    can be performed by an affine transformation conditioned on parameters 
+    of style and content image. Using not only mean and variance, but also 
+    covariances between individual feature maps enables transferring 
+    more sophisticated features. Exact architecture of
     transformation module proposed by \cite{Li2018} is depicted in Figure
-    \ref{fig:tranform_module}. 
+    \ref{fig:transform_module}. 
     
         \begin{figure}[h!]
-            \includegraphics[scale=0.35]{transform_module.png}
+        \centering
+            \includegraphics[scale=0.25]{transform_module.png}
             \caption{Architecture of transformation module. $F_C$, $F_S$ and $F_D$
             are content, style and transformed image feature maps respectively.
-            $f_c$ is fully connected layer and $T$ is transformation matrix.
+            $f_c$ is fully connected layer and $T$ is transformation matrix. 
+            The submodule in dashed green region is supposed to compute 
+            transformation matrix conditioned on style and content images.
             }
-            \label{fig:AGP}
+            \label{fig:transform_module}
         \end{figure}
+        
+    First both $F_C$ and $F_S$ are centered around 0 channelwise, that is their respective 
+    means for each channel are subtracted. They are then passed through short series of separate 
+    convolutional layers with ReLU non-linearity. It's important they are separate,
+    since we care about different features in content and style image. Then they 
+    are matrix-multiplied with their respective transposes which results in
+    their uncentered covariance matrices. Each of these matrices is then fed 
+    through fully connected layer, which is supposed to select which covariances
+    are the most important. Results of fc layers are then matrix-multiplied
+    with each other, which gives us the final style transformation matrix $T$.
+    On parallel path $F_C$ vector is compressed to the size of $T$. Compressed 
+    $F_C$ is matrix-multiplied with $T$ (this the moment style is transferred)
+    and uncompressed to the original size of $F_C$. Lastly mean vector of original $F_S$
+    is added. This way means of $F_D$'s channels and $F_S$'s channels are alligned
+    exactly.
+    
     
     
     
