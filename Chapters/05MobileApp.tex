@@ -31,7 +31,7 @@ To create style transfer client application and meet all of the requirements
 we had to face two main difficulties:
 \begin{itemize}
     \item sending video to server and than receiving it back with applied style transfer (real-time streaming)
-    \item implementing efficient image gallery which can load photos from smartphone's storage. 
+    \item implementing efficient image gallery which can load photos from smartphone's storage
 \end{itemize}
 
 Our main concept of this project was real-time streaming so solving first problem was crucial.
@@ -40,12 +40,75 @@ It's HTML5 standard and it allows real-time communication in browser.
 Someone may wonder how this can allow us to stream video in mobile application.
 We used Flutter InAppWebView plugin which can display websites inside application.
 With this plugin we were able to move almost all logic associated with communication into server.
-The application is just opening website under specific address.
+The application is just opening website under hardcoded specific address.
 
-
+The second task was to create effective custom image gallery. 
+Most smartphones take high resolution pictures which size is around 3-4 MB.
+It takes long time for Flutter to load big pictures like these especially when
+we have to load twelve or even more. We needed to load loads of pictures but they could be in fact very small because they ought to be presented as the thumbnails.
+In addition to there is problem with 
+memory overflow - when we were loading all picture at once application was
+crashing after few second. 
+To face memory overflow and high loading times introduced two improvements:
+lazy loading and image resize in line with compression.
+The gallery loads only twelve pictures at time so memory won't be filled so quickly.
+Improved gallery is also resizing file to $400\times400$ resolution and then compression is applied.
+It let us to save us memory and time.
 
 
 \subsection{Application walk-through}
+This part presents final client aplication and all it's capabilities.
+Every screenshot comes from Huawei P10 Lite with Android 8.1 operating system. In the pictures we can see aplication design which was desribed in chapter 0.2.
+
+\subsubsection{Start screen}
+Star screen appears just after aplication is loaded. It has only aesthetic purpose and it's introduction to main part of aplication. We can see here Vincent van Gogh picture \textit{Seascape near Les Saintes-Maries-de-la-Mer} and it's just one of 27 pre-built image-filters. Screen contains also aplication name \textit{ARTEXTURE}. If we would like to go to next screen we have to swipe up or tap arrow button on the botom.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.325\textwidth]{start_screen.jpg}
+    \caption{Start screen}
+    \label{fig:start-screen}
+\end{figure}
+
+
+\subsubsection{Gallery}
+Gallery is a main screen of the application. It allows us to pick image 
+which we want to use as a filter. Bottom half of the screen is taken by list of images.
+Application comes with 27 built in paintings images. We can also use images from storage.
+To switch between this two you have to click pallet icon on image icon on top of the list.
+If we select one of images from list it appears immediately in the background.
+In order to have a good look on whole selected image there is a possibility 
+to hide list by clicking on down arrow icon. 
+In right upper corner we can see settings icon. 
+
+\begin{figure}[H]
+    \minipage{0.32\textwidth}
+        \includegraphics[width=\linewidth]{gallery_1.jpg}
+        \caption{A really Awesome Image}\label{fig:awesome_image1}
+    \endminipage\hfill
+    \minipage{0.32\textwidth}
+        \includegraphics[width=\linewidth]{gallery_2.jpg}
+        \caption{A really Awesome Image}\label{fig:awesome_image2}
+    \endminipage\hfill
+    \minipage{0.32\textwidth}
+        \includegraphics[width=\linewidth]{options.jpg}
+        \caption{A really Awesome Image}\label{fig:awesome_image2}
+    \endminipage\hfill
+\end{figure}
+
+\subsubsection{Style transfer screen}
+
+\subsubsection{\textit{Pick a filter} screen}
+
+
+
+
+
+
+
+
+
 
 
 
