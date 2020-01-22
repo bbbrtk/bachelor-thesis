@@ -21,7 +21,7 @@ struggling with implementation or configuration.
             \item Neural networks built on a tape-based \textbf{autograd system}
         \end{itemize}
         
-        We decided to pick out PyTorch instead of TensorFlow (the main and actually the only alternative) due to several reasons. Firstly, TensorFlow was becoming more and more complex for machine learning beginners, where the PyTorch is based on basic and familiar programming paradigms. The new version of TF (2.0) solves this problem but was released after we had started working on the project. Moreover, the documentation is also pretty straightforward and helpful for newcomers. And finally, plenty of style transfer approaches are built on PyTorch. Including the network we adopt. 
+        We decided to pick out PyTorch instead of TensorFlow (the main and actually the only alternative) due to several reasons. Firstly, TensorFlow was becoming more and more complex for machine learning beginners, where the PyTorch is based on basic and familiar programming paradigms. The new version of TF (2.0) solves this problem but was released  we had started working on the project. Moreover, the documentation is also pretty straightforward and helpful for newcomers. And finally, plenty of style transfer approaches are built on PyTorch. Including the network we adopt. 
 %        \bartek{add biblio: https://pytorch.org/docs/stable/index.html}
 
     \subsubsection{CUDA}
@@ -45,11 +45,11 @@ struggling with implementation or configuration.
     
     TensorRT allows focusing on creating new applications with AI, autonomous machines
     and high-performance computing instead of calibration for inference development.
-    After optimization TensorRT chooses specific CUDA kernels for the platform to maximize
+     optimization TensorRT chooses specific CUDA kernels for the platform to maximize
     performance on GPUs. It uses Docker for integration with DevOps architectures.\\
     TensorRT doesn't support direct building of engines from PyTorch models, so 
     we use ONNX format as intermediate step in build process. Specifically
-    after pruning we convert encoders, transformatiom module and decoder to ONNX. 
+     pruning we convert encoders, transformatiom module and decoder to ONNX. 
     ONNX tends to produce excessively complex computational graphs, which sometimes
     prevents from conversion to TensorRT, so next we use open-source ONNX simplifier 
     \cite{onnxsim} to make models more compact. Finally, using open-source
@@ -165,7 +165,27 @@ struggling with implementation or configuration.
     We had been trying several options before we chose to use aiortc. Our prime attempt was to adopt \textit{WebRTC Plugin for Flutter}. It is a small project developed by the Flutter community containing Javascript server and Flutter client. That seemed to be a perfect solution that could accelerate our work.
     However, we encounter some obstacles in this undertaking. First of all, the mentioned plugin is poorly documented and error-prone what is a rather annoying combination. Secondly, it works efficiently only over the LAN network when we wish to connect to the server from any place. And the third thing is the communication crashes if the video is not streaming to/from the Chrome browser. Nevertheless, the project is gathering greater community what makes it promising in the time of growing popularity of Flutter.
     %\bartek{biblio to add:  https://github.com/cloudwebrtc/flutter-webrtc}
-   
+    
+
+\subsection{Environment}
+    Both model and server require multiple dependencies like:
+    \begin{itemize}
+        \item graphic card drivers
+        \item python packages 
+        \item Linux programs
+        \item programs from Github
+    \end{itemize}
+    Even if we have all needed dependencies there still remains problem with configuration which can take even hours. The target location of our program was one of the shared computers in Poznan University of Technology so we had to move whole environment very quickly and without making a mess. 
+    Finally, we decided to put our application into Docker container to deal with these to problems.
+    
+    \subsubsection{Docker}
+    Thanks to OS level virtualization Docker allows us to create containers where we can put our program and all it's dependencies. We can have multiple containers and manage them easily using command line or one of the GUI clients, like \textit{Kitematic}. Docker containers are separated from each other so there is no risk to do harm to other containers or host. However, we can make our containers communicate by mapping some of container ports to host.
+    
+    Thanks to Docker containers we were able to pack everything up and deploy on university's computer.
+    We put model, server, graphic card drivers, configuration files and all other dependencies into single container. Docker gives possibility to define whole building process in single file called \textit{Dockerfile}. During container building we can copy files from local drive, download programs from the internet or even run bash scripts. 
+    After building we converted our container into image and uploaded it to \textit{Dockerhub} - a docker images library where everyone can upload their images. Last thing to do was just download image on computer and run graphic card configuration script which prepare software for used graphic card type.
+    Project container is run with ports $8080$ and $5000$ mapped with same ports on host machine - on those ports both WebRTC and Flask servers are deployed. Client applications connecting to computer on these ports are in fact connecting with container.
+    
 \newpage
 \subsection{Mobile Application}
     This part describes the main technology used in clinet application which is Flutter. 
