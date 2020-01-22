@@ -64,17 +64,29 @@ of resolution 1024x576.
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
-                   & 940M & 960 & 1080 Ti \\
-                   \hline
- Original model    &  0.75   & 5   & 23 \\
- \hline
- Pruned model      &  4.2    & 22  & 84 \\
- \hline
- Pruned + TensorRT &  7.1    & 26  &67 \\
- \hline
- \end{tabular}
- \end{center}
- \end{table}
+                  &  940M & 960 & 1080 Ti \\
+\hline
+Original model    &  0.75 & 5   & 23 \\
+\hline
+Pruned model      &  4.2  & 22  & 79 \\
+\hline
+Pruned + TensorRT &  7.1  & 26  & 70 \\
+\hline
+\end{tabular}
+\end{center}
+\label{table:speedup}
+\end{table}
+As we see speedup gained by pruning the original model is tremendous on
+every architecture, though it decreases with computational power.
+For pruned models using TensorRT this trend is even more emphasized.
+While the mobile 940M GPU speeds up by 75\%, middle-range 960 only gains
+couple FPS, which at that point don't really make any differnece. The most
+interesting case is that of high-end GTX 1080 Ti, which slows down
+when TensorRT is used. This might be exactly the result of it's computational power.
+Pruned model is no longer bottlenecked by factors, the two weaker GPUs
+introduced and as a consequence it can be ran very efficiently.
+Since there is nothing to improve, tensor reshapes requiered by TensorRT
+might slow down inference.
 
 \subsection{Style scaling}
 \subsection{Color preservation}
