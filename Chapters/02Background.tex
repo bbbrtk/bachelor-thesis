@@ -136,15 +136,29 @@
         \label{fig:ST-example-gatys}
     \end{figure}
 
-
-\todo[inline]{TODO - FROM THIS PART:}
-    
-    
-    \subsubsection{State of art}
-    % NST was first published in the paper "A Neural Algorithm of Artistic Style" by Gatys et al., originally released to ArXiv 2015,[2] and subsequently accepted by the peer-reviewed Computer Vision and Pattern Recognition (CVPR) in 2016
-    Describe state of based on: \url{https://github.com/ycjing/Neural-Style-Transfer-Papers}
+    \subsubsection{State of the art}
+    NST was first published in the paper "A Neural Algorithm of Artistic Style" by Gatys et al. \bartek{add cite} and is developing rapidly gaining more and more attention. The core branches of Neural Style Transfer are presented on the Figure \fig{state-of-the-art}. Since presenting every concept of NST is not the goal of this paper, we recommend to visit \href{https://github.com/ycjing/Neural-Style-Transfer-Papers}{this actively updated repository}, where one can find information about each sub-field of the Neural Style Transfer. \\
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{state-of-the-art.png}
+        \caption{State of the art by \bartek{cite repo}}
+        \label{fig:state-of-the-art}
+    \end{figure}
     
     \subsubsection{Loss function}
+    In general \textbf{loss function} in NST contains two sub-losses: the content loss and the style loss. The idea is pretty straightforward. The first loss ensures that the activations of the higher layers are similar between the content image and the generated image. The second one makes sure that the correlation of activations in all the layers are similar between the style image and the generated image. 
+    
+    more definition here
+
+    The concept is depicted on Figure \fig{loss-equation} where α and β are user-defined parameters. By controlling α and β one can decide how much style of source image will be preserved (and similarly - the amount of the source image content).
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.4\textwidth]{loss-equation.png}
+        \caption{The neural style transfer loss equation}
+        \label{fig:loss-equation}
+    \end{figure}
+
+    kinds
     % Loss function - schemat z https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-neural-style-transfer-ef88e46697ee + byc moze rownanie z: https://towardsdatascience.com/neural-style-transfer-tutorial-part-1-f5cd3315fa7f
     % cite - https://arxiv.org/pdf/1603.08155.pdf
     % different losses - http://openaccess.thecvf.com/content_CVPR_2019/papers/Li_Learning_Linear_Transformations_for_Fast_Image_and_Video_Style_Transfer_CVPR_2019_paper.pdf
@@ -157,19 +171,16 @@
 
     
     \subsubsection{Commercial use}
-    % check https://github.com/ycjing/Neural-Style-Transfer-Papers - applicatoin papers
-    Some research projects became a base of mobile applications or programs which can be used by everyone for any purpose:
+    Some research projects became a base of mobile applications or web-services which can be used by everyone for any purpose:
     \begin{itemize}
         \item \href{https://deepart.io}{DeepArt} - free website where one can turn photo into artistic image
-        \item \href{https://www.fritz.ai}{Fritz} - machine learning platform for iOS and Android 
+        \item \href{http://neuralstyler.com}{Neural Styler} - NeuralStyler Artificial Intelligence converting videos into art works by using styles of famous artists
+        \item \href{https://www.ostagram.me/static_pages/lenta?last_days=1000&locale=en}{Ostagram} - web-service for algorithm combining the content of one image with the style of another image using CNN
         \item \href{https://prisma-ai.com}{Prisma} - photo-editing application able to create artwork from image
     \end{itemize}
 
     
-\todo[inline]{TODO - TO THIS PART}
-
-    
-    \subsubsection{Obsolete approach}
+    \subsubsection{Image Analogy - the obsolete approach}
     The alternative CNN approach which used to be popular beforehand is called \textbf{image analogy}. In brief, the algorithm wants to find an analogous image B' that relates to B in the same way as A' relates to A. \bartek{cite: https://mrl.nyu.edu/publications/image-analogies/analogies-72dpi.pdf} To transfer the style of image we need a dataset of training pairs of photo and an artwork from processed photo. The main weakness of this method is that mentioned pair barely exist in practice. An artwork is seldom based on a particular photo.
 
 
