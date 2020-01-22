@@ -25,7 +25,7 @@ struggling with implementation or configuration.
 %        \bartek{add biblio: https://pytorch.org/docs/stable/index.html}
 
     \subsubsection{CUDA}
-    CUDA is parallel computing platform on GPUs and programming model created by NVIDIA. Using GPUs models can be train with shorter period of time and allow high floating-point computing performance.CUDA allows to use equivalent CPU functions for maximum use of GPUs and accelerate programms. Many frameworks like TensorFlow or PyTorch relay on CUDA for their GPU support. The NVIDIA company also created CUDA Toolkit, which includes libraries, debugging and optimalization tool, which support all NVIDIA GPUs. There are three main libraries intended for deep learning CuDNN, which is the most popular for deep neutral network computations and mostly using in open sorce frameworks, TensorRT - the high-performance inference optimalizer and runtime, and DeepStream, a liblary to video inference. You can use also use signal processing and math libraries. In case, when there are no needed library, you can write your low-level CUDA program in C or C++.  
+    CUDA is parallel computing platform on GPUs and programming model created by NVIDIA. Using GPUs models can be train with shorter period of time and allow high floating-point computing performance.CUDA allows to use equivalent CPU functions for maximum use of GPUs and accelerate programms. Many frameworks like TensorFlow or PyTorch relay on CUDA for their GPU support. The NVIDIA company also created CUDA Toolkit, which includes libraries, debugging and optimization tool, which support all NVIDIA GPUs. There are three main libraries intended for deep learning CuDNN, which is the most popular for deep neutral network computations and mostly using in open source frameworks, TensorRT - the high-performance inference optimizer and runtime, and DeepStream, a library to video inference. You can use also use signal processing and math libraries. In case, when there are no needed library, you can write your low-level CUDA program in C or C++.  
 %       \asia{add biblio: https://www.infoworld.com/article/3299703/what-is-cuda-parallel-programming-for-gpus.html, https://developer.nvidia.com/cuda-toolkit}
     
     \subsubsection{TensorRT} \label{trt_chapter}
@@ -46,14 +46,43 @@ struggling with implementation or configuration.
     TensorRT allows focusing on creating new applications with AI, autonomous machines
     and high-performance computing instead of calibration for inference development.
     After optimization TensorRT chooses specific CUDA kernels for the platform to maximize
-    performance on GPUs. It uses Docker for integration with DevOps architectures.
+    performance on GPUs. It uses Docker for integration with DevOps architectures.\\
+    TensorRT doesn't support direct building of engines from PyTorch models, so 
+    we use ONNX format as intermediate step in build process. Specifically
+    after pruning we convert encoders, transformatiom module and decoder to ONNX. 
+    ONNX tends to produce excessively complex computational graphs, which sometimes
+    prevents from conversion to TensorRT, so next we use open-source ONNX simplifier 
+    \cite{onnxsim} to make models more compact. Finally, using open-source
+    onnx2trt parser \cite{onnx2trt} we build TensorRT engines based on simplified
+    ONNX models.
     
 %        \asia{add biblio: https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide, https://developer.nvidia.com/tensorrt }
 
     \subsubsection{OpenCV}
-    Open Source Computer Vision Library is an open-source library, orginaly developed by Intel, for computer vision and machine learning softwate. It includes dozens of computer vision algorithms adjusted for easy use for detect and recognize faces, identify objects and many others designed for image processing. Although written in C++, OpenCV has Python bindings and provides support for Machine Learning libraries like PyTorch.  By using it, one can process images and videos to detect objects, apply filters, analyze structure or perform reconstruction. OpenCV is designed to handle real-time vision applications and is currently developing full-featured CUDA interfaces.
+    Open Source Computer Vision Library is an open-source library, originally developed by Intel, for computer vision and machine learning software. It includes dozens of computer vision algorithms adjusted for easy use for detect and recognize faces, identify objects and many others designed for image processing. Although written in C++, OpenCV has Python bindings and provides support for Machine Learning libraries like PyTorch.  By using it, one can process images and videos to detect objects, apply filters, analyze structure or perform reconstruction. OpenCV is designed to handle real-time vision applications and is currently developing full-featured CUDA interfaces.
 %    \bartek{describe what do we use it for}
 %    \bartek{add: https://docs.opencv.org/master/}
+
+    \subsection{Distiller}
+    Distiller is an open-source Python package for neural network compression.
+    It provides a PyTorch environment for prototyping and analyzing compression algorithms,
+    such as sparsity-inducing methods and low precision arithmetic. Distiller
+    is still in experimental phase and is supposed to provide examples and tools
+    to build your own pruning pipelines, rather than complex library of functions
+    that would work of the box. As such it contains:
+    \begin{itemize}
+    \item A framework for integrating pruning, regularization and quantization algorithms
+    \item A set of tools for analyzing and evaluating compression performance
+    \item Example implementations of state-of-the-art compression algorithms
+    \item Experimental implementations of knowledge distillation and conditional
+          computation
+    \item Convenient YAML format for describing compression schedule
+    \end{itemize}
+    We were particularly interested in available pruning algorithms.
+    Out of many implemented methods only couple of them worked (that is threw easily
+    fixable bugs). Considering results in \cite{li2016pruning} and comparisons
+    in other papers we picked L1 structured pruning algorithm as a simple and reliable 
+    method.
 
 
 \newpage

@@ -2,11 +2,8 @@
 
 \begin{document}
     
-% przed tym chapterem przydałoby się opisać transfer stylu, rozwój prac od 2015
-% do 2018, funkcję straty dla transferu stylu, jej interpretację, na czym polega
-% AdaIn (https://arxiv.org/abs/1703.06868), czemu była całkeim okej ale nie do końca.
-% Takie jej ograniczenia, które ta praca, na której bazujemy rozwiązuje
-\subsection{Neural Network}
+
+\subsection{Neural Network} \label{network}
     In this chapter we describe the neural network used for style transfer. 
     First we describe it's architecture and specific layers. Then we detail
     pruning procedure used to obtain the final model.
@@ -23,7 +20,13 @@
     only once. For both encoder-decoder and
     transformation module we use pretrained models publicly available at 
     \url{https://github.com/sunshineatnoon/LinearStyleTransfer}
-    as starting point for further development. 
+    as starting point for further development. Because of implementation details
+    of pruning framework we use (each layer can only be used once during 
+    feed-forward phase), encoder couldn't be used to encode both content and
+    style image. As a consequence we had to include not one, but two copies of encoder
+    in our model - one for content images and one for style images. They start of
+    with entirely identical set of weights, but progressively diverge from each 
+    other during pruning procedure
     
     \begin{figure}[h!]
         \includegraphics[scale=0.25]{overall_network.png}
@@ -33,7 +36,7 @@
     
     
     \subsubsection{Encoder-decoder}
-    Both encoder and decoder are based on first layers of VGG-like [\cite{vgg}]
+    Both encoders and decoder are based on first layers of VGG-like \cite{vgg}
     network. VGG is a family of fully convolutional neural networks developed 
     specifically for computer vision task. Full VGG network consists of
     stacked Conv layers with ReLU activation function, interleaved with pooling
@@ -97,16 +100,16 @@
         \label{table:vgg}
     \end{table}
     
-    They differ in two aspects:
+    They differ in three aspects:
     \begin{itemize}
         \item \textbf{Padding} - \cite{Li2018} use reflection padding. In many
         models used for style transfer, use of zero padding degrades network's
-        performance around the input's edges[\cite{johnson2016perceptual}], exhibiting as
+        performance around the input's edges \cite{johnson2016perceptual}, exhibiting as
         vanishing of style or artifacts (see figure \ref{fig:edges}).
         In such situation adding reflection padding fixes the issue. We replace
         reflection padding with zero padding, because the former one is not 
         implemented within TensorRT used for additional inference speedup
-        (see \ref{trt_chapter}). Fortunately we don't observe described problem
+        (see \ref{trt_chapter}). Fortunately described problem is not nearly as visible
         in our model.
         \begin{figure}[h!]
             \includegraphics[scale=0.17]{edges.jpg}
@@ -116,15 +119,16 @@
             }
             \label{fig:edges}
         \end{figure}
-        \item \textbf{Width} of Conv layers. In order to reduce inference time ,
-        we prune encoder and decoder 
+        \item \textbf{Width} of Conv layers. In order to reduce inference time,
+        we prune encoder, decoder and part of transformation module
         to only contain $25\%$ of feature maps from the original architecture.
         This provides 
-        \kamil{Measure the speedups across couple GPUs 
-            (and maybe CPUs)}             
-        %TODO
-        X-times speedup on NVIDIA GTX 960 GPU inference server is ran on
-        [\kamil{refer to speedup table}]
+        fivefold speedup on NVIDIA GTX 960 GPU the inference server is ran on 
+        (see \ref{speedup} for details).
+        \item As described earlier our network consists of two encoders, specialized
+        for content and style images respectively. In section \ref{two_encoders}
+        we conduct experiments to observe effects of using style encoder for 
+        content images and vice-versa.
         
     \end{itemize}
 
@@ -203,10 +207,10 @@
     The criterion by which our algorithm selects filters is  
     $\ell_1$ norm, that is $\sum_{i,j}|f_{i,j}|$ where summation is done
     over all filter's values, suggested by \cite{li2016pruning}.
-    Intuition behind this and similar criterions (e.g. using 
+    Intuition behind this and similar criteria (e.g. using 
     $\ell_p$ norm) is that the smaller filter's norm, the smaller it's influence 
     on overall network output. Despite it's simplicity this criterion performs well in practice
-    and was adopted by many recent publications [\cite{lottery1}, \cite{lottery2}].
+    and was adopted by many recent publications \cite{lottery1, lottery2}.
     
     Our algorithm takes as inputs layers which should be pruned and sparsity levels
     respective layers should be pruned to. Pruning changes the network and it's activations' distribution

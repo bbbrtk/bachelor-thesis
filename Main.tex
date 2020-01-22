@@ -10,7 +10,6 @@
 \usepackage{titlesec}
 \setcounter{secnumdepth}{4}
 \usepackage{multirow}
-\usepackage{minted} % Code highlighting
 \usepackage{adjustbox}
 \usepackage{graphicx}
 \usepackage{amsmath, amssymb, amsthm} % Mathematical packages
@@ -84,9 +83,9 @@
 
 
 % ----- Sources -----
-\usepackage{natbib}
+\usepackage[square,numbers]{natbib}
 \bibliographystyle{apa} % citation and reference list style
-\def\biblio{\clearpage\bibliographystyle{apa}\bibliography{References.bib}} % defines the \biblio command used for referencing in subfiles - DO NOT CHANGE
+\def\biblio{\clearpage\bibliographystyle{apa}\bibliography{References}} % defines the \biblio command used for referencing in subfiles - DO NOT CHANGE
 
 \usepackage{amssymb}
 
@@ -184,9 +183,6 @@
     \subfile{Chapters/02NetworkArchitecture}
 \clearpage
 
-\section{Related Work}
-    \subfile{Chapters/03RelatedWork}
-\clearpage
 
 \section{Technologies}
     \subfile{Chapters/04Technologies}
@@ -208,7 +204,7 @@
 \renewcommand\refname{References} % name for the reference list
 {\setstretch{1.0} % linespacing for the references
 \addcontentsline{toc}{section}{References} % to change the name of the references in the TOC
-\bibliography{References.bib} % adds the references to the document
+\bibliography{References} % adds the references to the document
 }
 
 % -------- APPENDIX --------

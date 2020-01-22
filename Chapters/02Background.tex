@@ -182,16 +182,16 @@
     prevents real-time inference not only on embedded and mobile
     devices but even on middle-class GPUs. Overcoming these limitations 
     is very active area of research.\\
-    \textbf{Specialized architectures} such as MobileNet [\cite{mobilenetv1},
-    \cite{mobilenetv2}, \cite{mobilenetv3}] and ShuffleNet [\cite{shufflenetv1},
-    \cite{shufflenetv2}], replace full convolutions with bottlenecks of lighweight
+    \textbf{Specialized architectures} such as MobileNet \cite{mobilenetv1, 
+    mobilenetv2, mobilenetv3} and ShuffleNet \cite{shufflenetv1,
+    shufflenetv2}, replace full convolutions with bottlenecks of lighweight
     pointwise, depthwise and group convolutions in order to reduce number of 
     arithmetic operations and parameters. MobileNetV3 \cite{mobilenetv3} uses
     Neural Architecture Search to optimize the network for mobile phone CPU
     inference, while discussion in \cite{shufflenetv2} shows what aspects should
     be considered, when designing mobile architecture manually. 
     \textbf{Network pruning} aims to reduce already trained model's size by pruning away
-    weights with the least impact on network's quality. [\cite{zhu2017prune}] show
+    weights with the least impact on network's quality. \cite{zhu2017prune} show
     that for some models even up to $87.5$ weights can be removed with only 
     marginally reduced performance. 
     Because networks are initialized randomly, the least
@@ -199,21 +199,20 @@
     then results in sparse networks. Their storage is significantly reduced, however
     because available linear algebra libraries are optimized for dense structures,
     their inference time doesn't scale as well. To overcome this, more structured
-    methods of pruning were developed, among them filter pruning [\cite{li2016pruning},
-    \cite{molchanov2016pruning}]
-    and channel pruning [\cite{he2017channel}]. 
+    methods of pruning were developed, among them filter pruning \cite{li2016pruning, molchanov2016pruning}
+    and channel pruning \cite{he2017channel}. 
     Weight's or weights set's importance can be measured by various heuristics. 
-    [\cite{li2016pruning}] prune away the filters with the smallest $\ell_1$ norm.
+    \cite{li2016pruning} prune away the filters with the smallest $\ell_1$ norm.
     This approach easily generalizes to $\ell_p$ norm.
-    [\cite{polyak2015}] choose to prune away the filters with
+    \cite{polyak2015} choose to prune away the filters with
     the smallest activation statistics. More direct methods formulate pruning 
     try to preserve performance metrics (e.g. low loss, high accuracy) on training set. 
-    [\cite{molchanov2016pruning}] formulate pruning as optimization problem where
+    \cite{molchanov2016pruning} formulate pruning as optimization problem where
     the goal is preserving original training set loss value, that is minimizing
     $|L_{new} - L_{orig}|$. Curiously changing the goal to $L_{new} - L_{orig}$,
     that is letting the loss drop, degrades the resulting network's performance.\\
     Smaller networks can also be trained with aid of larger ones through process called
-    \textbf{knowledge distillation} [\cite{hinton2015distilling}]. 
+    \textbf{knowledge distillation} \cite{hinton2015distilling}. 
     The key idea is that activations of certain layers
     contain knowledge which is not present in dataset's labels. For example in network 
     trained for classification, the final softmax layer's outputs are usually 
