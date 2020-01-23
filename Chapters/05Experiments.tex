@@ -91,6 +91,53 @@ might slow down inference.
 \subsection{Style scaling}
 \subsection{Color preservation}
 \subsection{Video stability}
+One of goals for high-quality style transfer is stability. Let $F_1$ and $F_2$ be 
+two video frames relatively close in time and $T$ a style transfer algorithm transforming
+a single frame. We can define stability of $T$ by mean difference between
+$| F_1 - F_2 |$ and $|T(F_1)-T(F_2)|$. The smaller that difference, the more stable $T$ is.
+This definition says that if a certain region doesn't change between $F_1$ and $F_2$, then
+it also shouldn't change between $T(F_1)$ and $T(F_2)$, that is the transformed video
+shouldn't flicker too much. Definition also implies changes in orgiginal video
+should be reflected in the stylized video, but it's an obvoiys requirement and it's
+the former property that we usually call stability.
+Stability can be expilicitly guaranteed by use of special loss functions
+and proper training procedure \cite{stability1, stability2}. The model we base our work
+on however learns stability by design \cite{Li2018}, so there is no need for
+any auxillary techniques. We examine to what extent network pruning damages this 
+property. We conduct the experiment using a single style image and 3 videos with motionless
+camera. Results are presented in Figure \ref{fig:heatmap}.
+
+\begin{figure}[h!]
+\centering
+    \includegraphics[scale=0.2]{heatmap.jpg}
+    \caption{Comparison of stability between original (middle column) and pruned
+    (right column) model. Left column shows original video frames. For each of
+    $3\times3$ grids first two rows show two frames close two each other
+    ($1$ to $5$ frames of difference, depending on video's framerate) and the third
+    row is heatmap of difference between them. The image on the right is style used
+    throughout experiment; below it heatmap scale.
+    }
+    \label{fig:heatmap}
+\end{figure} 
+
+For each of $3\times3$ grids, the third row shows heatmaps of differences between 
+two images above it. A hypothetic perfectly stable style transform algorithm would
+produce the same heatmaps as the ones in left column. While both models perform
+resaonbly well for second and third video, they completely fail in the first case.
+The reason for such behaviour is progressive change of brightness of the sky
+which can't be seen in shown frames. Sky's brightness changes significantlly 
+as a result of some vehicle driving in front of camera. In other words
+stylizing poorly recorded video results in instability and noise. Comparing
+original and pruned model, we also see the latter is less stable for this video,
+though stripes produced by original model may seem even worse than overall
+noise outputed by pruned model. In the second case both networks perform equally well
+and their heatmaps are only slightly more noisy than the original heatmap.
+For the third video pruned model is only a bit more unstable than original model.
+Overall pruning seems to reduce stablility only by a small margin provided original network
+preserves stability. In situation where original network fails to do so, pruned model
+magnifies errors though.
+
+
 \subsection{Style and content encoding} \label{two_encoders}
 As mentioned in section \ref{network} the encoder had to be copied due to pruning
 constraints. Since two resulting encoders were pruned and fine-tuned separately 
