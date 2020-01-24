@@ -60,7 +60,7 @@ struggling with implementation or configuration.
     \subsubsection{OpenCV}
     Open Source Computer Vision Library is an open-source library, originally developed by Intel, for computer vision and machine learning software \cite{opencvdocs}. It includes dozens of computer vision algorithms adjusted for easy use for detect and recognize faces, identify objects and many others designed for image processing. Although written in C++, OpenCV has Python bindings and provides support for Machine Learning libraries like PyTorch.  By using it, one can process images and videos to detect objects, apply filters, analyze structure or perform reconstruction. OpenCV is designed to handle real-time vision applications and is currently developing full-featured CUDA interfaces.
 
-    \subsection{Distiller}
+    \subsubsection{Distiller}
     Distiller is an open-source Python package for neural network compression.
     It provides a PyTorch environment for prototyping and analyzing compression algorithms,
     such as sparsity-inducing methods and low precision arithmetic. Distiller
@@ -81,8 +81,6 @@ struggling with implementation or configuration.
     in other papers we picked L1 structured pruning algorithm as a simple and reliable 
     method.
 
-
-\newpage
 \subsection{Server}
     Client-server communication is divided into two parts: video streaming and transferring filter specification data. The first part is maintained by a server in WebRTC standard, whereas the second one is micro-server based on Flask. Both segments are written in Python and developed by open-source communities.
 
@@ -169,8 +167,8 @@ struggling with implementation or configuration.
     We put model, server, graphic card drivers, configuration files and all other dependencies into single container. Docker gives possibility to define whole building process in single file called \textit{Dockerfile}. During container building we can copy files from local drive, download programs from the internet or even run bash scripts. 
     After building we converted our container into image and uploaded it to \textit{Dockerhub} - a docker images library where everyone can upload their images. Last thing to do was just download image on computer and run graphic card configuration script which prepare software for used graphic card type.
     Project container is run with ports $8080$ and $5000$ mapped with same ports on host machine - on those ports both WebRTC and Flask servers are deployed. Client applications connecting to computer on these ports are in fact connecting with container.
-    
-\newpage
+
+
 \subsection{Mobile Application}
     This part describes the main technology used in clinet application which is Flutter. 
     We will also explain why we've chosen this specific technology.. 
