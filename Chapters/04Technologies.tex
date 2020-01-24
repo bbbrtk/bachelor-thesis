@@ -175,44 +175,43 @@ struggling with implementation or configuration.
         \item Linux programs
         \item programs from Github
     \end{itemize}
-    Even if we have all needed dependencies there still remains problem with configuration which can take even hours. The target location of our program was one of the shared computers in Poznan University of Technology so we had to move whole environment very quickly and without making a mess. 
-    Finally, we decided to put our application into Docker container to deal with these to problems.
+    Even if we have all needed dependencies there still remains a problem with configuration which can take even hours. The target location of our program was one of the shared computers in Poznan University of Technology so we had to move the whole environment very quickly without making a mess. 
+    Finally, we decided to put our application into Docker container to deal with all these problems.
     
     \subsubsection{Docker}
-    Thanks to OS level virtualization Docker allows us to create containers where we can put our program and all it's dependencies. We can have multiple containers and manage them easily using command line or one of the GUI clients, like \textit{Kitematic}. Docker containers are separated from each other so there is no risk to do harm to other containers or host. However, we can make our containers communicate by mapping some of container ports to host.
+    Thanks to OS level virtualization Docker allows us to create containers where we can put our program and all its dependencies. We can have multiple containers and manage them easily using command line or one of the GUI clients, like \textit{Kitematic}. Docker containers are separated from each other so there is no risk to do harm to other containers or host. However, we can make our containers communicate by mapping some of container ports to host.
     
     Thanks to Docker containers we were able to pack everything up and deploy on university's computer.
-    We put model, server, graphic card drivers, configuration files and all other dependencies into single container. Docker gives possibility to define whole building process in single file called \textit{Dockerfile}. During container building we can copy files from local drive, download programs from the internet or even run bash scripts. 
-    After building we converted our container into image and uploaded it to \textit{Dockerhub} - a docker images library where everyone can upload their images. Last thing to do was just download image on computer and run graphic card configuration script which prepare software for used graphic card type.
+    We put model, server, graphic card drivers, configuration files and all other dependencies into single container. Docker gives us the possibility to define whole building process in single file called \textit{Dockerfile}. During container building we can copy files from local drive, download programs from the Internet or even run bash scripts. 
+    After having it built, we converted our container into image and uploaded it to \textit{Dockerhub} - a docker images library where everyone can upload their images. Last thing to do was just download image on computer and run graphic card configuration script which prepares software for used graphic card type.
     Project container is run with ports $8080$ and $5000$ mapped with same ports on host machine - on those ports both WebRTC and Flask servers are deployed. Client applications connecting to computer on these ports are in fact connecting with container.
     
 \newpage
 \subsection{Mobile Application}
     This part describes the main technology used in clinet application which is Flutter. 
-    We will also explain why we've chosen this specific technology.. 
+    We will also explain why we have chosen this specific technology.
     \subsubsection{Flutter}
-        Today there are several frameworks which allow us to create mobile 
+        Today there are several frameworks which allows us to create mobile 
         applications for both Android and iOS simultaneously, 
         eg. React Native, Ionic, Xamarin.
         In 2015 Flutter joined this family and changed drastically situation
-        on mobile application scene. At the moment when we write this paper,
-        Flutter is the most popular multiplatform framework, which allow us to 
+        on mobile application market. Nowadays, Flutter is the most popular multiplatform framework, which enables to 
         create not only mobile applications but also web from single codebase.
     
     
-        Flutter is framework created by Google but it's also an open source project 
-        so everyone can propose new features and improvments. 
+        Flutter is a framework created by Google but it's also an open source project 
+        so everyone can propose new features and improvements. 
         When we write Flutter application we use Dart - language developed by 
         Google with C-style syntax.
         It runs on Dart VM included in the SDK. 
-        Very interesting feature of Dart is that it optionally transcompiles to 
+        A very interesting feature of Dart is that it optionally transcompiles to 
         JavaScript so you can also create web applications.
         
         
         Basic idea of Flutter sounds "Everything’s a widget" and widgets are 
         quite similar to React "components". 
-        Widgets can be combined in order to create more complex ones. 
-        You use widgets to build whole UI and some of them are:
+        They can be combined in order to create more complex ones. 
+        The main purpose of widgets’ usage is to build a whole UI and some of them are:
         \begin{itemize}
             \item Layout widgets - e.g. rows, columns, lists, grids, tables
             \item Style widgets - e.g. colors, fonts
@@ -222,23 +221,23 @@ struggling with implementation or configuration.
         Flutter comes with loads of prebuilt Material Design and Cupertino(iOS style)
         widgets which makes easy and fast to create great looking applications. 
         There are Material Design icons, colors, typical UI interface 
-        elements like top and bottom bars, buttons, list, animations and much more.
+        elements like top and bottom bars, buttons, list, animations and  many many more.
         
         
         Widgets are split into two main categories:
         \begin{itemize}
              \item Stateless - build only when the input data changes. 
-             \item Statefull - build when input data or state property changes 
+             \item Stateful - build when input data or state property changes 
         \end{itemize}
-        Difference between this two kinds of widgets is that Stateless widgets 
-        never changes while Statefull can be modified during their lifetime.
-        One example of statefull widget is simple checkbox. When we press checkbox
+        Difference between this two kinds of widgets is that the Stateless widgets
+        never changes while Stateful ones can be modified during their lifetime.
+        One of the examples of stateful widget is a simple checkbox. When we press checkbox
         it changes it's state to checked or unchecked and triggers rebuild on itself.
-        When we want change state of widget we must use special 
-        \textit{setState} to made flutter to re render this particular widget.
+        When we want change to state of widget we must use special 
+        \textit{setState} to made flutter re render this particular widget.
     
         
-        Flutter architecture is composed of many layers but we can split it into 
+        Flutter architecture is composed of many layers but we can divide it into 
         three main layers presented at Figure \ref{fig:flutter-layers}.
         \begin{figure}[h]
             \centering
@@ -248,43 +247,43 @@ struggling with implementation or configuration.
         \end{figure}
         Programmers have more contact with top layers of framework - 
         these are Material and Cupertino widgets which are composed of basic widgets.
-        Basic widgets uses lower layers of framework. 
+        Basic widgets use lower layers of framework. 
         The lowest one is foundation which contains core classes, functions and constants.
     
     
         From the beginning of our project we wanted to be able to develop new ideas
         very quickly.
         Python and PyTorch are technologies which definitely helped us keep high
-        productivity during this time. First choose was Kotlin - new modern programing 
+        productivity during this time. First choose was Kotlin - a new modern programming 
         language for Android applications. Main advantages of Kotlin are:
             \begin{itemize}
-                \item official supported by Google
+                \item officially supported by Google
                 \item high performance - native application
                 \item some great language features like null safety, readability or async functions
-                \item we had some experience with this language
+                \item having an experience in this language
             \end{itemize}
             
         The main drawback of creating mobile applications with Kotlin is that creating
-        some simple things can often take much time and effort. 
+        some simple things can often take a lot of time as well as effort. 
         This was a main cause of rejecting this approach.
-        We've looked for some other tools to create our client application and 
-        we've found Flutter - relatively new tool framework from Google which 
-        is still developing very quickly.
-        The main advantage of Flutter is that you can develop your apps very 
-        quickly because there are tons of ready, efficient and highly customizable 
-        widgets. There is also large community which creates new great widgets 
+        We were looking for some other tools to create our client application and 
+        eventually we found Flutter - relatively new tool framework from Google which 
+        is still developing quite fast.
+        The main advantage of Flutter is that we can develop your apps very 
+        quickly as there are numerous efficient, ready-to-use and highly customizable 
+        widgets. There is also a large community which creates new great widgets 
         add publishes them on official website so everyone can download them and use in project.
-        You can also modify or build new widgets on top of it and then publish.
+        You can also modify or build new widgets on the top of it and then publish.
         If some widget would become very popular and useful it will may be 
         include to official Flutter SDK. 
-        Flutter also makes easy to create apps in beautiful Mateterial Design 
-        style or it's iOS equivalent - Cupertino. 
-        The main feature of Flutter, and always mentioned by Google is of course 
+        Flutter also makes it easy to create apps in beautiful Material Design 
+        style or its iOS equivalent - Cupertino. 
+        The main feature of Flutter, which is always mentioned by Google is of course 
         creating applications for Android and iOS at the same time. 
         Our main goal was to create application for Android so we treated this feature like 
         an opened door. 
         Flutter is also declarative, react style framework which we prefer while
-        creating user interface's. We've had previous experience with React on web
+        creating user interfaces. We have had previous experience with React on web
         so Flutter seemed easy to learn. 
     
 
