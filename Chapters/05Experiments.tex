@@ -14,14 +14,14 @@ structure (Figure \ref{fig:mosaic1}) and minimalistic, low-entropy styles
             }
             \label{fig:mosaic1}
         \end{figure}
-As can be seen, pruned model performs on par with the original on complex styles.
+As we can see, pruned model performs on par with the original on complex styles.
 The only difference we notice for the first style is slightly lighter hue of sofa
 in the dog photo. Otherwise it's hard to find any differences in this column.
 In the second column the red jackets in kayak image stand out. This certainly is a drawback,
 considering image was supposed to imitate a sketch. Area under a bridge in last 
-image is also less detailed and darker. In general small model, as expected,
-seems more likely to discard small details - compare surface of water in kayak image
-or elephant's back in first image. For styles with one dominating color, smaller
+image is also less detailed and darker. In general pruned model, as expected,
+seems more likely to discard small details - compare for example surface of water in kayak image
+or elephant's back in first image. For styles with one dominant color, smaller
 model produces more uniform distribution of colors. It's visible in virtually
 all images in the last column; in this case images seem to be "watered down".
 Both of these traits are not necessarily drawbacks, for example the blue area
@@ -74,7 +74,7 @@ Pruned + TensorRT &  7.1  & 26  & 70 \\
 \hline
 \end{tabular}
 \end{center}
-\label{table:speedup}
+\caption{\label{table:speedup} FPS of achieved by models on different GPUs}
 \end{table}
 As we see speedup gained by pruning the original model is tremendous on
 every architecture, though it decreases with computational power.
@@ -115,20 +115,6 @@ on however learns stability by design \cite{Li2018}, so there is no need for
 any auxillary techniques. We examine to what extent network pruning damages this 
 property. We conduct the experiment using a single style image and 3 videos with motionless
 camera. Results are presented in Figure \ref{fig:heatmap}.
-
-\begin{figure}[h!]
-\centering
-    \includegraphics[scale=0.2]{heatmap.jpg}
-    \caption{Comparison of stability between original (middle column) and pruned
-    (right column) model. Left column shows original video frames. For each of
-    $3\times3$ grids first two rows show two frames close two each other
-    ($1$ to $5$ frames of difference, depending on video's framerate) and the third
-    row is heatmap of difference between them. The image on the right is style used
-    throughout experiment; below it heatmap scale.
-    }
-    \label{fig:heatmap}
-\end{figure} 
-
 For each of $3\times3$ grids, the third row shows heatmaps of differences between 
 two images above it. A hypothetic perfectly stable style transform algorithm would
 produce the same heatmaps as the ones in left column. While both models perform
@@ -145,6 +131,19 @@ For the third video pruned model is only a bit more unstable than original model
 Overall pruning seems to reduce stablility only by a small margin provided original network
 preserves stability. In situation where original network fails to do so, pruned model
 magnifies errors though.
+\begin{figure}[h!]
+\centering
+    \includegraphics[width=0.9\textwidth]{heatmap.jpg}
+    \caption{Comparison of stability between original (middle column) and pruned
+    (right column) model. Left column shows original video frames. For each of
+    $3\times3$ grids first two rows show two frames close two each other
+    ($1$ to $5$ frames of difference, depending on video's framerate) and the third
+    row is heatmap of difference between them. To the right of the grid: used style
+    image and heatmaps' scale.
+    }
+    \label{fig:heatmap}
+\end{figure} 
+
 
 
 \subsection{Style and content encoding} \label{two_encoders}
@@ -152,11 +151,11 @@ As mentioned in section \ref{network} the encoder had to be copied due to prunin
 constraints. Since two resulting encoders were pruned and fine-tuned separately 
 their sets of weights are different. In this section we shortly examine effects
 of using wrong combinations of encoder in pruned model. Results for four possible combinations
-of encoders are presented if Figure \ref{fig:mosaic_asym}.
+of encoders are presented in Figure \ref{fig:mosaic_asym}.
 
         \begin{figure}[h!]
         \centering
-            \includegraphics[scale=0.2]{mosaic_asym.png}
+            \includegraphics[width=1\textwidth]{mosaic_asym.png}
             \caption{Comparison of various configurations of network with respect
             to encoder used for encoding style/content image. From top to bottom:
             $S_E(S_I)$ and $C_E(C_I)$, $S_E(S_I)$ and $S_E(C_I)$,
@@ -176,8 +175,8 @@ should pay attention to both color and shapes. Consequently images in second row
 are of a lot worse quality than first row, but content and style are still readily
 recognizable. Comparing 3rd and 4th row, we see content 
 is reconstructed better in the latter one. Again, this should be the case,
-since content is encoded with $S_E$ in 3rd row and with $C_E$ in 4th row.
-Since $C_E$ produces more accurate shape encoding than $S_E$, images in 4th row are
+since content is encoded with $S_E$ in 3rd row and with $C_E$ in 4th row -
+$C_E$ produces more accurate shape encoding than $S_E$ so images in 4th row are
 sharper and less blurry.
 \biblio % Needed for referencing to working when compiling individual subfiles - Do not remove
 \end{document}
