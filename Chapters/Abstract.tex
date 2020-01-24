@@ -1,7 +1,7 @@
 \documentclass[../Main.tex]{subfiles}
 \begin{document}
 
-In this thesis, we are interested in the use of convolution neural networks in video processing. We analyzed the neural style transfer concept and base our project on the work of \bartek{dodac paper}.
+In this thesis, we are interested in the use of convolution neural networks in video processing. We analyzed the neural style transfer concept and base our project on the work of Li et al. \cite{Li2018}.
 Our goal is to enable fast real-time video processing using artistic style transfer by speeding up the existing convolutional neural network and ensure easy access by mobile application and lightweight server.
 We investigate different approaches and finally use network pruning and TensorRT library in order to improve the speed of the algorithm. Focusing on availability, we design the stream server in WebRTC standard and cross-platform mobile application written in Flutter. The first chapters describe the technologies and implementation of these three components. Then, we outline the experiments with various parameters on different architectures. 
 The results, after the final adjustments, shows that our network can achieve similar results to the initial one, but with greater speed and higher image resolution. We reach the point where the application can smoothly stream transformed video, so we are pleased with results. The possible delays depend on the network connection between a mobile device and the server and are multiplied by poor architecture. Since we analyze only some aspects, there is still a field for further improvements.

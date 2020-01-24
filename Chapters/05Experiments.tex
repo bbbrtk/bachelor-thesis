@@ -145,7 +145,7 @@ Sum                   &   4\,000\,879       &    2\,264\,267   \\
 \end{table}
 
 \subsection{Style scaling}
-We can control how much the result video or photo will be styled. For this purpose we added factor $\alpha$ -  which is style weight set in mobile application. Using method of style scaling based on interpolation between parameters of AdaIN given as input to decoder, what can be present as following equation: $$T(c,s,a) = g((1-\alpha)f(c)+\alpha AdaIN(f(c),f(s)))$$ When $\alpha= 0$  then the network will reconstruct the content style, $\alpha = 1$ is maximum level of styled, which was default style weight in previous experiments. 
+We can control how much the result video or photo will be styled. For this purpose we added factor $\alpha$ -  which is style weight set in mobile application. Using method of style scaling based on interpolation between feature maps given as input to decoder, what can be present as following equation: $$T(c,s,\alpha) = g((1-\alpha)f(c)+\alpha (f(c),f(s)))$$ When $\alpha= 0$  then the network will reconstruct the content style, $\alpha = 1$ is maximum level of styled, which was default style weight in previous experiments. 
 
 \begin{figure}[h!]
     \centering
@@ -155,6 +155,9 @@ We can control how much the result video or photo will be styled. For this purpo
 \end{figure}
 
 \subsection{Color preservation}
+Style transfer give us a content image in style of the chosen, another image. To output has a all details like lighting, shapes and colors. Using method of color histogram matching we can preserve color of content image and then transfer the style. The key of this method is create new style $S'$ by changing colors of style picture to colors matching with content, and then use style transfer algorithm. 
+We are 
+
 \subsection{Video stability}
 One of goals for high-quality style transfer is stability. Let $F_1$ and $F_2$ be 
 two video frames relatively close in time and $T$ a style transfer algorithm transforming
