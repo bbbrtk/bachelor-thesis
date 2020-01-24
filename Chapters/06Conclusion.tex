@@ -98,10 +98,9 @@ throughout the development of this project.
     model's parameters towards original. Probably even better idea would be matching
     encodings of images produced by respective networks. This would help
     smaller network closely mirror stylization performed by the original model.
-\item \textbf{Style interpolation}
-\item \textbf{Mixed styles using spatial control}
-    
-    
+\item \textbf{Style interpolation and mixed styles using spatial control}
+    We also want to add some new functionalities to the application like Style interpolation, co mixed at least two different styles to styled result. By giving on input to decoder convex combination, we can interpolate between styles and create new one. \\
+    Next feature are mixed styles using spatial control. We can choose parts of content image to styled each part in diferent style. This effect can be reached by using style transfer separately using different input statistics. Also it could be extend to color preservation in choosen part of image.
 \end{itemize}
 
 \biblio % Needed for referencing to working when compiling individual subfiles - Do not remove

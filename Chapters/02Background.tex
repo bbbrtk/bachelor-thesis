@@ -43,11 +43,8 @@
     Deep neural network is simply a feedforward network with many hidden layers. 
     How many layers does a network have to have in order to qualify as deep? There is no definite answer to this (it's a bit like asking how many grains make a heap), but usually having two or more hidden layers counts as deep. In contrast, a network with only a single hidden layer is conventionally called "shallow" \cite{Goodfellow-et-al-2016}.
     
-\newpage
-
     \subsubsection{Relationships}
     The variety of terms in the field of AI may be confusing. Especially, the relations between major concepts described in this paper. Diagram presented on Figure \ref{fig:AI-ML-Scheme} tries to clarify it.
-    \\
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.7\textwidth]{AI-ML-Scheme.png}
@@ -64,7 +61,7 @@
     \subsubsection{CNN Layers}
     As mentioned, the convolutional network is comprised of one or more convolutional layers (which often have a subsampling step) and then followed by one or more fully connected layers as in a standard multilayer neural network. The architecture of a CNN is designed to take advantage of the two-dimensional structure of an input image. Good results are achieved with local connections between neurons and tied weights followed by some form of pooling \cite{dlstanford}. The most common CNN layers listed below are normally placed where the hidden layers are depicted on Figure \ref{fig:nn-scheme}. 
     \begin{itemize}
-        \item The \textbf{convolution layer} has to extract features from the input. It computes a dot product between neuron weights and a small region it is connected to in the input volume.\\
+        \item The \textbf{convolution layer} has to extract features from the input. It computes a dot product between neuron weights and a small region it is connected to in the input volume.
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.5\textwidth]{cnn-convolution.png}
@@ -72,7 +69,7 @@
         \label{fig:cnn-convolution}
     \end{figure}
     
-        \item The \textbf{pooling layer} reduces the spatial size of these feature maps. Sometimes, the input image is big (and therefore time consuming especially if you have a big input set) or there is sparse data. In these cases, the objective of the Pooling Layers is to reduce the spatial dimension of the input matrix. A pooling layer is applied after one or multiple convolution layers.\\
+        \item The \textbf{pooling layer} reduces the spatial size of these feature maps. Sometimes, the input image is big (and therefore time consuming especially if you have a big input set) or there is sparse data. In these cases, the objective of the Pooling Layers is to reduce the spatial dimension of the input matrix. A pooling layer is applied after one or multiple convolution layers.
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.5\textwidth]{cnn-pooling.jpeg}
@@ -112,9 +109,6 @@
         \label{fig:style-and-content}
     \end{figure}
     
-        
-\newpage
-    
     \subsubsection{Example}
     The most common use of style transfer is obviously the artificial artwork created from photo. Especially the ones produced from some famous paintings. Attached examples give an idea of this approach capabilities. \\
     \begin{figure}[h!]
@@ -148,7 +142,7 @@
     In a nutshell, the approach uses the \textbf{instance normalization (IN)} - the alternative to the batch normalization, which computes the mean and standard deviation, and then normalize across each channel in each training example separately. The authors designed extension to IN which 'adjusts the mean and variance of the
     content input to match those of the style input'. It enables fast processing and full user control of the image styling.
     
-    Despite the numerous advantages, AdaIN has some cons mentioned in the paper. First of all, the quality of generated image is questionable when method does not involve firstorder statistcis like variance \bartek{cite our paper li}. Due to the three-way trade-off between the quality, user-flexibility and speed, authors accept this downside. But what is more crucial and important for our work, the speed of the algorithm run is 56 FPS for 256x256 and 15 FPS for 512×512. It is way too low on the good authors' machine architecture, especially when we are going to consider processing 1024x576 frames with speed at least 20 FPS.
+    Despite the numerous advantages, AdaIN has some cons mentioned in the paper. First of all, the quality of generated image is questionable when method does not involve firstorder statistcis like variance \cite{Li2018}. Due to the three-way trade-off between the quality, user-flexibility and speed, authors accept this downside. But what is more crucial and important for our work, the speed of the algorithm run is 56 FPS for 256x256 and 15 FPS for 512×512. It is way too low on the good authors' machine architecture, especially when we are going to consider processing 1024x576 frames with speed at least 20 FPS.
     Nevertheless, we find AdaIN idea interesting and out-of-the-box. It might be that future work and experiments will enhance the possibilities and meet our expectations.
 
     \subsubsection{Commercial use}
@@ -162,7 +156,7 @@
 
     
     \subsubsection{Image Analogy - the obsolete approach}
-    The alternative CNN approach which used to be popular beforehand is called \textbf{image analogy}. In brief, the algorithm wants to find an analogous image B' that relates to B in the same way as A' relates to A. \bartek{cite: https://mrl.nyu.edu/publications/image-analogies/analogies-72dpi.pdf} To transfer the style of image we need a dataset of training pairs of photo and an artwork from processed photo. The main weakness of this method is that mentioned pair barely exist in practice. An artwork is seldom based on a particular photo.
+    The alternative CNN approach which used to be popular beforehand is called \textbf{image analogy}. In brief, the algorithm wants to find an analogous image B' that relates to B in the same way as A' relates to A \cite{imageanalogy}. To transfer the style of image we need a dataset of training pairs of photo and an artwork from processed photo. The main weakness of this method is that mentioned pair barely exist in practice. An artwork is seldom based on a particular photo.
 
 
 \subsection{Neural network compression}
