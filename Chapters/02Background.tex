@@ -147,13 +147,9 @@
     
     \subsubsection{Loss function}
     In general \textbf{loss function} in NST contains two sub-losses: the content reconstruction loss and the style reconstruction loss. The idea is pretty straightforward. The first loss ensures that the activations of the higher layers are similar between the content image and the generated image. The second one makes sure that the correlation of activations in all the layers are similar between the style image and the generated image. So the differences between source and output image are the basis of the loss computing.
-    The concept is depicted on Figure \fig{loss-equation} where $\alpha$ and $\beta$ are parameters. By controlling them one can decide how much style of source image will be preserved (and similarly - the amount of the source image content). 
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[width=0.4\textwidth]{loss-equation.png}
-        \caption{The neural style transfer loss equation}
-        \label{fig:loss-equation}
-    \end{figure}
+    The concept can be denoted as follows:
+    \[L= \alpha L_{content} + \beta L_{style}\]
+    where $\alpha$ and $\beta$ are parameters. By controlling them one can decide how much style of source image will be preserved (and similarly - the amount of the source image content). 
     
     \bartek{cite gatys} proved that CNN capture the content info in higher levels of the network. Whereas \bartek{cite: https://arxiv.org/abs/1311.2901} paper tells that if two images to have the same content, the activation in higher levels are similar. It is the core idea of many content loss calculation methods.
     Style reconstruction loss is usually more advanced topic, but plenty of approaches base on correlation between feature maps. It is also common to compute style losses at multiple levels (while content loss is computed only once).

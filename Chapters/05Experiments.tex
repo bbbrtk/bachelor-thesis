@@ -89,7 +89,15 @@ Since there is nothing to improve, tensor reshapes requiered by TensorRT
 might slow down inference.
 
 \subsection{Style scaling}
+We can control how much the result video or photo will be styled. For this purpose we added factor $\alpha$ -  which is style weight set in mobile application. Using method of style scaling based on interpolation between parameters of AdaIN given as input to decoder, what can be present as following equation: $$T(c,s,a) = g((1-\alpha)f(c)+\alpha AdaIN(f(c),f(s)))$$ When $\alpha= 0$  then the network will reconstruct the content style, $\alpha = 1$ is maximum level of styled, which was default style weight in previous experiments. 
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.5]{Images/style1.png}
+    \includegraphics[scale=0.5]{Images/style2.png}
+    \caption{Comparison between different values of style weight}
+    \label{fig:my_label}
+\end{figure}
 
 \subsection{Color preservation}
 \subsection{Video stability}
