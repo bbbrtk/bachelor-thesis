@@ -2,22 +2,15 @@
 \begin{document}
 
 \subsection{Motivation}
-\todo[inline]{Rewrite the motivation - at the end}
-The evolution of technology has taken humanity to heights like never before. Work areas of medicine, safety, learning, and providing other kinds of help has reached a peak. But it does not stop there. Artificial intelligence is the next big thing in the world of technology and computer science but to understand it, it’s important to know what it consists of. It is essential to know what is deep learning and what artificial neural network means.
-
-The AI technology field is extremely advanced and interesting. These two tools that are being used in artificial intelligence are very powerful in terms of solving complex problems and to develop even higher standards in science.
-
-- nst is new
-- other works are not good enough - not for commercial use
-- 
+The recent innovations in the field of neural networks created new possibilities in the domain of video and image processing. The neural style transfer (NST) introduced by \bartek{dodac Gatysa} enables rendering image with its own content but a style of another one. Various papers present improvements of this concept - enhancement of artistic stylization effects, computational speed or content-style distribution. However, the NST approach is still fresh and further improvements could be done. We find that there still is a lack in the real-time video processing area, as well as easy access for non-skilled users. Even the latest works we base on provide algorithms that are not fast enough for high-resolution processing, neither for processing on average architectures. The shortage of availability of free and easy-to-use applications or platforms is also noticeable.
 
 
 \subsection{Project objective}
-- real time video
-- 20 fps on hd
-- enhanced artistic effect
-- easy access 
-- platform independent
+The overall objective of our thesis was to enable fast real-time video processing using artistic style transfer by speeding up the existing convolutional neural network and ensure easy access by mobile application and lightweight server.
+
+We aimed to maintain good video quality (1024x576) while reducing the computational time by use of network pruning and TensorRT. The speedup had to go hand in hand with video stability and color preservation although we did not want to depend on the sophisticated architecture. Moreover, we attempted to achieve a movie-like frame speed (\textasciitilde24 FPS) without limiting the number of possible styles.
+
+Access to our program should be provided for anyone interested - especially for those without programming skills. Therefore designing a user-friendly and cross-platform mobile application was the second goal. And since we focus on the video quality, the server should seamlessly connect application and algorithm - from any place without delays.
 
 \newpage
 \subsection{Work structure}
