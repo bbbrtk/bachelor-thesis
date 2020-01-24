@@ -156,7 +156,7 @@ We can control how much the result video or photo will be styled. For this purpo
 
 \subsection{Color preservation}
 Style transfer give us a content image in style of the chosen, another image. To output has a all details like lighting, shapes and colors. Using method of color histogram matching we can preserve color of content image and then transfer the style. The key of this method is create new style $S'$ by changing colors of style picture to colors matching with content, and then use style transfer algorithm. 
-We are 
+We are transform pixels $x=(R,G,B)$ with mean and covariance of RGB values to new style $$x_s\rightarrow{}Ax_s+b$$ where A is a 3x3 matrix and b is a 3-vector.
 
 \subsection{Video stability}
 One of goals for high-quality style transfer is stability. Let $F_1$ and $F_2$ be 
