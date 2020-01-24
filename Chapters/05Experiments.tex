@@ -55,9 +55,9 @@ image is very sparse. While original model acts as (not very good) edge detector
 pruned network produces seemingly overexposed images.
 Overall pruned model performs visibly worse on styles with very simple structure or no
 structure at all. 
-\subsubsection{Speedup}
-In this section we measure speedup provided by pruning and TensorRT. 
-We compare speed gains across different devices by taking measurements on three different
+\subsubsection{Technical comparison}
+In this section we confront models' speeds and memory footprints.
+First we compare speed gains across different devices by taking measurements on three different
 NVIDIA GeForce GPUs of varying computational power. In all tests we use RGB images
 of resolution 1024x576. 
 \begin{table}
@@ -80,13 +80,69 @@ As we see speedup gained by pruning the original model is tremendous on
 every architecture, though it decreases with computational power.
 For pruned models using TensorRT this trend is even more emphasized.
 While the mobile 940M GPU speeds up by 75\%, middle-range 960 only gains
-couple FPS, which at that point don't really make any differnece. The most
+couple FPS, which at that point don't really make any differnece from user's
+perspective. The most
 interesting case is that of high-end GTX 1080 Ti, which slows down
 when TensorRT is used. This might be exactly the result of it's computational power.
 Pruned model is no longer bottlenecked by factors, the two weaker GPUs
 introduced and as a consequence it can be ran very efficiently.
 Since there is nothing to improve, tensor reshapes requiered by TensorRT
-might slow down inference.
+might slow down inference. \\
+In tables \ref{table:memory} we present memory requirements of original and pruned model.
+Both encoder and decoder get whole order of magnitude smaller which is very
+satisfying result. Size of transformation module however is only reduced by $25\%$.
+This is due to fact it contains two fully-connected layers, which
+can not be pruned by Distiller, each one
+transforming $32\times32$ matrix into a matrix of the same size.
+This gives $2\times\left(32\times32\right)^2)=2097152$ parameters.
+Simple calculation shows these fc layers constitute ``just'' $75\%$
+of original transformation module, but pruning increases their share to 
+$97\%$. This is consistent with well-known fact that a VGG-like network's
+memory footprint stems mostly from fc layers but most of inference time
+is spent on sequential execution of Conv layers.
+
+\begin{table}
+\begin{center}
+
+\begin{tabular}{|c|c|c|}
+\hline
+                      &  Original model & Pruned TensorRT model \\
+\hline
+Content encoder       &  2.12 MB        & 152 KB   \\
+\hline
+Style encoder         &  -              & 152 KB   \\
+\hline
+Transformation module &  11 MB          & 8.28 MB  \\
+\hline
+Decoder               &  2.12 MB        & 150 KB   \\
+\hline
+Sum                   &  15.24 MB       & 8.73 MB  \\
+\hline
+\end{tabular}
+\vspace{1em}
+
+\begin{tabular}{|c|c|c|}
+\hline
+                      &  Original model & Pruned TensorRT model \\
+\hline
+Content encoder       &   555\,340        &  35\,164       \\
+\hline
+Style encoder         &  -              &  35\,164       \\
+\hline
+Transformation module &   2\,890\,464     &   2\,158\,848  \\
+\hline
+Decoder               &   555\,075       &   35\,091      \\
+\hline
+Sum                   &   4\,000\,879       &    2\,264\,267   \\
+\hline
+\end{tabular}
+
+\end{center}
+\caption{\label{table:memory} Total memory footprints (top) and number of parametrs (bottom)
+    of individual parts of each model. Style encoder
+    is ommited in original model as that network only has one encoder
+    }
+\end{table}
 
 \subsection{Style scaling}
 We can control how much the result video or photo will be styled. For this purpose we added factor $\alpha$ -  which is style weight set in mobile application. Using method of style scaling based on interpolation between parameters of AdaIN given as input to decoder, what can be present as following equation: $$T(c,s,a) = g((1-\alpha)f(c)+\alpha AdaIN(f(c),f(s)))$$ When $\alpha= 0$  then the network will reconstruct the content style, $\alpha = 1$ is maximum level of styled, which was default style weight in previous experiments. 
