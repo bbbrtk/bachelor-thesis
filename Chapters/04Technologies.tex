@@ -48,8 +48,8 @@ struggling with implementation or configuration.
      optimization TensorRT chooses specific CUDA kernels for the platform to maximize
     performance on GPUs. It uses Docker for integration with DevOps architectures.\\
     TensorRT doesn't support direct building of engines from PyTorch models, so 
-    we use ONNX format as intermediate step in build process. Specifically
-     pruning we convert encoders, transformatiom module and decoder to ONNX. 
+    we use ONNX format as intermediate step in build process. Specifically, after
+    pruning we convert encoders, transformatiom module and decoder to ONNX. 
     ONNX tends to produce excessively complex computational graphs, which sometimes
     prevents from conversion to TensorRT, so next we use open-source ONNX simplifier 
     \cite{onnxsim} to make models more compact. Finally, using open-source
@@ -64,7 +64,7 @@ struggling with implementation or configuration.
 %    \bartek{add: https://docs.opencv.org/master/}
 
     \subsection{Distiller}
-    Distiller is an open-source Python package for neural network compression.
+    Distiller\cite{distiller} is an open-source Python package for neural network compression.
     It provides a PyTorch environment for prototyping and analyzing compression algorithms,
     such as sparsity-inducing methods and low precision arithmetic. Distiller
     is still in experimental phase and is supposed to provide examples and tools

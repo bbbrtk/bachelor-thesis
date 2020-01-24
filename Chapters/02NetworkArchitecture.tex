@@ -22,7 +22,7 @@
     \url{https://github.com/sunshineatnoon/LinearStyleTransfer}
     as starting point for further development. Because of implementation details
     of pruning framework we use (each layer can only be used once during 
-    feed-forward phase), encoder couldn't be used to encode both content and
+    feed-forward phase), one encoder wasn't enough to encode both content and
     style image. As a consequence we had to include not one, but two copies of encoder
     in our model - one for content images and one for style images. They start of
     with entirely identical set of weights, but progressively diverge from each 
@@ -43,7 +43,7 @@
     layers performing downsampling, ending with couple of fully
     connected layers and Softmax layer. Such architecture allows for image classification.
     To adapt it for other computer vision tasks like segmentation, object detection,
-    tracking, domain adaptation or style transfer, the non-convolutional part
+    tracking, domain adaptation or style transfer, the fully-connected part
     of network needs to be removed. Depending on task's complexity, desired
     latency and available hardware, vgg-like networks of varying depth can be 
     constructed by simply removing consequent top layers of the network.
@@ -54,7 +54,7 @@
     \begin{center}
         \begin{tabular}{|c|c|}
         \hline
-         \cite{Li2018} & Our \\
+         Li et al. & Ours \\
         \hline
           \multicolumn{2}{|c|}{Pointwise Conv(3, 3)} \\
           \hline
@@ -62,25 +62,25 @@
           \hline
           CReLU(64, 64) & CReLU(16, 16)  \\
           \hline
-          \multicolumn{2}{|c|}{Max Pool x2}      \\
+          \multicolumn{2}{|c|}{Max Pool $\times2$}      \\
           \hline
           CReLU(64, 128)  & CReLU(16, 32) \\
           \hline
           CReLU(128, 128)  & CReLU(32, 32)\\
           \hline
-          \multicolumn{2}{|c|}{Max Pool x2}    \\
+          \multicolumn{2}{|c|}{Max Pool $\times2$}    \\
           \hline
           CReLU(128, 256) & CReLU(32, 64)\\
           \hline
           CReLU(256, 128) & CReLU(64, 32)\\
           \hline
-          \multicolumn{2}{|c|}{Upsample Nearest x2}\\
+          \multicolumn{2}{|c|}{Upsample Nearest $\times2$}\\
           \hline
           CReLU(128, 128) & CReLU(32, 32)\\
           \hline
           CReLU(128, 64) & CReLU(32, 16)\\
           \hline
-          \multicolumn{2}{|c|}{Upsample Nearest x2}\\
+          \multicolumn{2}{|c|}{Upsample Nearest $\times2$}\\
           \hline
           CReLU(64, 64) & CReLU(16, 16) \\
           \hline
@@ -89,13 +89,13 @@
         \end{tabular}
             \end{center}
         \caption{Encoder-decoder architecture before and after filter pruning.
-        The first Conv layer is pointwise convolution with 1x1 kernel, 
-        unitary stride, without padding. It has 3 input and 3 output channels.
+        The first Conv layer is pointwise convolution with $1\times1$ kernel, 
+        unitary stride, without padding. It has $3$ input and $3$ output channels.
         \textit{CReLU(a,b)} is Conv layer with \textit{a} input channels and 
         \textit{b} output channels followed by ReLU activation. All of 
-        \textit{CReLU}s have 3x3 kernels, unitary stride and and single pixel
-        of padding on each of 4 sides. Downsampling and upsampling
-        is done with 2x2 kernels and stride 2.
+        \textit{CReLU}s have $3\times3$ kernels, unitary stride and and single pixel
+        of padding on each of $4$ sides. Downsampling and upsampling
+        is done with $2\times2$ kernels and stride $2$.
         }
         \label{table:vgg}
     \end{table}
@@ -107,9 +107,9 @@
         performance around the input's edges \cite{johnson2016perceptual}, exhibiting as
         vanishing of style or artifacts (see figure \ref{fig:edges}).
         In such situation adding reflection padding fixes the issue. We replace
-        reflection padding with zero padding, because the former one is not 
+        reflection padding with zero padding, because the former is not 
         implemented within TensorRT used for additional inference speedup
-        (see \ref{trt_chapter}). Fortunately described problem is not nearly as visible
+        (see chapter \ref{trt_chapter}). Fortunately described problem is not nearly as visible
         in our model.
         \begin{figure}[h!]
             \includegraphics[scale=0.17]{edges.jpg}
@@ -160,15 +160,16 @@
         \centering
             \includegraphics[scale=0.25]{transform_module.png}
             \caption{Architecture of transformation module. $F_C$, $F_S$ and $F_D$
-            are content, style and transformed image feature maps respectively.
+            are content's, style's and transformed image's feature maps respectively.
             $f_c$ is fully connected layer and $T$ is transformation matrix. 
             The submodule in dashed green region is supposed to compute 
             transformation matrix conditioned on style and content images.
+            Figure adapted from \cite{Li2018}.
             }
             \label{fig:transform_module}
         \end{figure}
         
-    First both $F_C$ and $F_S$ are centered around 0 channelwise, that is their respective 
+    First both $F_C$ and $F_S$ are centered around 0 channel-wise, that is their respective 
     means for each channel are subtracted. They are then passed through short series of separate 
     convolutional layers with ReLU non-linearity. It's important they are separate,
     since we care about different features in content and style image. Then they 
@@ -184,18 +185,12 @@
     exactly.
     
     
-    
-    
-    
-    
-    
-    
 
 \subsection{Pruning}
     In this chapter we describe the pruning algorithm and the pruning procedure 
     used to obtain final network.
     \subsubsection{Filter pruning} 
-    Filter pruning is a type of structured pruning in which the smallest unit considered by
+    Filter pruning is a type of structured pruning in which the smallest unit considered by an
     algorithm is convolutional filter. Convolutional layer transforms feature maps
     $x_i \in \mathbb{R}^{n_i \times h_i\times w_i}$ into
     feature maps  $x_{i+1} \in \mathbb{R}^{n_{i+1}h_{i+1} \times w_{i+1}}$ by applying
@@ -205,8 +200,8 @@
     Filters of the next layer which were convoluted with this feature map are no longer needed 
     and can also be removed. 
     The criterion by which our algorithm selects filters is  
-    $\ell_1$ norm, that is $\sum_{i,j}|f_{i,j}|$ where summation is done
-    over all filter's values, suggested by \cite{li2016pruning}.
+    $\ell_1$ norm, that is $\sum_{i,j,k}|F_{i,j,k}|$ where summation is done
+    over all of filter's values, suggested by \cite{li2016pruning}.
     Intuition behind this and similar criteria (e.g. using 
     $\ell_p$ norm) is that the smaller filter's norm, the smaller it's influence 
     on overall network output. Despite it's simplicity this criterion performs well in practice
@@ -217,13 +212,13 @@
     very suddenly, so after every removal of filters, network has to be retrained to 
     at least partially regain it's original quality. Pruning can be done at once 
     (so called one shot pruning), 
-    where desired sparsity level is achieved just after one epoch or can be 
+    where desired sparsity level is achieved just after one epoch or be 
     spread across multiple epochs.  Retraining is easier in latter scenario,
     as network isn't altered suddenly so significantly. Specifically we use AGP (Automated
     Gradual Pruner) sparsity schedule proposed by \cite{zhu2017prune}. It prunes
     filters rapidly at the beginning, when redundant weights are abundant
     and slows down gradually. \% of filters remaining (called density) after epoch 
-    k is given by
+    $k$ is given by
     \[ D_k = f_f + (1-f_f)*(1-\tfrac{k}{K})^3 \]
     where $f_f$ is final density and $K$ is total number of epochs
     pruning is performed for. In our case $f_f=0.25$ and $K=10$. Exact densities
@@ -245,11 +240,11 @@
     VGG19 is a deep network and it's consecutive
     layers encode different characteristics of image, for example first layers might
     encode colors and texture, while latter layers more abstract features like shapes.
-    To compute losses transformed image, content image and
+    To compute losses, transformed image, content image and
     style image are passed through loss module, which encodes them into $F_{t,i}$, $F_{c,i}$ and 
     $F_{s,i}$ feature maps respectively, where $F_{x,n}$ is feature map computed by $n$th
-    ReLU activation layer. \cite{Li2018} find computing style loss combining many $F_{s,i}$
-    feature maps yields the best visual effects - they pick $i=2,4,6,10$. For 
+    ReLU activation layer. \cite{Li2018} find computing style loss combining many 
+    feature maps $F_{s,i}$ from various depths of network yields the best visual effects - they pick $i=2,4,6,10$. For 
     content loss one feature map is enough - $i=10$. Content loss is then computed as 
     MSE between $F_{c,10}$ and $F_{t,10}$. Style loss is given by 
     \[ \sum{MSE(mean(F_{t,i}), mean(F_{s,i})) + MSE(F_{t,i}F_{t,i}^T, F_{s,i}F_{s,i}^T}) \]
@@ -260,14 +255,14 @@
     Total loss is weighted sum of content loss and style loss:
     \[L=L_{content} + \lambda L_{style}\] \cite{Li2018} use $\lambda=0.02$ and we 
     also find it results in the most appealing visual effects. During pruning and 
-    fine-tuning we SGD optimizer to apply gradients. We set learning rate to $10^{-4}$
+    fine-tuning we use SGD optimizer to apply gradients. We set learning rate to $10^{-4}$
     and momentum to $0.9$. We use SGD mainly because other optimizers aren't implemented 
     in pruning framework we use. However we also find adaptive optimizers result 
     in instable training of transformation module and gradient explosion.
     
     \subsubsection{Pruning schedule, datasets} 
-    Following \cite{Li2018} we MS-COCO \cite{mscoco} as content dataset and Wikiart \cite{wikiart}
-    as style dataset. Both of these datasets contain roughly 80000 images. We divide them 
+    Following \cite{Li2018} we adopt MS-COCO \cite{mscoco} as content dataset and Wikiart \cite{wikiart}
+    as style dataset. Both of these datasets contain roughly 80000 images. We divide each of them 
     into 73000 training images and 7000 validation images. Implementing pruning on your own
     requires deep knowledge of used deep learning framework. Luckily there are model 
     minimization libraries for both PyTorch and Tensorflow. While Tensorflow has 
@@ -277,7 +272,7 @@
     It's an open source library which implements many structured and unstructured
     pruning algorithms, enables testing quality of quantized models and performing
     knowledge distillation. It's still far from perfect (current version is 0.4.1), but 
-    thanks to the open source code, it's easily extendable. Described above
+    thanks to an open source code, it's easily extendable. Described above
     $\ell_1$ AGP filter pruning is already implemented in Distiller. After specifying
     our network's architecture and datasets, and fixing couple minor bugs 
     we used it to prune and then fine-tune the 
@@ -290,7 +285,7 @@
     and network is optimized with consequent mini-batches. During this training,
     network should at least partially recover from performance drop caused by sudden
     change of weights. After 10 epochs, specified
-    for each layer level of sparsity is achieved and frozen weights are entirely removed
+    for each layer level of density is achieved and frozen weights are entirely removed
     from the model - at this moment architecture of the network is altered and physical
     storage required to save the model is reduced. Then comes the fine-tuning phase - 
     network is trained for another
@@ -298,18 +293,18 @@
     
     Throughout both phases validation loss is measured after each training epoch.
     As final model we pick the one with the lowest validation loss during fine-tuning, 
-    which happens to be the one after epoch 18. Training and validation losses are 
+    which happens to be the one after epoch $18$. Training and validation losses are 
     pictured in Figure \ref{fig:wykresy}. Because image reconstruction is fairly 
     easy, content losses remain almost constant during whole process. We see style 
     loss is much more heavily influenced by pruning. Right at the start, mean style loss 
-    on training set is right below 2.5, while mean validation loss is over 11. This means 
+    on training set is right below $2.5$, while mean validation loss is over 11. This means 
     model is able to quickly recover and fit to the data even after very aggresive pruning 
     (in AGP scheme first epoch removes the most filters), but regaining generalization requires more
-    time. While training style loss drops almost uniformly starting from the 5th epoch, 
-    when pruning becomes lighter, the validation set style loss only stabilizes after 10th epoch - 
+    time. While training style loss drops almost uniformly starting from the $5$th epoch, 
+    when pruning becomes lighter, the validation set style loss only stabilizes after $10$th epoch - 
     when pruning ends. It's important to note that even though validation style loss 
-    doesn't change much after 11th epoch, model is still learning and after 18th
-    epoch network performs much better than after 11th. This is because the style loss 
+    doesn't change much after 11th epoch, model is still learning and after $18$th
+    epoch network performs much better than after $11$th. This is because the style loss 
     computed by loss module is only a proxy for style difference, which doesn't have 
     any clear mathematical definition. In result value of style loss only partially reflects
     difference in style between two pictures. 

@@ -73,18 +73,18 @@ In this section we outline ideas and development directions we found interesting
 throughout the development of this project.
 \begin{itemize}
 \item \textbf{Feature encoding}
-    To construct encoder \cite{Li2018} train VGG-like architecrture to classify 
+    To construct encoder \cite{Li2018} train VGG-like architecture to classify 
     MSCOCO images. While dataset is rather large (80000 images), training classifier
     is probably the simplest way to obtain deep extractor of meaningful image features.
     Training encoder to perform other, more demanding, computer vision tasks like 
     segmentation or image tagging might result in more robust features better suited
-    for style transform. It would be particularly intersting to examine wheter use of encoders
+    for style transform. It would be particularly interesting to examine whether use of encoders
     trained in unsupervised manner (e.g. \cite{CPC, CPCv2}) would make any difference.
     Such models need to be able to perform tasks demanding even for humans, like generating
     full image based on only a port of it. As a side effect representations produced by their
     encoders must contain useful information for range of computer vision tasks.
     Even if it didn't influence network's output, the it might perhaps ease the training
-    and accelarate convergance of style transform models
+    and accelerate convergence of style transform models
 \item \textbf{More sophisticated training}
     Image classification is a well-defined task with clear metric.
     Because of this simplicity, papers introducing new pruning algorithms tend to 
