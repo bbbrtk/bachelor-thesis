@@ -13,7 +13,7 @@ struggling with implementation or configuration.
 \subsection{Neural Network}
 
     \subsubsection{PyTorch}
-        \textbf{PyTorch} is an open-source machine learning library created by Facebook and broadly used in the field of computer vision. Released in 2016 rapidly gained popularity among researchers and developers. PyTorch is not another Python binding into a C++ framework. It uses core Python concepts like structures, classes or conditions, so integrates easily with the rest of Python ecosystem. Library provides all necessary tools for developing and training the neural networks based on deep learning models.
+        \textbf{PyTorch} is an open-source machine learning library created by Facebook and broadly used in the field of computer vision. Released in 2016 \cite{pytorch} rapidly gained popularity among researchers and developers. PyTorch is not another Python binding into a C++ framework. It uses core Python concepts like structures, classes or conditions, so integrates easily with the rest of Python ecosystem. Library provides all necessary tools for developing and training the neural networks based on deep learning models.
         
         Two main features of this package are:
         \begin{itemize}
@@ -22,14 +22,13 @@ struggling with implementation or configuration.
         \end{itemize}
         
         We decided to pick out PyTorch instead of TensorFlow (the main and actually the only alternative) due to several reasons. Firstly, TensorFlow was becoming more and more complex for machine learning beginners, where the PyTorch is based on basic and familiar programming paradigms. The new version of TF (2.0) solves this problem but was released  we had started working on the project. Moreover, the documentation is also pretty straightforward and helpful for newcomers. And finally, plenty of style transfer approaches are built on PyTorch. Including the network we adopt. 
-%        \bartek{add biblio: https://pytorch.org/docs/stable/index.html}
 
     \subsubsection{CUDA}
-    CUDA is parallel computing platform on GPUs and programming model created by NVIDIA. Using GPUs models can be train with shorter period of time and allow high floating-point computing performance.CUDA allows to use equivalent CPU functions for maximum use of GPUs and accelerate programms. Many frameworks like TensorFlow or PyTorch relay on CUDA for their GPU support. The NVIDIA company also created CUDA Toolkit, which includes libraries, debugging and optimization tool, which support all NVIDIA GPUs. There are three main libraries intended for deep learning CuDNN, which is the most popular for deep neutral network computations and mostly using in open source frameworks, TensorRT - the high-performance inference optimizer and runtime, and DeepStream, a library to video inference. You can use also use signal processing and math libraries. In case, when there are no needed library, you can write your low-level CUDA program in C or C++.  
-%       \asia{add biblio: https://www.infoworld.com/article/3299703/what-is-cuda-parallel-programming-for-gpus.html, https://developer.nvidia.com/cuda-toolkit}
+    CUDA is parallel computing platform on GPUs and programming model created by NVIDIA \cite{cudatoolkit}. Using GPUs models can be train with shorter period of time and allow high floating-point computing performance.CUDA allows to use equivalent CPU functions for maximum use of GPUs and accelerate programms. Many frameworks like TensorFlow or PyTorch relay on CUDA for their GPU support. The NVIDIA company also created CUDA Toolkit, which includes libraries, debugging and optimization tool, which support all NVIDIA GPUs. There are three main libraries intended for deep learning CuDNN, which is the most popular for deep neutral network computations and mostly using in open source frameworks, TensorRT - the high-performance inference optimizer and runtime, and DeepStream, a library to video inference. You can use also use signal processing and math libraries. In case, when there are no needed library, you can write your low-level CUDA program in C or C++.  
+%       \asia{add biblio:  --> dodane 
     
     \subsubsection{TensorRT} \label{trt_chapter}
-    TensorRT is an SDK for deep learning interface \textbf{created by NVIDIA and designed for their GPUs}. It is built on CUDA and provides C++ and Python APIs, which allows loading pre-trained deep learning models, (trained with libraries like PyTorch) and run them on NVIDIA GPU. The main advantages of TensorRT are high-performance deep learning interface optimizer and light-weight runtime engine, that provide low latency and minimize streaming video delays. The engine is generated only once for each GPU and serialized as a plan file for the next uses. It is also possible to run an application with lower precision (if hardware allows doing so) to reduce memory requirements and reduce inference time. 
+    TensorRT is an SDK for deep learning interface \textbf{created by NVIDIA and designed for their GPUs}. It is built on CUDA and provides C++ and Python APIs, which allows loading pre-trained deep learning models, (trained with libraries like PyTorch) and run them on NVIDIA GPU. The main advantages of TensorRT are high-performance deep learning interface optimizer and light-weight runtime engine, that provide low latency and minimize streaming video delays \cite{tensorrtdocs}. The engine is generated only once for each GPU and serialized as a plan file for the next uses. It is also possible to run an application with lower precision (if hardware allows doing so) to reduce memory requirements and reduce inference time. 
     
     The workflow of the build phase network on TensorRT follows those steps:
     \begin{itemize}
@@ -56,12 +55,10 @@ struggling with implementation or configuration.
     onnx2trt parser \cite{onnx2trt} we build TensorRT engines based on simplified
     ONNX models.
     
-%        \asia{add biblio: https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide, https://developer.nvidia.com/tensorrt }
+%        \asia{add biblio: --> dodane
 
     \subsubsection{OpenCV}
-    Open Source Computer Vision Library is an open-source library, originally developed by Intel, for computer vision and machine learning software. It includes dozens of computer vision algorithms adjusted for easy use for detect and recognize faces, identify objects and many others designed for image processing. Although written in C++, OpenCV has Python bindings and provides support for Machine Learning libraries like PyTorch.  By using it, one can process images and videos to detect objects, apply filters, analyze structure or perform reconstruction. OpenCV is designed to handle real-time vision applications and is currently developing full-featured CUDA interfaces.
-%    \bartek{describe what do we use it for}
-%    \bartek{add: https://docs.opencv.org/master/}
+    Open Source Computer Vision Library is an open-source library, originally developed by Intel, for computer vision and machine learning software \cite{opencvdocs}. It includes dozens of computer vision algorithms adjusted for easy use for detect and recognize faces, identify objects and many others designed for image processing. Although written in C++, OpenCV has Python bindings and provides support for Machine Learning libraries like PyTorch.  By using it, one can process images and videos to detect objects, apply filters, analyze structure or perform reconstruction. OpenCV is designed to handle real-time vision applications and is currently developing full-featured CUDA interfaces.
 
     \subsection{Distiller}
     Distiller is an open-source Python package for neural network compression.
@@ -90,11 +87,7 @@ struggling with implementation or configuration.
     Client-server communication is divided into two parts: video streaming and transferring filter specification data. The first part is maintained by a server in WebRTC standard, whereas the second one is micro-server based on Flask. Both segments are written in Python and developed by open-source communities.
 
     \subsubsection{WebRTC}
-    WebRTC is an open framework that enables \textbf{Real Time Communication (RTC)} in web browsers and mobile apps via simple API. It provides tools to create peer-to-peer communication without any external plugins or programs. Standardized on API level by W3C 
-    %\bartek{add hyperlink} 
-    and protocol level by IETF 
-    %\bartek{add hyperlink}
-    is widely used and supported by Google, Apple, Microsoft, and main browser vendors. Given that our project and mobile application is cross-platfoom, we consider it as a key factor when choosing server technology.
+    WebRTC is an open framework that enables \textbf{Real Time Communication (RTC)} in web browsers and mobile apps via simple API \cite{webrtc}. It provides tools to create peer-to-peer communication without any external plugins or programs. Standardized on API level by \href{https://www.w3.org}{W3C} and protocol level by \href{https://ietf.org}{IETF} is widely used and supported by Google, Apple, Microsoft, and main browser vendors. Given that our project and mobile application is cross-platfoom, we consider it as a key factor when choosing server technology.
     
     WebRTC architecture presented on  Figure \ref{fig:webrtc-public-diagram-for-website} contains two main layers: 
     \begin{itemize}
@@ -105,25 +98,19 @@ struggling with implementation or configuration.
     \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{webrtc-public-diagram-for-website}
-    \caption{Overview of WebRTC architecture}
+    \caption{Overview of WebRTC architecture from official documentation \cite{webrtc}}
     \label{fig:webrtc-public-diagram-for-website}
     \end{figure}
 
     Comprehensive documentation and community creating many additional libraries make using this framework rather convenient. One of the most popular open-source libraries is \textbf{aiortc}.
-    % \bartek{
-    % photo: https://webrtc.org/architecture/
-    % biblio: https://webrtc.org
-    % }
-    
+
     \subsubsection{Aiortc}
-    \textbf{Aiortc} was developed as a 'WebRTC for Python'. Complexity (especially for beginners) and lack of Python bindings motivated authors of aiortc to design library and API which follow its Javascript counterpart. They pointed out that 
-    %\bartek{add cite} 
-    'WebRTC (...) is tightly coupled to a media stack, making it hard to plug in audio or video processing algorithms'. Our goal is to literally use the video processing algorithm, so we found this library and its examples extremely useful.
-    We based our server on the aiortc example which performs video, audio and data channel establishing with a browser. It also allows pocessing streaming frames using OpenCV. 
-        % \bartek{biblio: https://aiortc.readthedocs.io/en/stable/}
-    
+    \textbf{Aiortc} was developed as a 'WebRTC for Python' \cite{aiortcdocs}. Complexity (especially for beginners) and lack of Python bindings motivated authors of aiortc to design library and API which follow its Javascript counterpart. They pointed out that 
+    'WebRTC (...) is tightly coupled to a media stack, making it hard to plug in audio or video processing algorithms' \cite{aiortcdocs}. 
+    Our goal is to literally use the video processing algorithm, so we found this library and its examples extremely useful. We based our server on the aiortc example which performs video, audio and data channel establishing with a browser. It also allows pocessing streaming frames using OpenCV. 
+
     \subsubsection{Flask}
-    Flask is a so-called \textbf{micro-framework} with little dependencies to external libraries, which provides tools and technologies useful with building a small web application. It could be helpful for ones who want to create web pages, blogs or a simple REST server. 
+    Flask is a so-called \textbf{micro-framework} with little dependencies to external libraries, which provides tools and technologies useful with building a small web application \cite{flaskdocs}. It could be helpful for ones who want to create web pages, blogs or a simple REST server. 
     Technically, Flask is based on:
     \begin{itemize}
     \item Werkzeug WSGI (Web Server Gateway Interface is a popular specification for a universal interface between the  server and the web app) - toolkit which implements requests-response objects, and some service functions
@@ -137,8 +124,7 @@ struggling with implementation or configuration.
     \item Send confirmation response to the mobile app
     \end{itemize}
     We also decided to write simple Flask client in order to test connection to the server.
-   % \bartek{biblio to add: http://flask.palletsprojects.com/en/1.1.x/}
-    
+
     \subsubsection{Server flow}
     The aforementioned servers work separately and do not directly interfere with each other and could perform tasks asynchronously. In that way, many clients can upload filter images and parameters as well as stream video without delays. Every client can change filter params and start a new stream in various order, but the usual client-server flow is depicted in Figure \ref{fig:server-flow} \\
     \begin{figure}[h]
@@ -162,10 +148,8 @@ struggling with implementation or configuration.
     When streaming finishes or breaks (due to network error, application shutdown or any other error), server close connection gracefully but still stores last filter style parameters. If they are not specified during the next stream or the POST request to the Flask server fails, the server uses saved ones. 
     
     \subsubsection{Alternative technologies}
-    We had been trying several options before we chose to use aiortc. Our prime attempt was to adopt \textit{WebRTC Plugin for Flutter}. It is a small project developed by the Flutter community containing Javascript server and Flutter client. That seemed to be a perfect solution that could accelerate our work.
+    We had been trying several options before we chose to use aiortc. Our prime attempt was to adopt \href{https://github.com/cloudwebrtc/flutter-webrtc}{WebRTC Plugin for Flutter}. It is a small project developed by the Flutter community containing Javascript server and Flutter client. That seemed to be a perfect solution that could accelerate our work.
     However, we encounter some obstacles in this undertaking. First of all, the mentioned plugin is poorly documented and error-prone what is a rather annoying combination. Secondly, it works efficiently only over the LAN network when we wish to connect to the server from any place. And the third thing is the communication crashes if the video is not streaming to/from the Chrome browser. Nevertheless, the project is gathering greater community what makes it promising in the time of growing popularity of Flutter.
-    %\bartek{biblio to add:  https://github.com/cloudwebrtc/flutter-webrtc}
-    
 
 \subsection{Environment}
     Both model and server require multiple dependencies like:

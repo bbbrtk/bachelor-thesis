@@ -155,8 +155,9 @@ We can control how much the result video or photo will be styled. For this purpo
 \end{figure}
 
 \subsection{Color preservation}
-Style transfer give us a content image in style of the chosen, another image. To output has a all details like lighting, shapes and colors. Using method of color histogram matching we can preserve color of content image and then transfer the style. The key of this method is create new style $S'$ by changing colors of style picture to colors matching with content, and then use style transfer algorithm. 
-We are transform pixels $x=(R,G,B)$ with mean and covariance of RGB values to new style $$x_s\rightarrow{}Ax_s+b$$ where A is a 3x3 matrix and b is a 3-vector.
+Style transfer give us a content image in style of the chosen, another image. To output has a all details like lighting, shapes and colors. Using method of color histogram matching we can preserve color of content image and then transfer the style. The key of this method is create new style $S'$ by changing colors of style picture to colors matching with content, and then use style transfer algorithm. \\
+We are want each pixels $x=(R,G,B)$ to match mean and covariance of RGB values to new style, by using following transformation: $$x_s\rightarrow{}Ax_s+b$$ where A is a 3x3 matrix and b is a 3-vector. We choose A and b to satisfied by the constraints: $$b=\mu_C - A\mu_S$$ $$A\sum_SA^T = \sum_C$$ where $\mu_S$ and $\mu_C$ are mean colors of the style and content, $\sum_S$ and $\sum_C$ are pixel covariances. That give us family of solutions to A, now we use the Cholesky decomposiotion but it depends on colors channel ordering, or 3D color matching formulations, we choose this method. \\
+The eigenvalue decomposition of a covariance matrix will be $\sum=UAU^T$, we can define matrix square-root as $\sum^{1/2}=UA^{1/2}U^T$, with this and the transformation is following by: $$$$
 
 \subsection{Video stability}
 One of goals for high-quality style transfer is stability. Let $F_1$ and $F_2$ be 
