@@ -155,7 +155,7 @@ We can control how much the result video or photo will be styled. For this purpo
 \end{figure}
 
 \subsection{Color preservation}
-Style transfer give us a content image in style of the chosen, another image. To output has a all details like lighting, shapes and colors. Using method of color histogram matching we can preserve color of content image and then transfer the style. The key of this method is create new style $S'$ by changing colors of style picture to colors matching with content, and then use style transfer algorithm. \\
+Style transfer give us a content image in style of the chosen style image. Result has a all details like lighting, shapes and colors. Using method of linear color transfer we can preserve color of content image and then transfer the style. The key is create new style $S'$ by changing colors of style picture to colors matching with content, and then use style transfer algorithm. \\
 We are want each pixels $x=(R,G,B)$ to match mean and covariance of RGB values to new style, by using following transformation: $$x_s\rightarrow{}Ax_s+b$$ where A is a 3x3 matrix and b is a 3-vector. We choose A and b to satisfied by the constraints: $$b=\mu_C - A\mu_S$$ 
 \begin{center}
     $A\sum_SA^T = \sum_C$
@@ -165,7 +165,7 @@ The eigenvalue decomposition of a covariance matrix will be $\sum=UAU^T$, we can
 \begin{center}
 $A_{IA}=\sum^{1/2}_C\sum^{-1/2}_S$
 \end{center}
-This linear color transfer method can not giving satisfying results when content and style colors are too different. The color distribution may not be matched perfectly.
+This linear color transfer method can not giving satisfying results when content and style colors are too different, then color distribution may not hard to match and we will get mismatch between result and content colors.
 
 \subsection{Video stability}
 One of goals for high-quality style transfer is stability. Let $F_1$ and $F_2$ be 
