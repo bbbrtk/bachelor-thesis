@@ -114,11 +114,11 @@
 \begin{document}
 
 % ----- Todo new commands -----
-\newcommandx{\TODO}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
-\newcommandx{\kamil}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
-\newcommandx{\filip}[2][1=]{\todo[linecolor=gray,backgroundcolor=gray!25,bordercolor=gray,#1]{#2}}
-\newcommandx{\bartek}[2][1=]{\todo[linecolor=green,backgroundcolor=green!25,bordercolor=green,#1]{#2}}
-\newcommandx{\asia}[2][1=]{\todo[linecolor=orange,backgroundcolor=orange!25,bordercolor=orange,#1]{#2}}
+% \newcommandx{\TODO}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+% \newcommandx{\kamil}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+% \newcommandx{\filip}[2][1=]{\todo[linecolor=gray,backgroundcolor=gray!25,bordercolor=gray,#1]{#2}}
+% \newcommandx{\bartek}[2][1=]{\todo[linecolor=green,backgroundcolor=green!25,bordercolor=green,#1]{#2}}
+% \newcommandx{\asia}[2][1=]{\todo[linecolor=orange,backgroundcolor=orange!25,bordercolor=orange,#1]{#2}}
 
 
 \def\biblio{} % resets the biblio command, if not here a new reference list will be produced after every chapter
@@ -129,7 +129,6 @@
 
 \pagenumbering{gobble} % suppress page numbering
 \thispagestyle{plain} % suppress header
-
 
 \clearpage\mbox{}\clearpage % add blank page
 
@@ -168,7 +167,6 @@
     \subfile{Chapters/03NetworkArchitecture}
 \clearpage
 
-
 \section{Technologies}
     \subfile{Chapters/04Technologies}
 \clearpage
@@ -192,16 +190,6 @@
 \bibliography{References} % adds the references to the document
 }
 
-% -------- APPENDIX --------
-% \newpage
-% \renewcommand{\appendixpagename}{Appendix} % Heading of appendix
-% \renewcommand{\appendixtocname}{Appendix} % name of appendix in TOC
-% \appendixpage 
-% \addappheadtotoc
-
-% \begin{appendices}
-%     \subfile{Chapters/Appendix}
-% \end{appendices}
 
 
 \end{document}
