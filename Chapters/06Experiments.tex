@@ -155,7 +155,9 @@ We can control how much the result video or photo will be styled. For this purpo
 \end{figure}
 
 \subsection{Color preservation}
-Style transfer give us a content image in style of the chosen style image. Result has a all details like lighting, shapes and colors. Using method of linear color transfer we can preserve color of content image and then transfer the style. The key is create new style $S'$ by changing colors of style picture to colors matching with content, and then use style transfer algorithm. \\
+Style transfer give us a content image in style of the chosen style image. Result has a all details like lighting, shapes and colors. Using method of linear color transfer we can preserve color of content image and then transfer the style.
+
+The key is create new style $S'$ by changing colors of style picture to colors matching with content, and then use style transfer algorithm. \\
 We are want each pixels $x=(R,G,B)$ to match mean and covariance of RGB values to new style, by using following transformation: $$x_s\rightarrow{}Ax_s+b$$ where A is a 3x3 matrix and b is a 3-vector. We choose A and b to satisfied by the constraints: $$b=\mu_C - A\mu_S$$ 
 \begin{center}
     $A\sum_SA^T = \sum_C$
