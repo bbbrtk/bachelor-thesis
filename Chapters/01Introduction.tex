@@ -2,7 +2,7 @@
 \begin{document}
 
 \subsection{Motivation}
-The recent innovations in the field of neural networks created new possibilities in the domain of video and image processing. The neural style transfer (NST) introduced by \cite{gatys2015neural} enables rendering image with its own content but a style of another one. Various papers present improvements of this concept - enhancement of artistic stylization effects, computational speed or content-style distribution. However, the NST approach is still fresh and further improvements could be done. We find that there still is a lack in the real-time video processing area, as well as easy access for non-skilled users. Even the latest works we base on provide algorithms that are not fast enough for high-resolution processing, neither for processing on average architectures. The shortage of availability of free and easy-to-use applications or platforms is also noticeable.
+The recent innovations in the field of neural networks created new possibilities in the domain of video and image processing. The neural style transfer (NST) introduced by \cite{gatys2015neural} enables rendering image with its own content but a style of an another one. Various papers present improvements of this concept - enhancement of: artistic stylization effects, computational speed or content-style distribution. However, the NST approach is still fresh and further improvements could be done. We find that there still is a lack in the real-time video processing area, as well as in easy access for non-skilled users. Even the latest works we base on, provide algorithms that are not fast enough for high-resolution processing, neither for processing on average machine architectures. The deficit of availability of free and easy-to-use applications or platforms is also noticeable.
 
 
 \subsection{Project objective}
@@ -10,11 +10,11 @@ The overall objective of our thesis is to enable fast real-time video processing
 
 We aim to maintain good video quality (1024x576) while reducing the computational time by use of network pruning and TensorRT. The speedup must go hand in hand with video stability and color preservation although we do not want to depend on the sophisticated architecture. Moreover, we attempted to achieve a movie-like framerate (\textasciitilde{}24 FPS) without limiting the number of possible styles.
 
-Access to our program should be provided for anyone interested - especially for those without programming skills. Therefore designing a user-friendly and cross-platform mobile application was the second goal. And since we focus on the video quality, the server should seamlessly connect application and algorithm - from any place without delays.
+Access to our program should be provided for anyone interested - especially for those without programming skills necessary to launch neural network model. Therefore designing a user-friendly and cross-platform mobile application was the second goal. And since we focus on the video quality, the server should seamlessly connect application and algorithm - from any place without delays - what was the third objective.
 
 \newpage
 \subsection{Work structure}
-Since our project contains parts initially unrelated to each other, we decided to split the work into three main categories. Every team member individually focused on an owned part and then we join them together. \\
+Since our project contains parts initially unrelated to each other, we decided to split the work into four main categories. Every team member individually focused on an owned part and then we join them together. \\
 The work division can be summarized as follows:
 \begin{enumerate}
     \item Mobile Application - Filip Bończyk
@@ -29,6 +29,7 @@ The work division can be summarized as follows:
             \item Preparing mechanism of frame catching and passing to the CNN
             \item Server deploying
         \end{itemize}
+% TODODODODODO
     \item Nerual Network - Kamil Burdziński, Joanna Świda
         \begin{itemize}
             \item Related works research
@@ -40,6 +41,7 @@ The work division can be summarized as follows:
             \item Color preservation
             \item Binding server and algorithm together
         \end{itemize}
+% DODODODODODO
 \end{enumerate}
 
 \newpage

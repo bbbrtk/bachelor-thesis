@@ -6,15 +6,15 @@
 \subsection{Machine Learning} 
     Machine Learning (ML) is the 'field of study that gives computers the capability to learn without being explicitly programmed' \cite{Samuel1959SomeSI}. Technically, machine learning is an approach to data science and data analysis that involves adapting and building special models, which allow computer programs to learn through experience. It is based on many other fields such as: linear algebra, calculus, statistics, probability or graph theory. ML models are constructed and improved by algorithms which goal is to make the most accurate possible prediction.
     
-    There are various ML concepts and architectures, but one can highlight three most common parts:
+    There are various ML concepts and architectures, but one can highlight three parts included in most common designs:
     \begin{itemize}
         \item Model - the part which makes predictions
-        \item Parameters - the factors used by the model to make decisions
-        \item Learner - the part that adjusts the parameters
+        \item Parameters - the factors used by the \textbf{model} to make decisions
+        \item Learner - the part that adjusts the \textbf{parameters}
     \end{itemize}
-    Machine Learning works by gathering the data (where the quality of data determines the future quality of model), processing to make them consistent and relevant followed by splitting them to different sets (usually training and test sets). Next, the chosen algorithm and techniques build the model which is evaluated and upgraded several times to reach the appropriate level of prediction \cite{deepai}.
+    Machine Learning works by gathering the data (where the quality of data determines the future quality of model), processing them to ensure consistence and relevance, followed by splitting them to different sets (usually: training and test sets). Next, the chosen algorithm and techniques try to build the model which is evaluated and upgraded several times to reach the appropriate level of prediction accuracy \cite{deepai}. ML model needs well-prepared data to work properly. A prepared batch of data usually includes label describing its type. It enables algorithm to distinguish the batches and learn about their specific features. 
 
-    ML model needs well-prepared data to work properly. A prepared batch of data usually includes  label describing its type - it enables the algorithm to distinguish the batches and learn about their specific properties. One way that we can classify the tasks that machine learning algorithms solve is by how much labeled data they got and how much feedback they present. In the first type, the significant amount of labeled data is provided and the model generates some output. This paradigm is called \textbf{supervised learning}. In another paradigm, no labeled data is provided, no feedback generated - it is  \textbf{unsupervised learning}. Lastly, the \textbf{reinforcement learning}, rather different from the previous ones taking suitable action to maximize reward in a particular situation. The three main paradigms of ML are depicted on Figure \ref{fig:ML-paradigms}. \\
+    One way that we can classify the tasks that machine learning algorithms solve is by the amount of labeled data and the generated feedback. In the first type, the significant amount of labeled data is provided and the model generates some output. This paradigm is called \textbf{supervised learning}. In another paradigm, no labeled data is provided, no feedback generated - it is  \textbf{unsupervised learning}. Lastly, the \textbf{reinforcement learning}, rather different from the previous ones, take suitable action to maximize reward in a particular situation. The three main paradigms of ML are depicted in Figure \ref{fig:ML-paradigms}. \\
     \begin{figure}[h]
         \centering
         \includegraphics[width=0.7\textwidth]{ML-paradigms}
@@ -27,9 +27,9 @@
 
 \subsection{Neural Networks}
     \subsubsection{Overview}
-    The neural network is a concept and technique for building a computer program that learns from data and which is based very loosely on how the human brain works. More precisely, it is a collection of software \textbf{neurons} which are created, connected and allowed to send messages to each other. When this collection is asked to solve a problem, it attempts to do so over and over, each time strengthening the connections that lead to successful solution and reduce those leading to wrong one \cite{tfplayground}.
+    The neural network is a concept and technique for building a computer program that learns from data and which is based very loosely on how the human brain works. More precisely, it is a collection of artificial \textbf{neurons} which are connected and allowed to send messages to each other. When this collection is asked to solve a problem, it attempts to do so over and over, each time strengthening the connections that lead to successful solution and reduce those leading to the wrong one \cite{tfplayground}.
     
-     Technically, neural networks are \textbf{weighted graphs}. They consist of an ordered set of layers, where every layer is a set of neurons (nodes). The first layer of the neural network is called the \textbf{input layer}, and the last one is called the \textbf{output layer}. The layers in between are named \textbf{hidden layers}. Layers are groups of nodes. Nodes belonging to one layer are connected to the nodes in the following and/or the previous layers. These connections are weighted edges. \\ 
+    Technically, neural networks are \textbf{weighted graphs}. They consist of an ordered set of layers, where every layer is a group of neurons (nodes). The first layer of the neural network is called the \textbf{input layer}, and the last one is called the \textbf{output layer}. The layers in between are named \textbf{hidden layers}. Nodes belonging to one layer are connected to the nodes in the following and/or the previous layers. These connections are weighted edges. \\ 
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.7\textwidth]{cnn-network.jpeg}
@@ -37,14 +37,14 @@
         \label{fig:nn-scheme}
     \end{figure}
 
-    Given an input, each node produces an output (a number) which is calculated by the \textbf{activation function}. This output is then passed to the subsequently connected nodes, which calculate the next outputs. By calculating layer outputs consecutively we calculate the output of the last layer, which is the one we need.
+    Given an input, each node produces an output (a number) which is calculated by the \textbf{activation function}. This output is then passed to the subsequently connected nodes, which calculate the next outputs. By calculating layer outputs consecutively, we calculate the output of the final layer, which is the one we need.
     
     \subsubsection{Deep Neural Networks}
     Deep neural network is simply a feedforward network with many hidden layers. 
-    How many layers does a network have to have in order to qualify as deep? There is no definite answer to this (it's a bit like asking how many grains make a heap), but usually having two or more hidden layers counts as deep. In contrast, a network with only a single hidden layer is conventionally called "shallow" \cite{Goodfellow-et-al-2016}.
+    There is no definite answer to the question of how many layers does a network need to be qualified as deep, but usually having two or more hidden layers counts as deep. In contrast, a network with only a single hidden layer is conventionally called "shallow" \cite{Goodfellow-et-al-2016}.
     
     \subsubsection{Relationships}
-    The variety of terms in the field of AI may be confusing. Especially, the relations between major concepts described in this paper. Diagram presented on Figure \ref{fig:AI-ML-Scheme} tries to clarify it.
+    The variety of terms in the field of AI/ML may be confusing. Especially, the relations between major concepts described in this paper. Diagram presented on Figure \ref{fig:AI-ML-Scheme} tries to clarify it.
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.7\textwidth]{AI-ML-Scheme.png}
@@ -55,8 +55,8 @@
 \subsection{Convolutional Neural Networks}
 
     \subsubsection{Definition}
-    \textbf{Convolution Neural Networks (CNN)} are specialized types of networks. The \textbf{convolution} itself is a specialized kind of linear operation. Convolutional networks are simply neural networks that use convolution in place of general matrix multiplication in at least one of their layers \cite{Goodfellow-et-al-2016}.  CNN is well adapted for the processing of images, but the same concept fits other fields, like audio or video. 
-    Compared to the standard feedforward neural network with a similarly-sized layer, CNN has much fewer connections and parameters. Therefore it is easier to train, while its theoretically-best performance is going to be only slightly worse \cite{krizhevsky-imagenet}.
+    \textbf{Convolution Neural Networks (CNN)} are specialized types of networks. The \textbf{convolution} itself is a specific kind of linear operation. Convolutional networks are simply neural networks that use convolution in place of general matrix multiplication in at least one of their layers \cite{Goodfellow-et-al-2016}.  CNN is well adapted for the processing of images, but the same concept also fits other fields, like audio or video. 
+    Compared to the 'standard' feed-forward neural network with a similarly-sized layer, CNN could have fewer connections and parameters. Therefore it is easier to train, while its theoretically-best performance is going to be only slightly worse \cite{krizhevsky-imagenet}.
         
     \subsubsection{CNN Layers}
     As mentioned, the convolutional network is comprised of one or more convolutional layers (which often have a subsampling step) and then followed by one or more fully connected layers as in a standard multilayer neural network. The architecture of a CNN is designed to take advantage of the two-dimensional structure of an input image. Good results are achieved with local connections between neurons and tied weights followed by some form of pooling \cite{dlstanford}. The most common CNN layers listed below are normally placed where the hidden layers are depicted on Figure \ref{fig:nn-scheme}. 
