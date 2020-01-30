@@ -59,7 +59,7 @@
     Compared to the 'standard' feed-forward neural network with a similarly-sized layer, CNN could have fewer connections and parameters. Therefore it is easier to train, while its theoretically-best performance is going to be only slightly worse \cite{krizhevsky-imagenet}.
         
     \subsubsection{CNN Layers}
-    As mentioned, the convolutional network is comprised of one or more convolutional layers (which often have a subsampling step) and then followed by one or more fully connected layers as in a standard multilayer neural network. The architecture of a CNN is designed to take advantage of the two-dimensional structure of an input image. Good results are achieved with local connections between neurons and tied weights followed by some form of pooling \cite{dlstanford}. The most common CNN layers listed below are normally placed where the hidden layers are depicted on Figure \ref{fig:nn-scheme}. 
+    The architecture of a CNN is designed to take advantage of the two-dimensional structure of an input image. Convolutional network is comprised of one or more convolutional layers followed often by subsampling step (pooling) and then by one or more fully connected layers - just as in a standard multi-layer network \cite{dlstanford}. The most common CNN layers listed below are normally placed where the hidden layers are depicted on Figure \ref{fig:nn-scheme}. 
     \begin{itemize}
         \item The \textbf{convolution layer} has to extract features from the input. It computes a dot product between neuron weights and a small region it is connected to in the input volume.
     \begin{figure}[h!]
@@ -69,7 +69,7 @@
         \label{fig:cnn-convolution}
     \end{figure}
     
-        \item The \textbf{pooling layer} reduces the spatial size of these feature maps. Sometimes, the input image is big (and therefore time consuming especially if you have a big input set) or there is sparse data. In these cases, the objective of the Pooling Layers is to reduce the spatial dimension of the input matrix. A pooling layer is applied after one or multiple convolution layers.
+        \item The \textbf{pooling layer} reduces the spatial size of these feature maps. Sometimes, the input image is a big one (and therefore time-consuming, especially if you have a large input set) or there are sparse data. In these cases, the objective of the Pooling Layers is to reduce the spatial dimension of the input matrix. A pooling layer is applied after one or multiple convolution layers.
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.5\textwidth]{cnn-pooling.jpeg}
@@ -77,31 +77,31 @@
         \label{fig:cnn-pooling}
     \end{figure}
     
-        \item The last one, the \textbf{fully connected layer} performs the high-level reasoning and produces the final output. Neurons in a fully connected layer have connections to all activations in the previous layer.
+        \item The last one - \textbf{fully connected layer} - performs the high-level reasoning and produces the final output. Neurons in a fully connected layer have connections to \textbf{all} neurons in the previous layer.
     \end{itemize}
 
-    \subsubsection{Loss}
-    To know if the result/solution of operations performed in a neural network is correct (or not) we need a function that allows solutions to be ranked and compared. This is known as the \textbf{loss function}. It reduces all the various good and bad aspects of a possibly complex system down to a single number, a scalar value, which evaluates the candidate solution \cite{neuralsmithingbook}. 
-    
     \subsubsection{Activation}
-    The activation function is attached to each neuron in the network, and determines whether it should be activated or not, based on whether each neuron input is relevant for the model prediction. Activation functions also help normalize the output of each neuron to some range (generally between 1 and 0 or 1 and -1) \cite{missinglink}. 
+    The activation function is attached to each neuron in the network, and determines whether it should be activated or not. Based on whether each neuron input is relevant for the model prediction. Activation functions also helps to normalize the output of each neuron to some range (generally between 1 and 0 or 1 and -1) \cite{missinglink}. 
 
-    Since activation function is calculated across thousands or even millions of neurons for each data sample, it  must be computationally efficient. Probably the most used one is \textbf{Rectified Linear Unit (ReLU)}. It applies an element-wise  function, such as the max(0,x) - thresholding at zero - to activate or deactivate each single neuron.
+    Since activation function is calculated across thousands or even millions of neurons for each data sample, it must be computationally efficient. One of the the most used one (also in our network) is \textbf{Rectified Linear Unit (ReLU)}. It applies an element-wise function, such as the max(0,x) - thresholding at zero - to either activate or deactivate each single neuron.
+
+    \subsubsection{Loss}
+    To get know if the result of operations performed in a neural network is correct (or not), we need a function that allows solutions to be ranked and compared. This is known as the \textbf{loss function}. It reduces all the various good and bad aspects of a possibly complex system down to a single number (or vector of numbers), a scalar value, which evaluates the candidate solution \cite{neuralsmithingbook}. 
     
     \subsubsection{Backpropagation}
     
-    Backpropagation is an algorithm commonly used to train neural networks. When the neural network is initialized, weights are set randomly. Input is loaded and then passed through the network of neurons, and the network provides an output for each one, given the initial weights. Backpropagation helps to adjust the weights of the neurons so that the result comes closer and closer to the known true result. It is worth to mention that backprop for a convolution operation (for both the data and the weights) is also a convolution. Description of this mechanism in our network can be found in chapter 3.
+    Backpropagation is an algorithm commonly used to train neural networks. When the neural network is initialized, weights are set randomly (or para-randomly). The input is loaded and then passed through the network, and it provides an output for each one neuron, given the initial weights. Backpropagation helps to adjust the weights of the neurons so that the result comes closer and closer to the known true result. It is worth to mention that backprop for a convolution operation (for both the data and the weights) is also a convolution. The description of this mechanism in our network can be found in chapter 3.
 
 \subsection{Computer Vision}
-    Computer vision is a field of computer science that tries to understand the images and videos - how they are stored, how can we manipulate and effectively retrieve data from them. It seeks to replicate the human vision system and enable computers to \textit{think and see} the same way we do. Computer Vision plays a major role in photo correction apps and art generation but also in self-driving vehicles or robotics \cite{towardsdatascience}.
+    Computer vision is a field of computer science that tries to understand the images and videos - how they are stored, how can we manipulate and how effectively retrieve data from them. It seeks to replicate the human vision system and enable computers to \textit{think and see} the same way we do. Computer Vision plays a major role in photo correction apps and art generation but also in self-driving vehicles or robotics \cite{towardsdatascience}.
     
-    Thanks to the growing popularity of AI and recent innovations in the field of Deep Learning (and Neural Network as well), Computer Vision develops rapidly and is able to achieve better rates in almost all areas. In many tasks, it even can surpass humans (e.g. in object detection and labeling). Since we generate and collect more data used to train and make Computer Vision better, the growth of this field will be ensured. 
+    Thanks to the growing popularity of AI and recent innovations in the field of Deep Learning (and Neural Networks as well), Computer Vision is developing rapidly and is able to achieve better rates in almost all areas. In many tasks, it even can surpass humans (e.g. in object detection and labeling). Since we generate and collect more data used to train and make Computer Vision better, the growth of this field will be ensured. 
 
 \subsection{Style transfer}
     \subsubsection{Overview}
     Style transfer is a technique of extraction visual aspects from an image and blending it together with an another image content. It aims to manipulate digital pictures (or videos) and adopt the appearance or visual style. This is usually implemented by optimizing the output image to match the content statistics of the content image and the style statistics of the style reference image. These statistics are extracted from the images using a convolutional network. 
     
-    The crucial part of style transfer is process of isolating the style and the content from an image. Researchers developed many approaches which enable computers to do it with high precision. We will go through these techniques in next subsections. \\
+    The crucial part of style transfer is process of isolating the style and the content from an image. Researchers developed many approaches which enable computers to do it with high precision. We briefly introduce some techniques in next subsections. \\
     \begin{figure}[h]
         \centering
         \includegraphics[width=0.6\textwidth]{style-and-content}
@@ -110,7 +110,7 @@
     \end{figure}
     
     \subsubsection{Example}
-    The most common use of style transfer is obviously the artificial artwork created from photo. Especially the ones produced from some famous paintings. Attached examples give an idea of this approach capabilities. \\
+    One of the most common use of style transfer is creating an artificial artwork  from photo. Especially the ones produced from some famous paintings. Attached examples give an idea of this approach capabilities. \\
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.7\textwidth]{ST-example-gatys.jpg}
@@ -119,7 +119,7 @@
     \end{figure}
 
     \subsubsection{State of the art}
-    NST was first published in the paper "A Neural Algorithm of Artistic Style" by Gatys et al. \cite{gatys2015neural} and is developing rapidly gaining more and more attention. The core branches of Neural Style Transfer are presented on the Figure \ref{fig:state-of-the-art}. Since presenting every concept of NST is not the goal of this paper, we recommend to visit \href{https://github.com/ycjing/Neural-Style-Transfer-Papers}{this actively updated repository}, where one can find information about each sub-field of the Neural Style Transfer. \\
+    Neural Style Transfer (NST) was first published in the paper "A Neural Algorithm of Artistic Style" by Gatys et al. \cite{gatys2015neural} and is developing rapidly gaining more and more attention. The core branches of Neural Style Transfer are presented on the Figure \ref{fig:state-of-the-art}. Since presenting every concept of NST is not the goal of this paper, we recommend to visit \href{https://github.com/ycjing/Neural-Style-Transfer-Papers}{this actively updated repository}, where one can find information about each sub-field of the Neural Style Transfer.  \\
     \begin{figure}[h!]
         \centering
         \includegraphics[width=1\textwidth]{state-of-the-art.png}
@@ -127,18 +127,17 @@
         \label{fig:state-of-the-art}
     \end{figure}
     
-    \subsubsection{Loss function}
+    \subsubsection{Loss function in style transfer}
     In general \textbf{loss function} in NST contains two sub-losses: the content reconstruction loss and the style reconstruction loss. The idea is pretty straightforward. The first loss ensures that the activations of the higher layers are similar between the content image and the generated image. The second one makes sure that the correlation of activations in all the layers are similar between the style image and the generated image. So the differences between source and output image are the basis of the loss computing.
     The concept can be denoted as follows:
     \[L= \alpha L_{content} + \beta L_{style}\]
-    where $\alpha$ and $\beta$ are parameters. By controlling them one can decide how much style of source image will be preserved (and similarly - the amount of the source image content). 
+    where $\alpha$ and $\beta$ are hyperparameters. By controlling them one can decide how much style of source image will be preserved (and similarly - the amount of the source image content). 
     
-    \cite{gatys2015neural} proved that CNN capture the content info in higher levels of the network. Whereas \cite{zeiler2013visualizing} states that if two images have the same content, the activations in their higher levels are similar. It is the core idea of many content loss calculation methods.
+    \cite{gatys2015neural} proved that CNN captures the content info in higher levels of the network. Whereas \cite{zeiler2013visualizing} states that if two images have the same content, the activations in their higher levels are similar. It is the core idea of many content loss calculation methods.
     Style reconstruction loss is usually more advanced topic, but plenty of approaches base on correlation between feature maps. It is also common to compute style losses at multiple levels (while content loss is computed only once).
 
-
     \subsubsection{AdaIn}
-    Among many approaches to the NST (especially Artistic Neural Style Transfer) we would like to highlight the AdaIN method \cite{huang2017adain}. The authors of the Adaptive Instance Normalization aimed to speed up the computationally efficient style transform process. They pointed out that even the best methods cost a lot - either time or computing resources. Therefore are not designed for commercial use, particularly in real-time processing programs. Moreover, their method is free from restriction of pre-defined set of styles. It seemed to achieve all objectives of our project.
+    Among many approaches to the (Artistic) Neural Style Transfer we would like to highlight the AdaIN method \cite{huang2017adain}. The authors of the Adaptive Instance Normalization aimed to speed up the computationally efficient style transform process. They pointed out that even the best methods cost a lot - either time or computing resources. Therefore are not designed for commercial use, particularly in real-time processing programs. Moreover, their method is free from restriction of pre-defined set of styles. It seemed to achieve all objectives of our project.
     In a nutshell, the approach uses the \textbf{instance normalization (IN)} - the alternative to the batch normalization, which computes the mean and standard deviation, and then normalize across each channel in each training example separately. The authors designed extension to IN which 'adjusts the mean and variance of the
     content input to match those of the style input'. It enables fast processing and full user control of the image styling.
     
@@ -178,16 +177,16 @@
     be considered, when designing mobile architecture manually. 
     \textbf{Network pruning} aims to reduce already trained model's size by pruning away
     weights with the least impact on network's quality. \cite{zhu2017prune} show
-    that for some models even up to $87.5$ weights can be removed with only 
+    that for some models even up to $87.5$ weights \kamil{87.5\% of weights?} can be removed with only 
     marginally reduced performance. 
     Because networks are initialized randomly, the least
     important parameters are usually spread across whole network. Naive pruning 
     then results in sparse networks. Their storage is significantly reduced, however
-    because available linear algebra libraries are optimized for dense structures,
-    their inference time doesn't scale as well. To overcome this, more structured
+    due to the fact that available linear algebra libraries are optimized for dense structures,
+    their inference time does not scale as well. To overcome this, more structured
     methods of pruning were developed, among them filter pruning \cite{li2016pruning, molchanov2016pruning}
     and channel pruning \cite{he2017channel}. 
-    Weight's or weights set's importance can be measured by various heuristics. 
+    Weight or weights set importance can be measured by various heuristics. 
     \cite{li2016pruning} prune away the filters with the smallest $\ell_1$ norm.
     This approach easily generalizes to $\ell_p$ norm.
     \cite{polyak2015} choose to prune away the filters with
@@ -200,20 +199,18 @@
     Smaller networks can also be trained with aid of larger ones through process called
     \textbf{knowledge distillation} \cite{hinton2015distilling}. 
     The key idea is that activations of certain layers
-    contain knowledge which is not present in dataset's labels. For example in network 
-    trained for classification, the final softmax layer's outputs are usually 
-    interpreted as probabilities of respective classes. These probabilities might indicate,
-    that for given input x, $C_1$ is the proper class and class $C_2$ is twice as probable 
-    as class $C_3$. If the network is well trained, this means x is more similar to
-    objects of class $C_2$, rather than $C_3$. By training new small network to match both
-    it's softmax outputs with larger trained network's softmax outputs and proper labels,
+    contain knowledge which is not present in dataset labels. For example in a network  trained for classification, the final softmax layer outputs are usually 
+    interpreted as probabilities of respective classes. These probabilities might indicate that for given input x, $C_1$ is the proper class and class $C_2$ is twice as probable 
+    as class $C_3$. If the network is well trained this means x is more similar to
+    objects of class $C_2$, rather than $C_3$. By training a new small network to match its both
+    softmax outputs with the larger trained network softmax outputs and proper labels,
     we effectively gain additional training data and ease the training.
-    Almost every network's inference time can also be increased by \textbf{quantization}.
+    Almost every network inference time can also be increased by \textbf{quantization}.
     In many deep learning frameworks, computation is by default performed on
     32-bit floating point numbers. Such precision is often required during training to 
-    ensure gradient's numerical stability. However given that network's weights have
-    relatively small magnitude, in many applications it's unnecessary during inference.
-    Modern GPUs enable inference in FP16 and INT8 modes. There has also been work 
+    ensure gradient numerical stability. However given that network weights have
+    relatively small magnitude, in many applications it is unnecessary during inference.
+    Modern GPUs enable inference in FP16 and INT8 modes. There has also been worked 
     on even lower precision inference, performed on CPUs. 
     
         
