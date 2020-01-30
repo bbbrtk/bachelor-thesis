@@ -8,44 +8,42 @@
     First we describe it's architecture and specific layers. Then we detail
     pruning procedure used to obtain the final model.
     \subsubsection{Overall network architecture} 
-    We follow architecture described in \cite{Li2018}, changing it's components' details 
+    We follow architecture described in \cite{Li2018}, changing its components details 
     in order to enable real time inference. The network consists of two 
     main components - encoder-decoder module and
     transformation module pictured in Figure \ref{fig:overall_network}.
-    To perform style transfer encoder is fed with content image
-    and style image, producing feature maps cF and sF respectively.
-    Next, transformation module transfers sF's statistics onto cF. Resulting 
+    To perform style transfer, the encoder is fed with the content image
+    and the style image, producing feature maps cF and sF respectively.
+    Next, transformation module transfers sF statistics onto cF. Resulting 
     feature map is passed through decoder, which creates final image. 
     Thanks to this modular architecture, each style image needs to be encoded
     only once. For both encoder-decoder and
     transformation module we use pretrained models publicly available at 
     \url{https://github.com/sunshineatnoon/LinearStyleTransfer}
-    as starting point for further development. Because of implementation details
+    as a starting point for further development. Because of implementation details
     of pruning framework we use (each layer can only be used once during 
-    feed-forward phase), one encoder wasn't enough to encode both content and
+    feed-forward phase), one encoder was not enough to encode both content and
     style image. As a consequence we had to include not one, but two copies of encoder
-    in our model - one for content images and one for style images. They start of
-    with entirely identical set of weights, but progressively diverge from each 
-    other during pruning procedure
+    in our model - one for content images and one for style images. Both encoders start of with entirely identical set of weights, but progressively diverge from each other during pruning procedure.
     
     \begin{figure}[h!]
         \includegraphics[scale=0.25]{overall_network.png}
-        \caption{Overview of the network architecture}
+        \caption{Overview of the network architecture \cite{Li2018}}
         \label{fig:overall_network}
     \end{figure}
     
     
     \subsubsection{Encoder-decoder}
-    Both encoders and decoder are based on first layers of VGG-like \cite{vgg}
+    Encoders and decoder are based on first layers of VGG-like \cite{vgg}
     network. VGG is a family of fully convolutional neural networks developed 
     specifically for computer vision task. Full VGG network consists of
     stacked Conv layers with ReLU activation function, interleaved with pooling
     layers performing downsampling, ending with couple of fully
-    connected layers and Softmax layer. Such architecture allows for image classification.
+    connected layers and Softmax layer. Such architecture allows effiecent image classification.
     To adapt it for other computer vision tasks like segmentation, object detection,
     tracking, domain adaptation or style transfer, the fully-connected part
-    of network needs to be removed. Depending on task's complexity, desired
-    latency and available hardware, vgg-like networks of varying depth can be 
+    of network needs to be removed. Depending on task complexity, desired
+    latency and available hardware, VGG-like networks of varying depth can be 
     constructed by simply removing consequent top layers of the network.
     The architecture used by \cite{Li2018} and our pruned version are 
     outlined in table \ref{table:vgg}. 
@@ -54,7 +52,7 @@
     \begin{center}
         \begin{tabular}{|c|c|}
         \hline
-         Li et al. & Ours \\
+         Li et al. \cite{Li2018} & Ours \\
         \hline
           \multicolumn{2}{|c|}{Pointwise Conv(3, 3)} \\
           \hline
@@ -103,11 +101,11 @@
     They differ in three aspects:
     \begin{itemize}
         \item \textbf{Padding} - \cite{Li2018} use reflection padding. In many
-        models used for style transfer, use of zero padding degrades network's
-        performance around the input's edges \cite{johnson2016perceptual}, exhibiting as
-        vanishing of style or artifacts (see figure \ref{fig:edges}).
+        models used for style transfer, use of zero padding degrades network
+        performance around the input edges \cite{johnson2016perceptual}, exhibiting as
+        vanishing of style or artifacts (see Figure \ref{fig:edges}).
         In such situation adding reflection padding fixes the issue. We replace
-        reflection padding with zero padding, because the former is not 
+        reflection padding with zero padding, because the former one is not 
         implemented within TensorRT used for additional inference speedup
         (see chapter \ref{trt_chapter}). Fortunately described problem is not nearly as visible
         in our model.
@@ -125,15 +123,14 @@
         This provides 
         fivefold speedup on NVIDIA GTX 960 GPU the inference server is ran on 
         (see table \ref{table:speedup} on page \pageref{table:speedup} for details).
-        \item As described earlier our network consists of two encoders, specialized
+        \item \textbf{Encoders}. As described before, our network consists of two encoders, specialized
         for content and style images respectively. In section \ref{two_encoders}
         we conduct experiments to observe effects of using style encoder for 
         content images and vice-versa.
         
     \end{itemize}
 
-
-    \subsubsection{Transformation module}
+    \subsubsection{Transformation module} \label{transformation_module}
     Transformation module is the component where style is actually transfered
     by matching feature maps' statistics. \cite{huang2017adain} introduced
     statistics matching as style transfer method in form of Adaptive Instance
@@ -171,17 +168,17 @@
         
     First both $F_C$ and $F_S$ are centered around 0 channel-wise, that is their respective 
     means for each channel are subtracted. They are then passed through short series of separate 
-    convolutional layers with ReLU non-linearity. It's important they are separate,
-    since we care about different features in content and style image. Then they 
+    convolutional layers with ReLU non-linearity. It is important that they are separate,
+    since we care about different features in content and style image. Next, they 
     are matrix-multiplied with their respective transposes which results in
     their uncentered covariance matrices. Each of these matrices is then fed 
     through fully connected layer, which is supposed to select which covariances
-    are the most important. Results of fc layers are then matrix-multiplied
+    are the most important. Results of $F_C$ layers are then matrix-multiplied
     with each other, which gives us the final style transformation matrix $T$.
     On parallel path $F_C$ vector is compressed to the size of $T$. Compressed 
     $F_C$ is matrix-multiplied with $T$ (this the moment style is transferred)
     and uncompressed to the original size of $F_C$. Lastly mean vector of original $F_S$
-    is added. This way means of $F_D$'s channels and $F_S$'s channels are alligned
+    is added. This way means of $F_D$ channels and $F_S$ channels are aligned
     exactly.
     
     
@@ -190,7 +187,7 @@
 
 \subsection{Pruning}
     In this chapter we describe the pruning algorithm and the pruning procedure 
-    used to obtain final network.
+    used to obtain our final network.
     \subsubsection{Filter pruning} 
     Filter pruning is a type of structured pruning in which the smallest unit considered by an
     algorithm is convolutional filter. Convolutional layer transforms feature maps
@@ -228,7 +225,7 @@
     
         \begin{figure}[h!]
             \includegraphics[scale=0.35]{AGP.png}
-            \caption{Density of pruned layers after each epoch. 
+            \caption{Density of pruned layers after each epoch. \kamil{tutaj nie powinno byc na osi Y w legedzie ze x100? bo inaczej by wychodzilo ze z 1\% do 0.25\% sie zmniejsza }
             }
             \label{fig:AGP}
         \end{figure}
@@ -241,7 +238,7 @@
     task and is able to extract useful features for any image. 
     VGG19 is a deep network and it's consecutive
     layers encode different characteristics of image, for example first layers might
-    encode colors and texture, while latter layers more abstract features like shapes.
+    encode colors and texture, while latter layers are able to encode more abstract features like shapes.
     To compute losses, transformed image, content image and
     style image are passed through loss module, which encodes them into $F_{t,i}$, $F_{c,i}$ and 
     $F_{s,i}$ feature maps respectively, where $F_{x,n}$ is feature map computed by $n$th
@@ -269,9 +266,9 @@
     requires deep knowledge of used deep learning framework. Luckily there are model 
     minimization libraries for both PyTorch and Tensorflow. While Tensorflow has 
     a builtin library aiding pruning and quantization, PyTorch doesn't have one yet - 
-    quantization is in experimental phase and pruning is not available at all. The only 
-    software for pruning PyTorch models we are aware of is Distiller \cite{distiller}.
-    It's an open source library which implements many structured and unstructured
+    quantization is in experimental phase and pruning is not available at all. The best 
+    software for pruning PyTorch models we found is Distiller \cite{distiller}.
+    It is an open source library which implements many structured and unstructured
     pruning algorithms, enables testing quality of quantized models and performing
     knowledge distillation. It's still far from perfect (current version is 0.4.1), but 
     thanks to an open source code, it's easily extendable. Described above
@@ -286,7 +283,7 @@
     epoch usual training is performed - both content and style datasets are shuffled,
     and network is optimized with consequent mini-batches. During this training,
     network should at least partially recover from performance drop caused by sudden
-    change of weights. After 10 epochs, specified
+    change of weights. After 10 epochs, specified \kamil{brzmi jak gdyby brakowalo tu jakiegos slowa lub przecinka ale moze w sumie nie brakuje :D }
     for each layer level of density is achieved and frozen weights are entirely removed
     from the model - at this moment architecture of the network is altered and physical
     storage required to save the model is reduced. Then comes the fine-tuning phase - 
@@ -313,7 +310,7 @@
     
     \begin{center}
      \begin{figure}[h!]
-            \includegraphics[scale=0.3]{wykresy.png}
+            \includegraphics[scale=0.5]{wykresy.png}
             \caption{Mean training and validation losses throughout pruning and fine-tuning
             procedure. Optimal model with minimal validation loss in fine-tuning phase 
             is marked with red dot.
