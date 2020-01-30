@@ -1,7 +1,7 @@
 \documentclass[../Main.tex]{subfiles}
 \begin{document}
 \subsection{Model comparison}
-We begin experiments by comparing style transfer features and quality of
+We begin experiments by comparing style transfer features and quality of the
 original and pruned network. We compare models on detailed styles with complex 
 structure (Figure \ref{fig:mosaic1}) and minimalistic, low-entropy styles 
 (Figure \ref{fig:mosaic2}). 
@@ -55,6 +55,8 @@ image is very sparse. While original model acts as (not very good) edge detector
 pruned network produces seemingly overexposed images.
 Overall pruned model performs visibly worse on styles with very simple structure or no
 structure at all. 
+
+\newpage
 \subsubsection{Technical comparison}
 In this section we confront models' speeds and memory footprints.
 First we compare speed gains across different devices by taking measurements on three different
@@ -84,8 +86,8 @@ couple FPS, which at that point don't really make any difference from user's
 perspective. The most
 interesting case is that of high-end GTX 1080 Ti, which slows down
 when TensorRT is used. This might be exactly the result of it's computational power.
-Pruned model is no longer bottlenecked by factors, the two weaker GPUs
-introduced and as a consequence it can be ran very efficiently.
+Pruned model is no longer bottlenecked by factors the two weaker GPUs
+introduced, and as a consequence, it can be ran very efficiently.
 Since there is nothing to improve, tensor reshapes required by TensorRT
 might slow down inference. \\
 In tables \ref{table:memory} we present memory requirements of original and pruned model.
@@ -150,22 +152,26 @@ We can control how much the result video or photo will be styled. For this purpo
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.75]{Images/style1.png}
-    \caption{Comparison between different values of style weight}
+    \caption{Comparison between different values of style weight using style scaling method}
     \label{fig:style1}
 \end{figure}
 
 \subsection{Color preservation}
-Style transfer give us a content image in style of the chosen style image. Result has a all details like lighting, shapes and colors. Using method of linear color transfer we can preserve color of content image and then transfer the style. The key is create new style $S'$ by changing colors of style picture to colors matching with content, and then use style transfer algorithm. \\
-We are want each pixels $x=(R,G,B)$ to match mean and covariance of RGB values to new style, by using following transformation: $$x_s\rightarrow{}Ax_s+b$$ where A is a 3x3 matrix and b is a 3-vector. We choose A and b to satisfied by the constraints: $$b=\mu_C - A\mu_S$$ 
+Style transfer gives us a content image in the style of the chosen style image. The result has all details like lighting, shapes, and colors. Using a method of the linear color transfer we can preserve the color of the content image and then transfer the style.
+
+The key is to create new style $S'$ by changing colors of style picture to colors matching with content, and then use style transfer algorithm. \\
+We want each pixels $x=(R,G,B)$ to match mean and covariance of RGB values of new style using following transformation: $$x_s\rightarrow{}Ax_s+b$$ - where A is a 3x3 matrix and b is a 3-vector. We selected A and b in order to meet the requirements:
+ $$b=\mu_C - A\mu_S$$ 
 \begin{center}
     $A\sum_SA^T = \sum_C$
 \end{center}
-where $\mu_S$ and $\mu_C$ are mean colors of the style and content, $\sum_S$ and $\sum_C$ are pixel covariances. That give us family of solutions to A, now we use the Cholesky decomposiotion but it depends on colors channel ordering, or 3D color matching formulations, we choose this method. \\
-The eigenvalue decomposition of a covariance matrix will be $\sum=UAU^T$, we can define matrix square-root as $\sum^{1/2}=UA^{1/2}U^T$, with this and the transformation is following by: 
+where $\mu_S$ and $\mu_C$ are mean colors of the style and content, $\sum_S$ and $\sum_C$ are pixel covariances. That gives us a family of solutions to A. Then we use the Cholesky decomposition which depends on colors channel ordering, or 3D color matching formulations. We have chosen second method. \\
+The eigenvalue decomposition of a covariance matrix will be $\sum=UAU^T$, and we can define matrix square-root as $\sum^{1/2}=UA^{1/2}U^T$, with this and the transformation is following by:
+
 \begin{center}
 $A_{IA}=\sum^{1/2}_C\sum^{-1/2}_S$
 \end{center}
-This linear color transfer method can not giving satisfying results when content and style colors are too different, then color distribution may not hard to match and we will get mismatch between result and content colors.
+This linear color transfer method can not give satisfying results when content and style colors are too different. Therefore the color distribution may not match and we have a mismatch between result and content colors.
 
 \subsection{Video stability}
 One of goals for high-quality style transfer is stability. Let $F_1$ and $F_2$ be 
