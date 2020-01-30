@@ -217,12 +217,12 @@
     filters rapidly at the beginning, when redundant weights are abundant
     and slows down gradually. \% of filters remaining (called density) after epoch 
     $k$ is given by
-    \[ D_k = f_f + (1-f_f)*(1-\tfrac{k}{K})^3 \]
+    \[ D_k = f_f + (100\%-f_f)*(1-\tfrac{k}{K})^3 \]
     where $f_f$ is final density and $K$ is total number of epochs
-    pruning is performed for. In our case $f_f=0.25$ and $K=10$. Exact densities
+    pruning is performed for. In our case $f_f=25\%$ and $K=10$. Exact densities
     in our schedule our shown in Figure \ref{fig:AGP}. 
     
-    \kamil{tutaj nie powinno byc na osi Y w legedzie ze x100? bo inaczej by wychodzilo ze z 1\% do 0.25\% sie zmniejsza}
+    
         \begin{figure}[h!]
             \includegraphics[scale=0.35]{AGP.png}
             \caption{Density of pruned layers after each epoch.}
@@ -244,9 +244,11 @@
     ReLU activation layer. \cite{Li2018} find computing style loss combining many 
     feature maps $F_{s,i}$ from various depths of network yields the best visual effects - they pick $i=2,4,6,10$. For 
     content loss one feature map is enough - $i=10$. Content loss is then computed as 
-    MSE between $F_{c,10}$ and $F_{t,10}$. Style loss is given by 
-    \[ \sum{MSE(mean(F_{t,i}), mean(F_{s,i})) + MSE(F_{t,i}F_{t,i}^T, F_{s,i}F_{s,i}^T}) \]
-    where summation is done over selected layers and MSE is mean squared error.
+    MSE between $F_{c,10}$ and $F_{t,10}$. Style loss is given by
+    \[ \sum\limits_{i \in I} MSE(mean(F_{t,i}), mean(F_{s,i})) + MSE(F_{t,i}F_{t,i}^T, F_{s,i}F_{s,i}^T) \]
+    where $I$ is index set $\{2,4,6,10\}$ and MSE is mean squared error. $F_{x,n}$ are $2D$ matrices
+    of shape $\left(C, H \times W\right)$ reshaped from $3D$ feature maps. Mean is then computed with respect
+    to second dimension, resulting in $C$-dimensional vector. 
     $AA^T$ is called Gram matrix of matrix $A$. It serves as $A$'s uncentered covariance.
     Style loss' purpose is then matching statistics of
     style images' distribution and transformed images' distribution.
@@ -282,8 +284,8 @@
     epoch usual training is performed - both content and style datasets are shuffled,
     and network is optimized with consequent mini-batches. During this training,
     network should at least partially recover from performance drop caused by sudden
-    change of weights. After 10 epochs, specified \kamil{brzmi jak gdyby brakowalo tu jakiegos slowa lub przecinka ale moze w sumie nie brakuje :D }
-    for each layer level of density is achieved and frozen weights are entirely removed
+    change of weights. After 10 epochs, specified earlier
+    levels of density are achieved and frozen weights are entirely removed
     from the model - at this moment architecture of the network is altered and physical
     storage required to save the model is reduced. Then comes the fine-tuning phase - 
     network is trained for another
