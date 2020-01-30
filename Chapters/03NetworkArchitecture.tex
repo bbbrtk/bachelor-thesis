@@ -1,7 +1,6 @@
 \documentclass[../Main.tex]{subfiles}
 
 \begin{document}
-    
 
 \subsection{Neural Network} \label{network}
     In this chapter we describe the neural network used for style transfer. 
@@ -223,10 +222,10 @@
     pruning is performed for. In our case $f_f=0.25$ and $K=10$. Exact densities
     in our schedule our shown in Figure \ref{fig:AGP}. 
     
+    \kamil{tutaj nie powinno byc na osi Y w legedzie ze x100? bo inaczej by wychodzilo ze z 1\% do 0.25\% sie zmniejsza}
         \begin{figure}[h!]
             \includegraphics[scale=0.35]{AGP.png}
-            \caption{Density of pruned layers after each epoch. \kamil{tutaj nie powinno byc na osi Y w legedzie ze x100? bo inaczej by wychodzilo ze z 1\% do 0.25\% sie zmniejsza }
-            }
+            \caption{Density of pruned layers after each epoch.}
             \label{fig:AGP}
         \end{figure}
         
@@ -310,7 +309,7 @@
     
     \begin{center}
      \begin{figure}[h!]
-            \includegraphics[scale=0.5]{wykresy.png}
+            \includegraphics[scale=0.3]{wykresy.png}
             \caption{Mean training and validation losses throughout pruning and fine-tuning
             procedure. Optimal model with minimal validation loss in fine-tuning phase 
             is marked with red dot.
