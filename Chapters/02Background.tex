@@ -15,7 +15,7 @@
     Machine Learning works by gathering the data (where the quality of data determines the future quality of model), processing them to ensure consistence and relevance, followed by splitting them to different sets (usually: training and test sets). Next, the chosen algorithm and techniques try to build the model which is evaluated and upgraded several times to reach the appropriate level of prediction accuracy \cite{deepai}. ML model needs well-prepared data to work properly. A prepared batch of data usually includes label describing its type. It enables algorithm to distinguish the batches and learn about their specific features. 
 
     One way that we can classify the tasks that machine learning algorithms solve is by the amount of labeled data and the generated feedback. In the first type, the significant amount of labeled data is provided and the model generates some output. This paradigm is called \textbf{supervised learning}. In another paradigm, no labeled data is provided, no feedback generated - it is  \textbf{unsupervised learning}. Lastly, the \textbf{reinforcement learning}, rather different from the previous ones, take suitable action to maximize reward in a particular situation. The three main paradigms of ML are depicted in Figure \ref{fig:ML-paradigms}. \\
-    \begin{figure}[h]
+    \begin{figure}[ht]
         \centering
         \includegraphics[width=0.7\textwidth]{ML-paradigms}
         \caption{Machine Learning paradigms}
@@ -30,7 +30,7 @@
     The neural network is a concept and technique for building a computer program that learns from data and which is based very loosely on how the human brain works. More precisely, it is a collection of artificial \textbf{neurons} which are connected and allowed to send messages to each other. When this collection is asked to solve a problem, it attempts to do so over and over, each time strengthening the connections that lead to successful solution and reduce those leading to the wrong one \cite{tfplayground}.
     
     Technically, neural networks are \textbf{weighted graphs}. They consist of an ordered set of layers, where every layer is a group of neurons (nodes). The first layer of the neural network is called the \textbf{input layer}, and the last one is called the \textbf{output layer}. The layers in between are named \textbf{hidden layers}. Nodes belonging to one layer are connected to the nodes in the following and/or the previous layers. These connections are weighted edges. \\ 
-    \begin{figure}[h!]
+    \begin{figure}[ht!]
         \centering
         \includegraphics[width=0.7\textwidth]{cnn-network.jpeg}
         \caption{Neural network layers \cite{dlstanford}}
@@ -45,7 +45,7 @@
     
     \subsubsection{Relationships}
     The variety of terms in the field of AI/ML may be confusing. Especially, the relations between major concepts described in this paper. Diagram presented on Figure \ref{fig:AI-ML-Scheme} tries to clarify it.
-    \begin{figure}[h!]
+    \begin{figure}[ht!]
         \centering
         \includegraphics[width=0.7\textwidth]{AI-ML-Scheme.png}
         \caption{The relationship between main fields}
@@ -62,7 +62,7 @@
     The architecture of a CNN is designed to take advantage of the two-dimensional structure of an input image. Convolutional network is comprised of one or more convolutional layers followed often by subsampling step (pooling) and then by one or more fully connected layers - just as in a standard multi-layer network \cite{dlstanford}. The most common CNN layers listed below are normally placed where the hidden layers are depicted on Figure \ref{fig:nn-scheme}. 
     \begin{itemize}
         \item The \textbf{convolution layer} has to extract features from the input. It computes a dot product between neuron weights and a small region it is connected to in the input volume.
-    \begin{figure}[h!]
+    \begin{figure}[ht!]
         \centering
         \includegraphics[width=0.5\textwidth]{cnn-convolution.png}
         \caption{Convolution with 3x3 filter \cite{dlstanford}}
@@ -70,7 +70,7 @@
     \end{figure}
     
         \item The \textbf{pooling layer} reduces the spatial size of these feature maps. Sometimes, the input image is a big one (and therefore time-consuming, especially if you have a large input set) or there are sparse data. In these cases, the objective of the Pooling Layers is to reduce the spatial dimension of the input matrix. A pooling layer is applied after one or multiple convolution layers.
-    \begin{figure}[h!]
+    \begin{figure}[ht!]
         \centering
         \includegraphics[width=0.5\textwidth]{cnn-pooling.jpeg}
         \caption{Process of max-pooling \cite{dlstanford}}
@@ -89,7 +89,6 @@
     To get know if the result of operations performed in a neural network is correct (or not), we need a function that allows solutions to be ranked and compared. This is known as the \textbf{loss function}. It reduces all the various good and bad aspects of a possibly complex system down to a single number (or vector of numbers), a scalar value, which evaluates the candidate solution \cite{neuralsmithingbook}. 
     
     \subsubsection{Backpropagation}
-    
     Backpropagation is an algorithm commonly used to train neural networks. When the neural network is initialized, weights are set randomly (or para-randomly). The input is loaded and then passed through the network, and it provides an output for each one neuron, given the initial weights. Backpropagation helps to adjust the weights of the neurons so that the result comes closer and closer to the known true result. It is worth to mention that backprop for a convolution operation (for both the data and the weights) is also a convolution. The description of this mechanism in our network can be found in chapter 3.
 
 \subsection{Computer Vision}
@@ -101,8 +100,8 @@
     \subsubsection{Overview}
     Style transfer is a technique of extraction visual aspects from an image and blending it together with an another image content. It aims to manipulate digital pictures (or videos) and adopt the appearance or visual style. This is usually implemented by optimizing the output image to match the content statistics of the content image and the style statistics of the style reference image. These statistics are extracted from the images using a convolutional network. 
     
-    The crucial part of style transfer is process of isolating the style and the content from an image. Researchers developed many approaches which enable computers to do it with high precision. We briefly introduce some techniques in next subsections. \\
-    \begin{figure}[h]
+    The crucial part of style transfer is process of isolating the style and the content from an image. Researchers developed many approaches which enable computers to do it with high precision. We briefly introduce some techniques in next subsections.
+    \begin{figure}[ht]
         \centering
         \includegraphics[width=0.6\textwidth]{style-and-content}
         \caption{Style and content flow diagram from \cite{ulyanov2016instance}}
@@ -111,7 +110,7 @@
     
     \subsubsection{Example}
     One of the most common use of style transfer is creating an artificial artwork  from photo. Especially the ones produced from some famous paintings. Attached examples give an idea of this approach capabilities. \\
-    \begin{figure}[h!]
+    \begin{figure}[ht!]
         \centering
         \includegraphics[width=0.7\textwidth]{ST-example-gatys.jpg}
         \caption{Picture transformed to painting-like image by \cite{gatys2015neural}}
@@ -120,7 +119,7 @@
 
     \subsubsection{State of the art}
     Neural Style Transfer (NST) was first published in the paper "A Neural Algorithm of Artistic Style" by Gatys et al. \cite{gatys2015neural} and is developing rapidly gaining more and more attention. The core branches of Neural Style Transfer are presented on the Figure \ref{fig:state-of-the-art}. Since presenting every concept of NST is not the goal of this paper, we recommend to visit \href{https://github.com/ycjing/Neural-Style-Transfer-Papers}{this actively updated repository}, where one can find information about each sub-field of the Neural Style Transfer.  \\
-    \begin{figure}[h!]
+    \begin{figure}[ht!]
         \centering
         \includegraphics[width=1\textwidth]{state-of-the-art.png}
         \caption{State of the art by \cite{nstpapersrepo}}

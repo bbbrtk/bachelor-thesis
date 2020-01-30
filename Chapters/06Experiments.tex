@@ -5,7 +5,7 @@ We begin experiments by comparing style transfer features and quality of the
 original and pruned network. We compare models on detailed styles with complex 
 structure (Figure \ref{fig:mosaic1}) and minimalistic, low-entropy styles 
 (Figure \ref{fig:mosaic2}). 
-        \begin{figure}[h!]
+        \begin{figure}[ht!]
         \centering
             \includegraphics[scale=0.2]{mosaic1.png}
             \caption{Comparison of original and pruned network on complex styles. 
@@ -28,7 +28,7 @@ Both of these traits are not necessarily drawbacks, for example the blue area
 under the bridge in last image of last column looks less coherent than darker version
 produced by small model. Discarding details might even be desirable for many styles.
 
-        \begin{figure}[h!]
+        \begin{figure}[ht!]
         \centering
             \includegraphics[scale=0.2]{mosaic2.png}
             \caption{Comparison of original and pruned network on simple styles. 
@@ -149,7 +149,7 @@ Sum                   &   4\,000\,879       &    2\,264\,267   \\
 \subsection{Style scaling}
 We can control how much the result video or photo will be styled. For this purpose we added factor $\alpha$ -  which is style weight set in mobile application. Using method of style scaling based on interpolation between feature maps given as input to decoder, what can be present as following equation: $$T(c,s,\alpha) = g((1-\alpha)f(c)+\alpha (f(c),f(s)))$$ When $\alpha= 0$  then the network will reconstruct the content style, $\alpha = 1$ is maximum level of styled, which was default style weight in previous experiments. 
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
     \centering
     \includegraphics[scale=0.75]{Images/style1.png}
     \caption{Comparison between different values of style weight using style scaling method}
@@ -205,7 +205,7 @@ For the third video pruned model is only a bit more unstable than original model
 Overall pruning seems to reduce stability only by a small margin provided original network
 preserves stability. In situation where original network fails to do so, pruned model
 magnifies errors though.
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
     \includegraphics[width=0.9\textwidth]{heatmap.jpg}
     \caption{Comparison of stability between original (middle column) and pruned
@@ -227,7 +227,7 @@ their sets of weights are different. In this section we shortly examine effects
 of using wrong combinations of encoder in pruned model. Results for four possible combinations
 of encoders are presented in Figure \ref{fig:mosaic_asym}.
 
-        \begin{figure}[h!]
+        \begin{figure}[ht!]
         \centering
             \includegraphics[width=1\textwidth]{mosaic_asym.png}
             \caption{Comparison of various configurations of network with respect

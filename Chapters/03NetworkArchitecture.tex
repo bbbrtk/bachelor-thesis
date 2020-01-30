@@ -25,7 +25,7 @@
     style image. As a consequence we had to include not one, but two copies of encoder
     in our model - one for content images and one for style images. Both encoders start of with entirely identical set of weights, but progressively diverge from each other during pruning procedure.
     
-    \begin{figure}[h!]
+    \begin{figure}[ht!]
         \includegraphics[scale=0.25]{overall_network.png}
         \caption{Overview of the network architecture \cite{Li2018}}
         \label{fig:overall_network}
@@ -108,7 +108,7 @@
         implemented within TensorRT used for additional inference speedup
         (see chapter \ref{trt_chapter}). Fortunately described problem is not nearly as visible
         in our model.
-        \begin{figure}[h!]
+        \begin{figure}[ht!]
             \includegraphics[scale=0.17]{edges.jpg}
             \caption{Result of zero padding (left) and reflection padding (right)
                 in \cite{johnson2016perceptual}. Style visibly diminishes around
@@ -152,7 +152,7 @@
     transformation module proposed by \cite{Li2018} is depicted in Figure
     \ref{fig:transform_module}. 
     
-        \begin{figure}[h!]
+        \begin{figure}[ht!]
         \centering
             \includegraphics[scale=0.25]{transform_module.png}
             \caption{Architecture of transformation module. $F_C$, $F_S$ and $F_D$
@@ -223,7 +223,7 @@
     in our schedule our shown in Figure \ref{fig:AGP}. 
     
     
-        \begin{figure}[h!]
+        \begin{figure}[ht!]
             \includegraphics[scale=0.35]{AGP.png}
             \caption{Density of pruned layers after each epoch.}
             \label{fig:AGP}
@@ -310,7 +310,7 @@
     difference in style between two pictures. 
     
     \begin{center}
-     \begin{figure}[h!]
+     \begin{figure}[ht!]
             \includegraphics[scale=0.3]{wykresy.png}
             \caption{Mean training and validation losses throughout pruning and fine-tuning
             procedure. Optimal model with minimal validation loss in fine-tuning phase 
