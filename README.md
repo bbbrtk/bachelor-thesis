@@ -2,21 +2,21 @@
 ### Video processing using style stransfer with convolutional neural networks
 
 Each part of the project can be found on GitHub:
-1. Style Transfer Algorithm and Neural Network
+**Style Transfer Algorithm and Neural Network**
 
 [https://github.com/kamieen03/style-transfer-net](https://github.com/kamieen03/style-transfer-net)
 
 https://github.com/kamieen03/style-transfer-server
 
-2. Mobile Application
+**Mobile Application**
 
 https://github.com/bonczol/style-app
 
-3. Server
+**Server**
 
 https://github.com/bbbrtk/aiortc
 
-4. Docker Container
+**Docker Container**
 
 https://github.com/bonczol/style-docker
 
