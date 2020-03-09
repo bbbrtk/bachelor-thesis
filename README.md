@@ -34,9 +34,7 @@ which is mainly a server with style transfer neural network.
 
 ![MobileApp](https://raw.githubusercontent.com/bbbrtk/bachelor-thesis/master/thesis/Images/app.png)
 
-![Filters](https://raw.githubusercontent.com/bbbrtk/bachelor-thesis/master/thesis/Images/sumup.png)
-
-![Filters2](https://raw.githubusercontent.com/bbbrtk/bachelor-thesis/master/thesis/Images/mosaic1.png)
+![Filters](https://raw.githubusercontent.com/bbbrtk/bachelor-thesis/master/thesis/Images/mosaic1.png)
 
 
 ### Repos
