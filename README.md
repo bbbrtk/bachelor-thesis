@@ -1,25 +1,4 @@
-## bachelor-thesis
-### Video processing using style stransfer with convolutional neural networks
-
-Each part of the project can be found on GitHub:
-
-**Style Transfer Algorithm and Neural Network**
-
-[https://github.com/kamieen03/style-transfer-net](https://github.com/kamieen03/style-transfer-net)
-
-https://github.com/kamieen03/style-transfer-server
-
-**Mobile Application**
-
-https://github.com/bonczol/style-app
-
-**Server**
-
-https://github.com/bbbrtk/aiortc
-
-**Docker Container**
-
-https://github.com/bonczol/style-docker
+## Video processing using style stransfer with convolutional neural networks
 
 ### Abstract
 
@@ -52,4 +31,34 @@ then apply it as a filter in real-time video. Figure presents screenshots taken 
 transfer screen of an application. They show how filters with different textures and colors affects
 photos. In order to make our application work we had to also create a back-end environment
 which is mainly a server with style transfer neural network.
+
+![MobileApp](https://raw.githubusercontent.com/bbbrtk/bachelor-thesis/master/thesis/Images/app.png)
+
+![Filters](https://raw.githubusercontent.com/bbbrtk/bachelor-thesis/master/thesis/Images/sumup.png)
+
+![Filters2](https://raw.githubusercontent.com/bbbrtk/bachelor-thesis/master/thesis/Images/mosaic1.png)
+
+
+### Repos
+
+Each part of the project can be found on GitHub:
+
+**Style Transfer Algorithm and Neural Network**
+
+[https://github.com/kamieen03/style-transfer-net](https://github.com/kamieen03/style-transfer-net)
+
+https://github.com/kamieen03/style-transfer-server
+
+**Mobile Application**
+
+https://github.com/bonczol/style-app
+
+**Server**
+
+https://github.com/bbbrtk/aiortc
+
+**Docker Container**
+
+https://github.com/bonczol/style-docker
+
 
