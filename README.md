@@ -3,14 +3,22 @@
 
 Each part of the project can be found on GitHub:
 1. Style Transfer Algorithm and Neural Network
-* [https://github.com/kamieen03/style-transfer-net](https://github.com/kamieen03/style-transfer-net)
-* https://github.com/kamieen03/style-transfer-server
+
+[https://github.com/kamieen03/style-transfer-net](https://github.com/kamieen03/style-transfer-net)
+
+https://github.com/kamieen03/style-transfer-server
+
 2. Mobile Application
-* https://github.com/bonczol/style-app
+
+https://github.com/bonczol/style-app
+
 3. Server
-* https://github.com/bbbrtk/aiortc
+
+https://github.com/bbbrtk/aiortc
+
 4. Docker Container
-* https://github.com/bonczol/style-docker
+
+https://github.com/bonczol/style-docker
 
 ### Abstract
 
